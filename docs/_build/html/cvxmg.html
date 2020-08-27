@@ -1,49 +1,203 @@
 
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cvxmg modules &mdash; cvxmg 2.0.0 documentation</title>
+  
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>cvxmg modules &#8212; cvxmg 2.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Methodology formulation" href="methodology.html" />
-    <link rel="prev" title="cvxmg" href="modules.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="methodology.html" title="Methodology formulation"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="modules.html" title="cvxmg"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">cvxmg</a> &#187;</li> 
-      </ul>
-    </div>  
+  
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="cvxmg 2.0.0 documentation" href="index.html"/>
+        <link rel="up" title="Classes, Objects, and Methods of CVXMG" href="modules.html"/>
+        <link rel="next" title="References" href="references.html"/>
+        <link rel="prev" title="Classes, Objects, and Methods of CVXMG" href="modules.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> cvxmg
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configini.html">Setting the informationf of the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-prob-info">Setting “prob_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-sources-info">Setting “sources_info”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constructores.html">Types of constructors for the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#deterministicdsms">DeterministicDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#multiyeardsms">MultiyearDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#stochasticdsms">StochasticDSMS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example of how to use CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#first-step-create-the-information-of-prob-info-and-sources-info">First step: Create the information of “prob_info” and “sources_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#second-step-set-the-constructor">Second step: Set the constructor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Methodology formulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#proposed-solution">Proposed solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#main-assumptions">Main assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#mathematical-formulation">Mathematical formulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dsm.html">DSM integration into the sizing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#time-of-use-tariff">Time of use tariff:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#critical-peak-pricing">Critical peak pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#incentive-based-pricing">Incentive-based pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiyear.html">Multiyear analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#set-problem-information">Set problem information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#read-results-of-previous-years">Read results of previous years:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#actualize-solver-parameters">Actualize solver parameters:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#summary-year-resul">summary[year] = resul:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stochastic.html">Stochastic multiyear analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Energy sources models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#photovoltaic-system">Photovoltaic system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#battery-energy-storage-system">Battery energy storage system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#diesel-generator">Diesel generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Classes, Objects, and Methods of CVXMG</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cvxmg modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cvxmg</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">Classes, Objects, and Methods of CVXMG</a> &raquo;</li>
+        
+      <li>cvxmg modules</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/cvxmg.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="module-cvxmg">
 <span id="cvxmg-modules"></span><h1>cvxmg modules<a class="headerlink" href="#module-cvxmg" title="Permalink to this headline">¶</a></h1>
@@ -175,9 +329,9 @@ This class requires the following attributes:</p>
 <div class="line-block">
 <div class="line"><strong>fuel_function:</strong> (numpy.ndarray of dimension less than three)</div>
 <div class="line">The fuel function can take a cuadratic or linear input arguments. The dimension of the numpy array will determine the fuel function. </div>
-<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the operational costs. The datails of this approximation can be found in <a class="reference internal" href="#ov2020" id="id3"><span>[ov2020]</span></a>: </div>
+<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the operational costs. The datails of this approximation can be found in <a class="reference internal" href="references.html#ov2020" id="id3"><span>[ov2020]</span></a>: </div>
 <div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the output power of the generator. </div>
-<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the operational costs. However, to better aproximate the fuel consumption, the second term is multiplied by the installed capacity. The datails of this approximation can be found in <a class="reference internal" href="#bu2019" id="id4"><span>[bu2019]</span></a>: </div>
+<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the operational costs. However, to better aproximate the fuel consumption, the second term is multiplied by the installed capacity. The datails of this approximation can be found in <a class="reference internal" href="references.html#bu2019" id="id4"><span>[bu2019]</span></a>: </div>
 <div class="line"><span class="math notranslate nohighlight">\(aQ+bC\)</span>, where Q is the output power of the generator and C is the installed capacity. </div>
 <div class="line">if the input has a numpy array of dimension one ([a]), a linear function will be used for the operational costs: </div>
 <div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the output power of the generator. </div>
@@ -247,7 +401,7 @@ This class requires the following attributes:</p>
 <dt id="cvxmg.EStorage">
 <em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">EStorage</code><span class="sig-paren">(</span><em class="sig-param">investment_cost=0</em>, <em class="sig-param">fuel_function=0</em>, <em class="sig-param">fuel_cost=0</em>, <em class="sig-param">maintenance_cost=5</em>, <em class="sig-param">min_out_power=0</em>, <em class="sig-param">max_out_power=100</em>, <em class="sig-param">rate_up=1</em>, <em class="sig-param">rate_down=1</em>, <em class="sig-param">initial_charge=50</em>, <em class="sig-param">years=1</em>, <em class="sig-param">yearly_total_capacity=0</em>, <em class="sig-param">tax_tonne_price=0</em>, <em class="sig-param">life_time=4</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.EStorage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>General class for storage (Batteries, CAES, HydroPump, Flywheel, Hydrogen, etc.). This class will create an object that represents a electric energy storage system. The datails of this model can be found in <a class="reference internal" href="#ov2020" id="id5"><span>[ov2020]</span></a>. This class requires the following attributes:</p>
+<p>General class for storage (Batteries, CAES, HydroPump, Flywheel, Hydrogen, etc.). This class will create an object that represents a electric energy storage system. The datails of this model can be found in <a class="reference internal" href="references.html#ov2020" id="id5"><span>[ov2020]</span></a>. This class requires the following attributes:</p>
 <div class="line-block">
 <div class="line"><strong>investment_cost:</strong> (int, float)</div>
 <div class="line">Initial investment cost paid for installing a kW of the selected technology. </div>
@@ -333,7 +487,7 @@ This class requires the following attributes:</p>
 <dt id="cvxmg.Excessenergy">
 <em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">Excessenergy</code><span class="sig-paren">(</span><em class="sig-param">cost_function=0</em>, <em class="sig-param">reliability=5</em>, <em class="sig-param">years=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.Excessenergy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>General class for excess of Energy. The details of this model can be found in <a class="reference internal" href="#ov2020" id="id6"><span>[ov2020]</span></a>. This Class requires the following attributes:</p>
+<p>General class for excess of Energy. The details of this model can be found in <a class="reference internal" href="references.html#ov2020" id="id6"><span>[ov2020]</span></a>. This Class requires the following attributes:</p>
 <div class="line-block">
 <div class="line"><strong>cost_function:</strong> (numpy.ndarray of dimension less than three)</div>
 <div class="line">The cost function can take a cuadratic or linear input arguments. The dimension of the numpy array will determine the cost function. </div>
@@ -365,7 +519,7 @@ This class requires the following attributes:</p>
 <dt id="cvxmg.Lackenergy">
 <em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">Lackenergy</code><span class="sig-paren">(</span><em class="sig-param">cost_function=0</em>, <em class="sig-param">reliability=5</em>, <em class="sig-param">years=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.Lackenergy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>General class for Lack of Energy. The details of the model can be found in <a class="reference internal" href="#ov2020" id="id7"><span>[ov2020]</span></a>. This class requires the following attributes:</p>
+<p>General class for Lack of Energy. The details of the model can be found in <a class="reference internal" href="references.html#ov2020" id="id7"><span>[ov2020]</span></a>. This class requires the following attributes:</p>
 <div class="line-block">
 <div class="line"><strong>cost_function:</strong> (numpy.ndarray of dimension less than three)</div>
 <div class="line">The cost function can take a cuadratic or linear input arguments. The dimension of the numpy array will determine the cost function. </div>
@@ -386,24 +540,6 @@ This class requires the following attributes:</p>
 <div class="line">Number of years of optimization. </div>
 <div class="line">If any value is passed the class will take the default value = 1.</div>
 </div>
-<dl class="citation">
-<dt class="label" id="ov2020"><span class="brackets">ov2020</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>,<a href="#id6">3</a>,<a href="#id7">4</a>,<a href="#id15">5</a>)</span></dt>
-<dd><ol class="upperalpha simple" start="10">
-<li><ol class="upperalpha simple" start="3">
-<li><p>Oviedo Cepeda et al. (in press), “Design of an Incentive-based Demand Side Management Strategy for Stand-Alone Microgrids Planning,” Int. J. Sustain. Energy Plan. Manag., vol. 28, pp. 1–21, 2020.</p></li>
-</ol>
-</li>
-</ol>
-</dd>
-<dt class="label" id="bu2019"><span class="brackets">bu2019</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id16">2</a>,<a href="#id19">3</a>)</span></dt>
-<dd><ol class="upperalpha simple">
-<li><ol class="upperalpha simple" start="12">
-<li><p>Bukar, C. W. Tan, and K. Y. Lau, “Optimal sizing of an autonomous photovoltaic/wind/battery/diesel generator microgrid using grasshopper optimization algorithm,” Sol. Energy, vol. 188, no. March, pp. 685–696, 2019.</p></li>
-</ol>
-</li>
-</ol>
-</dd>
-</dl>
 <dl class="method">
 <dt id="cvxmg.Lackenergy.formulate">
 <code class="sig-name descname">formulate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.Lackenergy.formulate" title="Permalink to this definition">¶</a></dt>
@@ -464,7 +600,7 @@ This class requires the following attributes:</p>
 <dt id="cvxmg.MultiyearDSMS">
 <em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">MultiyearDSMS</code><span class="sig-paren">(</span><em class="sig-param">prob_info_input</em>, <em class="sig-param">sources_info</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.MultiyearDSMS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p><a href="#id8"><span class="problematic" id="id9">|</span></a>Multiyear constructor to ensamble the microgrid using Demand Side Management Strategies. The multiyear constructor implements the adaptative method described in <a class="reference internal" href="#pece2019" id="id10"><span>[pece2019]</span></a>. However, the multiyear analysis here does not consider three day each month as the authors propose in the article. The multy-year analysis here considers the full year analysis (8760 hours).
+<p><a href="#id8"><span class="problematic" id="id9">|</span></a>Multiyear constructor to ensamble the microgrid using Demand Side Management Strategies. The multiyear constructor implements the adaptative method described in <a class="reference internal" href="references.html#pece2019" id="id10"><span>[pece2019]</span></a>. However, the multiyear analysis here does not consider three day each month as the authors propose in the article. The multy-year analysis here considers the full year analysis (8760 hours).
 <a href="#id11"><span class="problematic" id="id12">|</span></a>The multiyear constructor requires the following parameters:</p>
 <div class="line-block">
 <div class="line"><strong>prob_info:</strong> (dictionary) </div>
@@ -484,16 +620,6 @@ For more information about the different options of how to generate the scenario
 <p class="admonition-title">Tip</p>
 <p>Please refer to <strong>Setting sources_info</strong> section.</p>
 </div>
-<dl class="citation">
-<dt class="label" id="pece2019"><span class="brackets"><a class="fn-backref" href="#id10">pece2019</a></span></dt>
-<dd><ol class="upperalpha simple" start="26">
-<li><ol class="upperalpha simple" start="11">
-<li><p>Pecenak, M. Stadler, and K. Fahy, “Efficient multi-year economic energy planning in microgrids,” Appl. Energy, vol. 255, no. August, p. 113771, 2019.</p></li>
-</ol>
-</li>
-</ol>
-</dd>
-</dl>
 <dl class="method">
 <dt id="cvxmg.MultiyearDSMS.financialMG">
 <code class="sig-name descname">financialMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.MultiyearDSMS.financialMG" title="Permalink to this definition">¶</a></dt>
@@ -517,7 +643,7 @@ Method created to make some default plots of the results.</p>
 <dt id="cvxmg.PVGenerator">
 <em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">PVGenerator</code><span class="sig-paren">(</span><em class="sig-param">investment_cost=0</em>, <em class="sig-param">maintenance_cost=5</em>, <em class="sig-param">rate_up=1</em>, <em class="sig-param">rate_down=1</em>, <em class="sig-param">ghi=0</em>, <em class="sig-param">temperature=0</em>, <em class="sig-param">derat=1</em>, <em class="sig-param">pstc=0.3</em>, <em class="sig-param">Ct=-0.0039</em>, <em class="sig-param">years=1</em>, <em class="sig-param">sen_ghi=1</em>, <em class="sig-param">simulation_year=0</em>, <em class="sig-param">yearly_total_capacity=0</em>, <em class="sig-param">life_time=25</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.PVGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>General class for the photovoltaic generator. The model of the pv generator can be found in <a class="reference internal" href="#ov2020" id="id15"><span>[ov2020]</span></a> and <a class="reference internal" href="#bu2019" id="id16"><span>[bu2019]</span></a>.
+<p>General class for the photovoltaic generator. The model of the pv generator can be found in <a class="reference internal" href="references.html#ov2020" id="id15"><span>[ov2020]</span></a> and <a class="reference internal" href="references.html#bu2019" id="id16"><span>[bu2019]</span></a>.
 This class requires the following attributes:</p>
 <div class="line-block">
 <div class="line"><strong>investment_cost:</strong> (int, float)</div>
@@ -622,7 +748,7 @@ For more information about the different options of how to generate the scenario
 <dt id="cvxmg.WINDGenerator">
 <em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">WINDGenerator</code><span class="sig-paren">(</span><em class="sig-param">investment_cost=0</em>, <em class="sig-param">maintenance_cost=5</em>, <em class="sig-param">rate_up=1</em>, <em class="sig-param">rate_down=1</em>, <em class="sig-param">wind=0</em>, <em class="sig-param">years=1</em>, <em class="sig-param">rated_speed=13</em>, <em class="sig-param">speed_cut_in=3</em>, <em class="sig-param">speed_cut_out=12.5</em>, <em class="sig-param">nominal_capacity=1</em>, <em class="sig-param">simulation_year=0</em>, <em class="sig-param">yearly_total_capacity=0</em>, <em class="sig-param">life_time=15</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.WINDGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>General class for Partially Dispatchable Renewable Wind generator. The model of the wind generator can be found in <a class="reference internal" href="#bu2019" id="id19"><span>[bu2019]</span></a>. This class requires the following attributes:</p>
+<p>General class for Partially Dispatchable Renewable Wind generator. The model of the wind generator can be found in <a class="reference internal" href="references.html#bu2019" id="id19"><span>[bu2019]</span></a>. This class requires the following attributes:</p>
 <div class="line-block">
 <div class="line"><strong>investment_cost:</strong> (int, float)</div>
 <div class="line">Initial investment cost paid for installing a kW of the selected technology. </div>
@@ -1028,60 +1154,74 @@ The input parameters are:</p>
 </div>
 
 
+           </div>
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="references.html" class="btn btn-neutral float-right" title="References" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral" title="Classes, Objects, and Methods of CVXMG" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Juan Carlos Oviedo Cepeda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Stanford-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="modules.html"
-                        title="previous chapter">cvxmg</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="methodology.html"
-                        title="next chapter">Methodology formulation</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/cvxmg.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="methodology.html" title="Methodology formulation"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="modules.html" title="cvxmg"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="modules.html" >cvxmg</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>

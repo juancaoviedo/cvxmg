@@ -1,48 +1,200 @@
 
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Methodology formulation &mdash; cvxmg 2.0.0 documentation</title>
+  
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>Methodology formulation &#8212; cvxmg 2.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DSM integration into the sizing" href="dsm.html" />
-    <link rel="prev" title="cvxmg modules" href="cvxmg.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="dsm.html" title="DSM integration into the sizing"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="cvxmg.html" title="cvxmg modules"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
-      </ul>
-    </div>  
+  
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="cvxmg 2.0.0 documentation" href="index.html"/>
+        <link rel="next" title="DSM integration into the sizing" href="dsm.html"/>
+        <link rel="prev" title="Example of how to use CVXMG" href="example.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> cvxmg
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configini.html">Setting the informationf of the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-prob-info">Setting “prob_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-sources-info">Setting “sources_info”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constructores.html">Types of constructors for the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#deterministicdsms">DeterministicDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#multiyeardsms">MultiyearDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#stochasticdsms">StochasticDSMS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example of how to use CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#first-step-create-the-information-of-prob-info-and-sources-info">First step: Create the information of “prob_info” and “sources_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#second-step-set-the-constructor">Second step: Set the constructor</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Methodology formulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#proposed-solution">Proposed solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-assumptions">Main assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mathematical-formulation">Mathematical formulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dsm.html">DSM integration into the sizing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#time-of-use-tariff">Time of use tariff:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#critical-peak-pricing">Critical peak pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#incentive-based-pricing">Incentive-based pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiyear.html">Multiyear analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#set-problem-information">Set problem information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#read-results-of-previous-years">Read results of previous years:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#actualize-solver-parameters">Actualize solver parameters:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#summary-year-resul">summary[year] = resul:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stochastic.html">Stochastic multiyear analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Energy sources models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#photovoltaic-system">Photovoltaic system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#battery-energy-storage-system">Battery energy storage system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#diesel-generator">Diesel generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Classes, Objects, and Methods of CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cvxmg.html">cvxmg modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cvxmg</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Methodology formulation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/methodology.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="methodology-formulation">
 <h1>Methodology formulation<a class="headerlink" href="#methodology-formulation" title="Permalink to this headline">¶</a></h1>
@@ -59,18 +211,18 @@
 <p>A methodology with the above characteristics does not exist in the reviewed literature. In this regard, CVXMG builds a methodology to solve that.</p>
 <div class="section" id="proposed-solution">
 <h2>Proposed solution<a class="headerlink" href="#proposed-solution" title="Permalink to this headline">¶</a></h2>
-<p>The proposed solution implements a multiyear-stochastic analysis using Disciplined Convex Stochastic Programming (DCSP). DCSP builds on principles from stochastic optimization and convex analysis, representing a considerable advantage to build the desired methodology cite{Ali2015}. Equation <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> presents the general formulation of a convex stochastic problem:</p>
+<p>The proposed solution implements a multiyear-stochastic analysis using Disciplined Convex Stochastic Programming (DCSP). DCSP builds on principles from stochastic optimization and convex analysis, representing a considerable advantage to build the desired methodology <a class="reference internal" href="references.html#ali2015" id="id1"><span>[Ali2015]</span></a>. Equation <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> presents the general formulation of a convex stochastic problem:</p>
 <div class="math notranslate nohighlight" id="equation-equ-dcsp-formulation">
 <span class="eqno">(1)<a class="headerlink" href="#equation-equ-dcsp-formulation" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{equation}
     minimize\;E(a_1(x,\xi)) \\
     subject\;to\;E(b_i(x,\xi)) = 0\;\; i=1, \ldots ,B \\
     c_i(x,\xi) \geq 0\;\; i=1, \ldots ,C
 \end{equation}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(b_i:\mathbf{R}^n \times \mathbf{R}^q \to \mathbf{R}\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots ,B\)</span> are convex functions in <span class="math notranslate nohighlight">\(x\)</span> for each value of the random variable <span class="math notranslate nohighlight">\(\xi \in \mathbf{R}^q\)</span>, and <span class="math notranslate nohighlight">\(c_i:\mathbf{R}^n \to \mathbf{R}\)</span>, <span class="math notranslate nohighlight">\(i=1 ,\ldots ,C\)</span> are (deterministic) affine functions; since expectations preserve convexity, the objective and inequality constraint functions in <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> are (also) convex in <span class="math notranslate nohighlight">\(x\)</span>, making <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> a convex optimization problem cite{Ali2015}, cite[Chapter~7]{Liberti2008}.</p>
+<p>where <span class="math notranslate nohighlight">\(b_i:\mathbf{R}^n \times \mathbf{R}^q \to \mathbf{R}\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots ,B\)</span> are convex functions in <span class="math notranslate nohighlight">\(x\)</span> for each value of the random variable <span class="math notranslate nohighlight">\(\xi \in \mathbf{R}^q\)</span>, and <span class="math notranslate nohighlight">\(c_i:\mathbf{R}^n \to \mathbf{R}\)</span>, <span class="math notranslate nohighlight">\(i=1 ,\ldots ,C\)</span> are (deterministic) affine functions; since expectations preserve convexity, the objective and inequality constraint functions in <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> are (also) convex in <span class="math notranslate nohighlight">\(x\)</span>, making <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> a convex optimization problem <a class="reference internal" href="references.html#ali2015" id="id2"><span>[Ali2015]</span></a>, <a class="reference internal" href="references.html#liberti2008" id="id3"><span>[Liberti2008]</span></a>.</p>
 </div>
 <div class="section" id="main-assumptions">
 <h2>Main assumptions<a class="headerlink" href="#main-assumptions" title="Permalink to this headline">¶</a></h2>
-<p>The formulation of the methodology assumes that the planner can have at least one year of historical data of weather variables and electrical demand. The formulation use this historical data to build the multiyear, and multiyear-stochastic analysis of the methodology by using a scenario construction technique. Section ref{subsec:math_formulation} presents the information about the scenario building technique.</p>
+<p>The formulation of the methodology assumes that the planner can have at least one year of historical data of weather variables and electrical demand. The formulation use this historical data to build the multiyear, and multiyear-stochastic analysis of the methodology by using a scenario construction technique.</p>
 <p>The methodology assumes that there is no presence of smart or controllable loads in the IMGs. Considering this, it is not possible to apply advanced DSM strategies for IMGs. Due to this limitation, the present study proposes to use price-based DSM strategies and one DSM strategy based on Direct Load Curtailment. Both kinds of DSM strategies offer less technical difficulty as their more sophisticated counterparts.</p>
 <p>The formulation also assumes that the planner can know the price elasticity of the demand of the customers. By using the price elasticity of the customers’ demand, it is possible to compute how they will react to different stimuli. Additionally, the price elasticity of the demand intrinsically implies that without any external stimulus, the customers do not have any incentive to modify their consumption patterns. This assumption means that customers will not alter their consumption patterns if the IMG uses a flat tariff.</p>
 </div>
@@ -120,7 +272,7 @@
 <span class="eqno">(10)<a class="headerlink" href="#equation-equ-energy-balance-f2-f1" title="Permalink to this equation">¶</a></span>\[\begin{equation}
     \sum_{t=1}^{T}\sum_{u=1}^{U} E_{u,t} - EE_t + LE_t - D_{t}^{dr}=0
 \end{equation}\]</div>
-<p>where $EE_t$ and $LE_t$ are the excess and lack of energy. According to cite{Chauhan2014,Diaf2008}, the loss of power supply probability (LPSP) is:</p>
+<p>where $EE_t$ and $LE_t$ are the excess and lack of energy. According to <a class="reference internal" href="references.html#chauhan2014" id="id4"><span>[Chauhan2014]</span></a>, <a class="reference internal" href="references.html#diaf2008" id="id5"><span>[Diaf2008]</span></a>, the loss of power supply probability (LPSP) is:</p>
 <div class="math notranslate nohighlight" id="equation-equ-19">
 <span class="eqno">(11)<a class="headerlink" href="#equation-equ-19" title="Permalink to this equation">¶</a></span>\[\begin{equation}
     LPSP=\frac{\sum_{t=1}^{T}LE_t}{\sum_{t=1}^{T} D_{t}^{dr}}
@@ -143,69 +295,74 @@
 </div>
 
 
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Methodology formulation</a><ul>
-<li><a class="reference internal" href="#proposed-solution">Proposed solution</a></li>
-<li><a class="reference internal" href="#main-assumptions">Main assumptions</a></li>
-<li><a class="reference internal" href="#mathematical-formulation">Mathematical formulation</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dsm.html" class="btn btn-neutral float-right" title="DSM integration into the sizing" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example.html" class="btn btn-neutral" title="Example of how to use CVXMG" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="cvxmg.html"
-                        title="previous chapter">cvxmg modules</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="dsm.html"
-                        title="next chapter">DSM integration into the sizing</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/methodology.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Juan Carlos Oviedo Cepeda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Stanford-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="dsm.html" title="DSM integration into the sizing"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="cvxmg.html" title="cvxmg modules"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>

@@ -1,5 +1,5 @@
-cvxmg
-=====
+Classes, Objects, and Methods of CVXMG 
+================
 
 .. toctree::
    :maxdepth: 4

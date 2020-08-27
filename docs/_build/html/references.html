@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>References &mdash; cvxmg 2.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="cvxmg 2.0.0 documentation" href="index.html"/>
+        <link rel="prev" title="cvxmg modules" href="cvxmg.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> cvxmg
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configini.html">Setting the informationf of the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-prob-info">Setting “prob_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-sources-info">Setting “sources_info”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constructores.html">Types of constructors for the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#deterministicdsms">DeterministicDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#multiyeardsms">MultiyearDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#stochasticdsms">StochasticDSMS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example of how to use CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#first-step-create-the-information-of-prob-info-and-sources-info">First step: Create the information of “prob_info” and “sources_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#second-step-set-the-constructor">Second step: Set the constructor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Methodology formulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#proposed-solution">Proposed solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#main-assumptions">Main assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#mathematical-formulation">Mathematical formulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dsm.html">DSM integration into the sizing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#time-of-use-tariff">Time of use tariff:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#critical-peak-pricing">Critical peak pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#incentive-based-pricing">Incentive-based pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiyear.html">Multiyear analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#set-problem-information">Set problem information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#read-results-of-previous-years">Read results of previous years:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#actualize-solver-parameters">Actualize solver parameters:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#summary-year-resul">summary[year] = resul:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stochastic.html">Stochastic multiyear analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Energy sources models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#photovoltaic-system">Photovoltaic system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#battery-energy-storage-system">Battery energy storage system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#diesel-generator">Diesel generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Classes, Objects, and Methods of CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cvxmg.html">cvxmg modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cvxmg</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>References</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/references.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<p>In here the list of references used in this documentation:</p>
+<dl class="citation">
+<dt class="label" id="pece2019"><span class="brackets">pece2019</span></dt>
+<dd><ol class="upperalpha simple" start="26">
+<li><ol class="upperalpha simple" start="11">
+<li><p>Pecenak, M. Stadler, and K. Fahy, “Efficient multi-year economic energy planning in microgrids,” Appl. Energy, vol. 255, no. August, p. 113771, 2019.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="ov2020"><span class="brackets">ov2020</span></dt>
+<dd><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="3">
+<li><p>Oviedo Cepeda et al. (in press), “Design of an Incentive-based Demand Side Management Strategy for Stand-Alone Microgrids Planning,” Int. J. Sustain. Energy Plan. Manag., vol. 28, pp. 1–21, 2020.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="bu2019"><span class="brackets">bu2019</span></dt>
+<dd><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="12">
+<li><p>Bukar, C. W. Tan, and K. Y. Lau, “Optimal sizing of an autonomous photovoltaic/wind/battery/diesel generator microgrid using grasshopper optimization algorithm,” Sol. Energy, vol. 188, no. March, pp. 685–696, 2019.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="celik2017"><span class="brackets">Celik2017</span></dt>
+<dd><ol class="upperalpha simple" start="2">
+<li><p>Celik, R. Roche, S. Suryanarayanan, D. Bouquain, and A. Miraoui, “Electric energy management in residential areas through coordination of multiple smart homes,” Renew. Sustain. Energy Rev., vol. 80, no. April 2016, pp. 260–275, 2017.</p></li>
+</ol>
+</dd>
+<dt class="label" id="inversin2000"><span class="brackets">Inversin2000</span></dt>
+<dd><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="18">
+<li><p>Inversin, “Mini-grid design manual,” 2000.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="baatz2017"><span class="brackets">Baatz2017</span></dt>
+<dd><ol class="upperalpha simple" start="2">
+<li><p>Baatz, “Rate Design Matters: The Intersection of Residential Rate Design and Energy Efficiency,” 2017.</p></li>
+</ol>
+</dd>
+<dt class="label" id="glick2014"><span class="brackets">Glick2014</span></dt>
+<dd><ol class="upperalpha simple" start="4">
+<li><p>Glick, M. Lehrman, and O. Smith, “Rate Design for the Distribution Edge,” Rocky Mt. Inst., no. August, 2014.</p></li>
+</ol>
+</dd>
+<dt class="label" id="kostkova2013"><span class="brackets">Kostkova2013</span></dt>
+<dd><ol class="upperalpha simple" start="11">
+<li><p>Kostkova, L. Omelina, P. Kycina, and P. Jamrich, “An introduction to load management,” Electr. Power Syst. Res., vol. 95, pp. 184–191, 2013.</p></li>
+</ol>
+</dd>
+<dt class="label" id="wong2012"><span class="brackets">Wong2012</span></dt>
+<dd><ol class="upperalpha simple" start="3">
+<li><p>Joe-Wong, S. Sen, S. Ha, and M. Chiang, “Optimized day-ahead pricing for smart grids with device-specific scheduling flexibility,” IEEE J. Sel. Areas Commun., vol. 30, no. 6, pp. 1075–1085, 2012.</p></li>
+</ol>
+</dd>
+<dt class="label" id="borenstein2002"><span class="brackets">Borenstein2002</span></dt>
+<dd><ol class="upperalpha simple" start="19">
+<li><p>Borenstein, M. Jaske, and A. Rosenfeld, “Dynamic Pricing , Advanced Metering and Demand Response in Electricity Markets,” 2002.</p></li>
+</ol>
+</dd>
+<dt class="label" id="ali2015"><span class="brackets">Ali2015</span></dt>
+<dd><ol class="upperalpha simple">
+<li><p>Ali, J. Z. Kolter, S. Diamond, and S. Boyd, “Disciplined convex stochastic programming: A new framework for stochastic optimization,” in Uncertainty in Artificial Intelligence, 2015, no. 3, pp. 62–71.</p></li>
+</ol>
+</dd>
+<dt class="label" id="liberti2008"><span class="brackets">Liberti2008</span></dt>
+<dd><ol class="upperalpha simple" start="12">
+<li><p>Liberti and N. Maculan, Global optimization, from theory to implementation, vol. 105, no. 28. Springer, 2008.</p></li>
+</ol>
+</dd>
+<dt class="label" id="chauhan2014"><span class="brackets">Chauhan2014</span></dt>
+<dd><ol class="upperalpha simple">
+<li><p>Chauhan and R. P. Saini, “A review on Integrated Renewable Energy System based power generation for stand-alone applications: Configurations, storage options, sizing methodologies and control,” Renew. Sustain. Energy Rev., vol. 38, pp. 99–120, 2014.</p></li>
+</ol>
+</dd>
+<dt class="label" id="diaf2008"><span class="brackets">Diaf2008</span></dt>
+<dd><ol class="upperalpha simple" start="19">
+<li><p>Diaf, G. Notton, M. Belhamel, M. Haddadi, and A. Louche, “Design and techno-economical optimization for hybrid PV/wind system under various meteorological conditions,” Appl. Energy, vol. 85, no. 10, pp. 968–987, 2008.</p></li>
+</ol>
+</dd>
+<dt class="label" id="atb-data"><span class="brackets">atb_data</span></dt>
+<dd><p>National Renewable Energy Laboratory.Annual Technology Baseline data. 2019.</p>
+</dd>
+<dt class="label" id="energy-outlook"><span class="brackets">energy_outlook</span></dt>
+<dd><p>Energy Information Administration.Anual Energy Outlook 2020. 2020.</p>
+</dd>
+<dt class="label" id="tax-data"><span class="brackets">tax_data</span></dt>
+<dd><p>Canadian government.Greenhouse Gas Pollution Pricing Act. 2018.</p>
+</dd>
+<dt class="label" id="pecenak2019"><span class="brackets">Pecenak2019</span></dt>
+<dd><ol class="upperalpha simple" start="26">
+<li><ol class="upperalpha simple" start="11">
+<li><p>Pecenak, M. Stadler, and K. Fahy, “Efficient multi-year economic energy planning in microgrids,” Appl. Energy, vol. 255, no. August, p. 113771, 2019.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="li2017"><span class="brackets">Li2017</span></dt>
+<dd><ol class="upperalpha simple" start="2">
+<li><p>Li, R. Roche, D. Paire, and A. Miraoui, “Sizing of a stand-alone microgrid considering electric power, cooling/heating, hydrogen loads and hydrogen storage degradation,” Appl. Energy, vol. 205, no. July, pp. 1244–1259, 2017.</p></li>
+</ol>
+</dd>
+<dt class="label" id="zhang2016"><span class="brackets">Zhang2016</span></dt>
+<dd><ol class="upperalpha simple" start="10">
+<li><p>Zhang et al., “A Bi-Level Program for the Planning of an Islanded Microgrid Including CAES,” IEEE Trans. Ind. Appl., vol. 52, no. 4, pp. 2768–2777, 2016.</p></li>
+</ol>
+</dd>
+<dt class="label" id="lasnier1990"><span class="brackets">lasnier1990</span></dt>
+<dd><ol class="upperalpha simple" start="6">
+<li><p>Lasnier, Photovoltaic Engineering Handbook. Taylor &amp; Francis, 1990.</p></li>
+</ol>
+</dd>
+<dt class="label" id="skoplaki2009"><span class="brackets">Skoplaki2009</span></dt>
+<dd><ol class="upperalpha simple" start="5">
+<li><p>Skoplaki and J. A. Palyvos, “Operating temperature of photovoltaic modules: A survey of pertinent correlations,” Renew. Energy, vol. 34, no. 1, pp. 23–29, 2009.</p></li>
+</ol>
+</dd>
+<dt class="label" id="duffie2013"><span class="brackets">Duffie2013</span></dt>
+<dd><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple">
+<li><p>Duffie and W. A. Beckman, Solar Engineering of Thermal Processes, 4th Editio. Wiley, 2013.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="librosolar"><span class="brackets">librosolar</span></dt>
+<dd><p>Tomas  Markvart,  ed.Solar  electricity.  2nd  Editio.  Wiley,  2000,  p.  298.ISBN:9780471988526.</p>
+</dd>
+<dt class="label" id="xiaoping2010"><span class="brackets">Xiaoping2010</span></dt>
+<dd><ol class="upperalpha simple" start="12">
+<li><p>Xiaoping, D. Ming, H. Jianghong, H. Pingping, and P. Yali, “Dynamic Economic Dispatch for Microgrids Including Battery Energy Storage,” in International Symposium on Power Electronics for Distributed Generation Systems, 2010, no. 2, pp. 914–917.</p></li>
+</ol>
+</dd>
+<dt class="label" id="silver2008"><span class="brackets">Silver2008</span></dt>
+<dd><ol class="upperalpha simple" start="5">
+<li><ol class="upperalpha simple">
+<li><p>Silver, “Operations Research in Inventory Management: A Review and Critique,” Oper. Res., vol. 29, no. 4, pp. 628–645, 2008.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="zhang2018ab"><span class="brackets">Zhang2018ab</span></dt>
+<dd><p>Xu Zhang et al. “A novel method for lithium-ion battery state of energy andstate of power estimation based on multi-time-scale filter”. In:Applied Energy216.February (2018), pp. 442–451.ISSN: 03062619.</p>
+</dd>
+<dt class="label" id="arun2008"><span class="brackets">Arun2008</span></dt>
+<dd><ol class="upperalpha simple" start="16">
+<li><p>Arun, Rangan Banerjee, and Santanu Bandyopadhyay. “Optimum sizing ofbattery-integrated diesel generator for remote electrification through design-space approach”. In:Energy33.7 (2008), pp. 1155–1168.ISSN: 03605442.</p></li>
+</ol>
+</dd>
+<dt class="label" id="ashok2006"><span class="brackets">Ashok2006</span></dt>
+<dd><p>S Ashok. “Optimised model for community-based hybrid energy system”.In:Renewable Energy32 (2006), pp. 1155–1164.</p>
+</dd>
+<dt class="label" id="scioletti2017"><span class="brackets">Scioletti2017</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><ol class="upperalpha simple" start="19">
+<li><p>Scioletti, A. M. Newman, J. K. Goodman, A. J. Zolan, and S. Leyffer, “Optimal design and dispatch of a system of diesel generators, photovoltaics and batteries for remote locations,” Optim. Eng., vol. 18, no. 3, pp. 755–792, 2017.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="bukar2019"><span class="brackets">Bukar2019</span></dt>
+<dd><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="12">
+<li><p>Bukar, C. W. Tan, and K. Y. Lau, “Optimal sizing of an autonomous photovoltaic/wind/battery/diesel generator microgrid using grasshopper optimization algorithm,” Sol. Energy, vol. 188, no. June, pp. 685–696, 2019.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="ramli2018"><span class="brackets">Ramli2018</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="13">
+<li><p>Ramli, H. R. E. H. Bouchekara, and A. S. Alghamdi, “Optimal sizing of PV/wind/diesel hybrid microgrid system using multi-objective self-adaptive differential evolution algorithm,” Renew. Energy, vol. 121, pp. 400–411, 2018.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="kaabeche2017"><span class="brackets">Kaabeche2017</span></dt>
+<dd><ol class="upperalpha simple">
+<li><p>Kaabeche, S. Diaf, and R. Ibtiouen, “Firefly-inspired algorithm for optimal sizing of renewable hybrid system considering reliability criteria,” Sol. Energy, vol. 155, pp. 727–738, 2017.</p></li>
+</ol>
+</dd>
+<dt class="label" id="dole2004"><span class="brackets">Dole2004</span></dt>
+<dd><ol class="upperalpha simple" start="4">
+<li><p>Dole and I. Bartlett, “Beyond cost recovery: setting user charges for financial, economic, and social goals,” 2004.</p></li>
+</ol>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="cvxmg.html" class="btn btn-neutral" title="cvxmg modules" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Juan Carlos Oviedo Cepeda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Stanford-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

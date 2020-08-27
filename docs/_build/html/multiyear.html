@@ -1,52 +1,204 @@
 
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multiyear analysis &mdash; cvxmg 2.0.0 documentation</title>
+  
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>Multiyear analysis &#8212; cvxmg 2.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Stochastic multiyear analysis" href="stochastic.html" />
-    <link rel="prev" title="DSM integration into the sizing" href="dsm.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="stochastic.html" title="Stochastic multiyear analysis"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="dsm.html" title="DSM integration into the sizing"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
-      </ul>
-    </div>  
+  
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="cvxmg 2.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Stochastic multiyear analysis" href="stochastic.html"/>
+        <link rel="prev" title="DSM integration into the sizing" href="dsm.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> cvxmg
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configini.html">Setting the informationf of the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-prob-info">Setting “prob_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-sources-info">Setting “sources_info”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constructores.html">Types of constructors for the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#deterministicdsms">DeterministicDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#multiyeardsms">MultiyearDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#stochasticdsms">StochasticDSMS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example of how to use CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#first-step-create-the-information-of-prob-info-and-sources-info">First step: Create the information of “prob_info” and “sources_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#second-step-set-the-constructor">Second step: Set the constructor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Methodology formulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#proposed-solution">Proposed solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#main-assumptions">Main assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#mathematical-formulation">Mathematical formulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dsm.html">DSM integration into the sizing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#time-of-use-tariff">Time of use tariff:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#critical-peak-pricing">Critical peak pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#incentive-based-pricing">Incentive-based pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Multiyear analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-problem-information">Set problem information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-results-of-previous-years">Read results of previous years:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#actualize-solver-parameters">Actualize solver parameters:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary-year-resul">summary[year] = resul:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stochastic.html">Stochastic multiyear analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Energy sources models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#photovoltaic-system">Photovoltaic system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#battery-energy-storage-system">Battery energy storage system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#diesel-generator">Diesel generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Classes, Objects, and Methods of CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cvxmg.html">cvxmg modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cvxmg</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Multiyear analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/multiyear.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="multiyear-analysis">
 <h1>Multiyear analysis<a class="headerlink" href="#multiyear-analysis" title="Permalink to this headline">¶</a></h1>
-<p>Most of the methodologies found in literature to compute the sizing of IMGs consider one single year for the analysis (refer to Tables ref{tab:sizing_ems_multi} and ref{tab:sizing_ems_single}). However, by considering this, these methodologies are implicitly assuming that the capital, operational, and maintenance expenditures will remain constant during the lifetime of the projects (20 to 25 years). These kinds of methodologies only consider the interest rate to compute future values of capital, operational, and maintenance. Nevertheless, this is not a straightforward justifiable assumption, especially considering that renewable energy sources’ costs are decreasing fast in the last years. Moreover, new policies taxing carbon emissions can significantly benefit renewable energy projects in the future. To have a better understanding of the variations in prices in the future, refer to Figure ref{fig:cost_projections}.</p>
+<p>Most of the methodologies found in literature to compute the sizing of IMGs consider one single year for the analysis. However, by considering this, these methodologies are implicitly assuming that the capital, operational, and maintenance expenditures will remain constant during the lifetime of the projects (20 to 25 years). These kinds of methodologies only consider the interest rate to compute future values of capital, operational, and maintenance. Nevertheless, this is not a straightforward justifiable assumption, especially considering that renewable energy sources’ costs are decreasing fast in the last years. Moreover, new policies taxing carbon emissions can significantly benefit renewable energy projects in the future. To have a better understanding of the variations in prices in the future, the following figure is introduced.</p>
 <a class="reference internal image-reference" href="_images/prices_bess.png"><img alt="_images/prices_bess.png" src="_images/prices_bess.png" style="width: 370px;" /></a>
 <a class="reference internal image-reference" href="_images/prices_pv.png"><img alt="_images/prices_pv.png" src="_images/prices_pv.png" style="width: 370px;" /></a>
 <a class="reference internal image-reference" href="_images/prices_wind.png"><img alt="_images/prices_wind.png" src="_images/prices_wind.png" style="width: 370px;" /></a>
@@ -56,17 +208,17 @@
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <ul class="simple">
-<li><p>BESS capital expenditures cite{atb_data},</p></li>
-<li><p>PV capital expenditures cite{atb_data},</p></li>
-<li><p>Wind capital expenditures cite{atb_data},</p></li>
+<li><p>BESS capital expenditures <a class="reference internal" href="references.html#atb-data" id="id1"><span>[atb_data]</span></a>,</p></li>
+<li><p>PV capital expenditures <a class="reference internal" href="references.html#atb-data" id="id2"><span>[atb_data]</span></a>,</p></li>
+<li><p>Wind capital expenditures <a class="reference internal" href="references.html#atb-data" id="id3"><span>[atb_data]</span></a>,</p></li>
 <li><p>Diesel generator capital expenditures.</p></li>
-<li><p>Diesel price cite{energy_outlook},</p></li>
-<li><p>Carbon Tax price cite{tax_data}.</p></li>
+<li><p>Diesel price <a class="reference internal" href="references.html#energy-outlook" id="id4"><span>[energy_outlook]</span></a>,</p></li>
+<li><p>Carbon Tax price <a class="reference internal" href="references.html#tax-data" id="id5"><span>[tax_data]</span></a>.</p></li>
 </ul>
 </div>
 <p>These figures shows the trends in capital expenditures for different energy sources for the following years. By using a multiyear analysis, it is possible to capture those trends in the prices. However, a methodology that uses one single year approach can not incorporate these trends. This assumption does not seem appropriate for future replacements of the energy sources.</p>
-<p>Reference cite{Pecenak2019} classifies multiyear methodologies in two main categories: the forward-looking model and the adaptive model. On one side, the forward-looking model deals with an optimization formulation that has as a horizon the lifetime of the IMG project (20 to 25 years). This approach has the advantage of being able to integrate future information. However, the enormous size of the optimization formulation can make the problem difficult to solve. Additionally, the formulation will require binary variables to integrate the technologies’ replacement, which adds even more complexity to the problem. On the other side, the adaptive model uses a rolling horizon of smaller windows of time (usually one year). This approach does not require binary variables, which represents an advantage. The model easily integrates growth of demand, price forecasts, and energy resources. Additionally, this approach does not require to modify the optimization formulation. Instead, it solves a single year optimization until it reaches the project’s lifetime.</p>
-<p>CVXMG chooses to work with the adaptive method. However, despite its advantages, the implementation of the model requires careful attention to previous years’ input parameters. The investment decisions of previous years should be known for the model in each window of time. Algorithm ref{algorithm_multiyear} shows a simplified step by step guide for the multiyear analysis. The following lines provide a brief description of each line of the algorithm.</p>
+<p>Reference <a class="reference internal" href="references.html#pecenak2019" id="id6"><span>[Pecenak2019]</span></a> classifies multiyear methodologies in two main categories: the forward-looking model and the adaptive model. On one side, the forward-looking model deals with an optimization formulation that has as a horizon the lifetime of the IMG project (20 to 25 years). This approach has the advantage of being able to integrate future information. However, the enormous size of the optimization formulation can make the problem difficult to solve. Additionally, the formulation will require binary variables to integrate the technologies’ replacement, which adds even more complexity to the problem. On the other side, the adaptive model uses a rolling horizon of smaller windows of time (usually one year). This approach does not require binary variables, which represents an advantage. The model easily integrates growth of demand, price forecasts, and energy resources. Additionally, this approach does not require to modify the optimization formulation. Instead, it solves a single year optimization until it reaches the project’s lifetime.</p>
+<p>CVXMG chooses to work with the adaptive method. However, despite its advantages, the implementation of the model requires careful attention to previous years’ input parameters. The investment decisions of previous years should be known for the model in each window of time. The following algorithm shows a simplified step by step guide for the multiyear analysis. The following lines provide a brief description of each line of the algorithm.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MultiyearDSMS</span>
 
 <span class="n">Inputs</span><span class="p">:</span> <span class="n">Weather</span><span class="p">,</span> <span class="n">forecasted</span> <span class="n">acquisition</span> <span class="n">prices</span> <span class="n">of</span> <span class="n">energy</span> <span class="n">sources</span><span class="p">,</span> <span class="n">forecasted</span> <span class="n">fuel</span> <span class="n">prices</span> <span class="n">over</span> <span class="n">the</span> <span class="n">lifetime</span> <span class="n">of</span> <span class="n">the</span> <span class="n">IMG</span> <span class="n">project</span><span class="o">.</span>
@@ -116,7 +268,7 @@
 </div>
 <div class="section" id="yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">
 <h2>yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):<a class="headerlink" href="#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param" title="Permalink to this headline">¶</a></h2>
-<p>The function <span class="math notranslate nohighlight">\(yearly\_solver\)</span> contains the formulation described at the beginning of this section (Equations ref{equ:capex}–ref{equ:dlcres2}). This function solves the DCSP optimization formulation for over one year. This function returns the capacities of the energy sources to install in that year, the dispatch of the energy sources and the energy tariffs for the customers. Additionally, this function returns the payments of each one of the stakeholders of the project.</p>
+<p>The function <span class="math notranslate nohighlight">\(yearly\_solver\)</span> contains the formulation described at the beginning of this section (Equations <a class="reference internal" href="methodology.html#equation-equ-capex">(2)</a> to <a class="reference internal" href="dsm.html#equation-equ-dlcres2">(15)</a>). This function solves the DCSP optimization formulation for over one year. This function returns the capacities of the energy sources to install in that year, the dispatch of the energy sources and the energy tariffs for the customers. Additionally, this function returns the payments of each one of the stakeholders of the project.</p>
 </div>
 <div class="section" id="summary-year-resul">
 <h2>summary[year] = resul:<a class="headerlink" href="#summary-year-resul" title="Permalink to this headline">¶</a></h2>
@@ -125,73 +277,74 @@
 </div>
 
 
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Multiyear analysis</a><ul>
-<li><a class="reference internal" href="#set-problem-information">Set problem information</a></li>
-<li><a class="reference internal" href="#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
-<li><a class="reference internal" href="#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
-<li><a class="reference internal" href="#read-results-of-previous-years">Read results of previous years:</a></li>
-<li><a class="reference internal" href="#actualize-solver-parameters">Actualize solver parameters:</a></li>
-<li><a class="reference internal" href="#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
-<li><a class="reference internal" href="#summary-year-resul">summary[year] = resul:</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="stochastic.html" class="btn btn-neutral float-right" title="Stochastic multiyear analysis" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dsm.html" class="btn btn-neutral" title="DSM integration into the sizing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="dsm.html"
-                        title="previous chapter">DSM integration into the sizing</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="stochastic.html"
-                        title="next chapter">Stochastic multiyear analysis</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/multiyear.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Juan Carlos Oviedo Cepeda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Stanford-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="stochastic.html" title="Stochastic multiyear analysis"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="dsm.html" title="DSM integration into the sizing"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>

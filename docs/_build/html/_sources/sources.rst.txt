@@ -4,7 +4,7 @@ Energy sources models
 Photovoltaic system                                       
 ------------------------
 
-References \cite{Li2017, Zhang2016, lasnier1990} describe the output power :math:`E_{PV,t}` of a :math:`N_{PV}` number of photovoltaic panels as:
+References [Li2017]_, [Zhang2016]_, [lasnier1990]_ describe the output power :math:`E_{PV,t}` of a :math:`N_{PV}` number of photovoltaic panels as:
 
 .. math::
     \begin{equation}
@@ -12,7 +12,7 @@ References \cite{Li2017, Zhang2016, lasnier1990} describe the output power :math
     \end{equation}
     :label: equ:23
 
-where :math:`\rho_{PV}`, :math:`P_{STC}`, :math:`G_{A,t}`, :math:`G_{STC}`, and :math:`C_T` are the derating factor (unitless), output power  of the PV module (:math:`kW`), GHI (:math:`kW/m^2`), GHI at standard conditions (:math:`kW/m^2`), and temperature coefficient of the PV module (:math:`\%/^{\circ}C`), respectively. :math:`T_{C,t}`  is the working temperature of the PV cell at hour :math:`t` (:math:`^{\circ}C`), and :math:`T_{STC}` is the temperature at standard conditions (:math:`^{\circ}C`). Reference \cite{Skoplaki2009} describes :math:`T_{C,t}` as a function of the ambient temperature and incident solar radiation over the PV module. 
+where :math:`\rho_{PV}`, :math:`P_{STC}`, :math:`G_{A,t}`, :math:`G_{STC}`, and :math:`C_T` are the derating factor (unitless), output power  of the PV module (:math:`kW`), GHI (:math:`kW/m^2`), GHI at standard conditions (:math:`kW/m^2`), and temperature coefficient of the PV module (:math:`\%/^{\circ}C`), respectively. :math:`T_{C,t}`  is the working temperature of the PV cell at hour :math:`t` (:math:`^{\circ}C`), and :math:`T_{STC}` is the temperature at standard conditions (:math:`^{\circ}C`). Reference [Skoplaki2009]_ describes :math:`T_{C,t}` as a function of the ambient temperature and incident solar radiation over the PV module. 
 
 .. math::
     \begin{equation}
@@ -20,15 +20,15 @@ where :math:`\rho_{PV}`, :math:`P_{STC}`, :math:`G_{A,t}`, :math:`G_{STC}`, and 
     \end{equation}
     :label: equ:23a
 
-where :math:`G_{NOCT}`, :math:`T_{NOCT}` and :math:`T_{a,t,NOCT}` are the solar radiation (:math:`kW/m^2`), working temperature (:math:`^{\circ}C`) and ambient temperature (:math:`^{\circ}C`) at Nominal Operational Cell Temperature (NOCT) conditions \cite{A.Duffie2013, librosolar}. 
+where :math:`G_{NOCT}`, :math:`T_{NOCT}` and :math:`T_{a,t,NOCT}` are the solar radiation (:math:`kW/m^2`), working temperature (:math:`^{\circ}C`) and ambient temperature (:math:`^{\circ}C`) at Nominal Operational Cell Temperature (NOCT) conditions [Duffie2013]_, [librosolar]_. 
 
 
 Battery energy storage system     
 ---------------------------------
 
-A battery is an element strongly coupled in time \cite{Xiaoping2010}. The lack or excess of energy in one hour can be demanded or stored in the battery. To guarantee that the battery is not charged and discharged simultaneously, the BESS model can integrate binary variables. However, as discussed before, the proposed methodology tries to avoid using binary variables. The methodology proposes to model the BESS as an accumulator to avoid using binary variables. The battery is a deposit to store something temporarily. The deposit can *charge* if there is still space available, and *discharge* when required.  Operations Research modeled this problem long before, and it is well known as the inventory problem \cite{Silver2008}.
+A battery is an element strongly coupled in time [Xiaoping2010]_. The lack or excess of energy in one hour can be demanded or stored in the battery. To guarantee that the battery is not charged and discharged simultaneously, the BESS model can integrate binary variables. However, as discussed before, the proposed methodology tries to avoid using binary variables. The methodology proposes to model the BESS as an accumulator to avoid using binary variables. The battery is a deposit to store something temporarily. The deposit can *charge* if there is still space available, and *discharge* when required.  Operations Research modeled this problem long before, and it is well known as the inventory problem [Silver2008]_.
 
-The model of the BESS does not use separate optimization variables for charging and discharging of the BESS. Instead uses one single variable for the dispatch that controls the residual energy of the battery \cite{Zhang2018ab}. Equation :eq:`equ:residual_energy` presents a simple way of defining the residual energy in a BESS.
+The model of the BESS does not use separate optimization variables for charging and discharging of the BESS. Instead uses one single variable for the dispatch that controls the residual energy of the battery [Zhang2018ab]_. Equation :eq:`equ:residual_energy` presents a simple way of defining the residual energy in a BESS.
 
 .. math::
     \begin{equation}
@@ -82,11 +82,11 @@ Equation :eq:`equ:24` describes the initial residual energy of the BESS. The sim
 Diesel generator
 ---------------------------------
 
-The fuel consumption of a diesel generator is a function of its capacity and output power. This function uses linear or quadratic formulations \cite{13,14}. Reference \cite{Scioletti2017} makes a quadratic fit to estimate :math:`\alpha`, :math:`\beta`, and :math:`\gamma` parameters as a function of the capacity of the generator using manufacturer-provided fuel consumption data. Bukar et al. use a linear approximation to describe the diesel consumption of a Diesel Generator \cite{Bukar2019}. Equation :eq:`equ:diesel_generator_operational_costs` describes the function that \cite{Bukar2019} use.
+The fuel consumption of a diesel generator is a function of its capacity and output power. This function uses linear or quadratic formulations [Arun2008]_, [Ashok2006]_. Reference [Scioletti2017]_ makes a quadratic fit to estimate :math:`\alpha`, :math:`\beta`, and :math:`\gamma` parameters as a function of the capacity of the generator using manufacturer-provided fuel consumption data. Bukar et al. use a linear approximation to describe the diesel consumption of a Diesel Generator [Bukar2019]_. Equation :eq:`equ:diesel_generator_operational_costs` describes the function that [Bukar2019]_ use.
 
 .. math::
     \begin{equation}
-        F_{DG,t}=0.246E_{DG,t}+0.08415C_{DG}
+        F_{DG,t}=0.246E_{DG,t}+0.08415C_{DG}s
     \end{equation}  
     :label: equ:diesel_generator_operational_costs
 
@@ -94,7 +94,7 @@ where, :math:`E_{DG,t}`, :math:`F_{DG,t}`, and :math:`C_{DG}` denote the generat
 
 \subsection{Wind generator}  
 
-The output power of a wind turbine is a function of the wind speed and its rated capacity. Equation :eq:`equ:wind_turbine` presents a well-accepted model to compute the output power of a wind turbine \cite{Ramli2018, Kaabeche2017}. The proposed methodology uses this model.  
+The output power of a wind turbine is a function of the wind speed and its rated capacity. Equation :eq:`equ:wind_turbine` presents a well-accepted model to compute the output power of a wind turbine [Ramli2018]_, [Kaabeche2017]_. The proposed methodology uses this model.  
 
 .. math::
     \begin{equation}

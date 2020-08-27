@@ -1,55 +1,207 @@
 
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DSM integration into the sizing &mdash; cvxmg 2.0.0 documentation</title>
+  
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>DSM integration into the sizing &#8212; cvxmg 2.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Multiyear analysis" href="multiyear.html" />
-    <link rel="prev" title="Methodology formulation" href="methodology.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="multiyear.html" title="Multiyear analysis"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="methodology.html" title="Methodology formulation"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
-      </ul>
-    </div>  
+  
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="cvxmg 2.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Multiyear analysis" href="multiyear.html"/>
+        <link rel="prev" title="Methodology formulation" href="methodology.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> cvxmg
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configini.html">Setting the informationf of the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-prob-info">Setting “prob_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-sources-info">Setting “sources_info”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constructores.html">Types of constructors for the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#deterministicdsms">DeterministicDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#multiyeardsms">MultiyearDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#stochasticdsms">StochasticDSMS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example of how to use CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#first-step-create-the-information-of-prob-info-and-sources-info">First step: Create the information of “prob_info” and “sources_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#second-step-set-the-constructor">Second step: Set the constructor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Methodology formulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#proposed-solution">Proposed solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#main-assumptions">Main assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#mathematical-formulation">Mathematical formulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DSM integration into the sizing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-of-use-tariff">Time of use tariff:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#critical-peak-pricing">Critical peak pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#incentive-based-pricing">Incentive-based pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiyear.html">Multiyear analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#set-problem-information">Set problem information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#read-results-of-previous-years">Read results of previous years:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#actualize-solver-parameters">Actualize solver parameters:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#summary-year-resul">summary[year] = resul:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stochastic.html">Stochastic multiyear analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Energy sources models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#photovoltaic-system">Photovoltaic system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#battery-energy-storage-system">Battery energy storage system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#diesel-generator">Diesel generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Classes, Objects, and Methods of CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cvxmg.html">cvxmg modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cvxmg</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>DSM integration into the sizing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dsm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="dsm-integration-into-the-sizing">
 <h1>DSM integration into the sizing<a class="headerlink" href="#dsm-integration-into-the-sizing" title="Permalink to this headline">¶</a></h1>
-<p>The methodology integrates ToU, CPP, DADP, IBP, Fixed Shape Pricing (FSP) and DLCt as DSM strategies into the sizing of the IMG. The baseline case for comparisons does not use a DSM strategy, it only uses a flat tariff. The description of the baseline case and each of the DSM strategies proceeds in the following subsections cite{Celik2017}.</p>
+<p>The methodology integrates ToU, CPP, DADP, IBP, Fixed Shape Pricing (FSP) and DLCt as DSM strategies into the sizing of the IMG. The baseline case for comparisons does not use a DSM strategy, it only uses a flat tariff. The description of the baseline case and each of the DSM strategies proceeds in the following subsections <a class="reference internal" href="references.html#celik2017" id="id1"><span>[Celik2017]</span></a>.</p>
 <div class="section" id="flat-tariff-baseline-case">
 <h2>Flat tariff (Baseline case):<a class="headerlink" href="#flat-tariff-baseline-case" title="Permalink to this headline">¶</a></h2>
-<p>In general terms, the value of a flat tariff is the sum of all the costs of producing the energy divided by the total amount of energy produced cite{Inversin2000}. Equation <a class="reference internal" href="#equation-equ-8">(1)</a> describes the yearly payments using a regular flat tariff.</p>
+<p>In general terms, the value of a flat tariff is the sum of all the costs of producing the energy divided by the total amount of energy produced <a class="reference internal" href="references.html#inversin2000" id="id2"><span>[Inversin2000]</span></a>. Equation <a class="reference internal" href="#equation-equ-8">(1)</a> describes the yearly payments using a regular flat tariff.</p>
 <div class="math notranslate nohighlight" id="equation-equ-8">
 <span class="eqno">(1)<a class="headerlink" href="#equation-equ-8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
     \Gamma_{n}^{flat}=\frac{\zeta_{y}+\vartheta_{y}+\mu_{y}+\phi_{y}}{\sum_{t=1}^T D_{t}^{dr}}(1+R)\sum_{t=1}^T D_{n,t}^{dr}
@@ -63,7 +215,7 @@
 </div>
 <div class="section" id="time-of-use-tariff">
 <h2>Time of use tariff:<a class="headerlink" href="#time-of-use-tariff" title="Permalink to this headline">¶</a></h2>
-<p>ToU tariffs vary daily or seasonally on a fixed schedule, using two or more constant prices cite{Baatz2017}. One of the main benefits of this type of fare is its stability over long periods, which gives the customer a better ability to adapt to it cite{Glick2014, Kostkova2013}. To create a ToU tariff, the planner must define the number of <span class="math notranslate nohighlight">\(Z\)</span> blocks, and the starting and ending hours of each <span class="math notranslate nohighlight">\(z\)</span> block cite{Glick2014}. The optimization problem considers the prices <span class="math notranslate nohighlight">\(\pi_z\)</span>  of the <span class="math notranslate nohighlight">\(Z\)</span> number of blocks as decision variables. Figure ref{fig:tou} shows the main components of a ToU tariff, and equation <a class="reference internal" href="#equation-equ-tou">(3)</a> presents the yearly payments using <span class="math notranslate nohighlight">\(Z\)</span> different block hours of prices.</p>
+<p>ToU tariffs vary daily or seasonally on a fixed schedule, using two or more constant prices <a class="reference internal" href="references.html#baatz2017" id="id3"><span>[Baatz2017]</span></a>. One of the main benefits of this type of fare is its stability over long periods, which gives the customer a better ability to adapt to it [Glick2014, Kostkova2013]_. To create a ToU tariff, the planner must define the number of <span class="math notranslate nohighlight">\(Z\)</span> blocks, and the starting and ending hours of each <span class="math notranslate nohighlight">\(z\)</span> block <a class="reference internal" href="references.html#glick2014" id="id4"><span>[Glick2014]</span></a>. The optimization problem considers the prices <span class="math notranslate nohighlight">\(\pi_z\)</span>  of the <span class="math notranslate nohighlight">\(Z\)</span> number of blocks as decision variables. The following figure shows the main components of a ToU tariff, and equation <a class="reference internal" href="#equation-equ-tou">(3)</a> presents the yearly payments using <span class="math notranslate nohighlight">\(Z\)</span> different block hours of prices.</p>
 <a class="reference internal image-reference" href="_images/ToU.png"><img alt="_images/ToU.png" src="_images/ToU.png" style="width: 600px;" /></a>
 <div class="math notranslate nohighlight" id="equation-equ-tou">
 <span class="eqno">(3)<a class="headerlink" href="#equation-equ-tou" title="Permalink to this equation">¶</a></span>\[\begin{equation}
@@ -73,7 +225,7 @@
 </div>
 <div class="section" id="critical-peak-pricing">
 <h2>Critical peak pricing:<a class="headerlink" href="#critical-peak-pricing" title="Permalink to this headline">¶</a></h2>
-<p>CPP tariff can be 3 to 5 times higher than the usual tariff but is allowed only a few days per year cite{Kostkova2013}. In Equation <a class="reference internal" href="#equation-equ-11">(4)</a>, <span class="math notranslate nohighlight">\(\pi_{base}\)</span> is a scalar variable, that is chosen to be equal to the flat tariff <span class="math notranslate nohighlight">\(\pi^{flat}\)</span>. <span class="math notranslate nohighlight">\(\pi_{peak}\)</span> is a decision variable of dimension <span class="math notranslate nohighlight">\(T\)</span>. Equation <a class="reference internal" href="#equation-equ-11">(4)</a> defines the day-ahead forecasted payments using a CPP tariff, and Equation <a class="reference internal" href="#equation-equ-11a">(5)</a> defines the day-ahead hourly critical peak price.</p>
+<p>CPP tariff can be 3 to 5 times higher than the usual tariff but is allowed only a few days per year <a class="reference internal" href="references.html#kostkova2013" id="id5"><span>[Kostkova2013]</span></a>. In Equation <a class="reference internal" href="#equation-equ-11">(4)</a>, <span class="math notranslate nohighlight">\(\pi_{base}\)</span> is a scalar variable, that is chosen to be equal to the flat tariff <span class="math notranslate nohighlight">\(\pi^{flat}\)</span>. <span class="math notranslate nohighlight">\(\pi_{peak}\)</span> is a decision variable of dimension <span class="math notranslate nohighlight">\(T\)</span>. Equation <a class="reference internal" href="#equation-equ-11">(4)</a> defines the day-ahead forecasted payments using a CPP tariff, and Equation <a class="reference internal" href="#equation-equ-11a">(5)</a> defines the day-ahead hourly critical peak price.</p>
 <div class="math notranslate nohighlight" id="equation-equ-11">
 <span class="eqno">(4)<a class="headerlink" href="#equation-equ-11" title="Permalink to this equation">¶</a></span>\[\begin{equation}
     \Gamma_{n}^{CPP}=\sum_{t=1}^{T}(\pi^{base}+\pi_{t}^{peak})D_{n,t}^{dr}
@@ -90,7 +242,7 @@
 </div>
 <div class="section" id="day-ahead-dynamic-pricing">
 <h2>Day ahead dynamic pricing:<a class="headerlink" href="#day-ahead-dynamic-pricing" title="Permalink to this headline">¶</a></h2>
-<p>DADP refers to a tariff that is announced one day in advance to customers and has hourly variations. This scheme offers less uncertainty to customers than <em>hour-ahead pricing</em> or <em>real-time pricing,</em> thus allowing them to plan their activities cite{Joe-Wong2012, Borenstein2002}. Equation <a class="reference internal" href="#equation-equ-13">(7)</a> introduces the payments under DADP tariff, using <span class="math notranslate nohighlight">\(\pi_{t}\)</span> as a decision variable vector of dimension <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>DADP refers to a tariff that is announced one day in advance to customers and has hourly variations. This scheme offers less uncertainty to customers than <em>hour-ahead pricing</em> or <em>real-time pricing,</em> thus allowing them to plan their activities <a class="reference internal" href="references.html#wong2012" id="id6"><span>[Wong2012]</span></a>, <a class="reference internal" href="references.html#borenstein2002" id="id7"><span>[Borenstein2002]</span></a>. Equation <a class="reference internal" href="#equation-equ-13">(7)</a> introduces the payments under DADP tariff, using <span class="math notranslate nohighlight">\(\pi_{t}\)</span> as a decision variable vector of dimension <span class="math notranslate nohighlight">\(T\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-equ-13">
 <span class="eqno">(7)<a class="headerlink" href="#equation-equ-13" title="Permalink to this equation">¶</a></span>\[\begin{equation}
     \Gamma_{n}^{DADP}=\sum_{t=1}^T\pi_{t}D_{n,t}^{dr}
@@ -110,7 +262,7 @@
 </div>
 <div class="section" id="fixed-shape-pricing">
 <h2>Fixed Shape Pricing:<a class="headerlink" href="#fixed-shape-pricing" title="Permalink to this headline">¶</a></h2>
-<p>As mentioned in section ref{sec:tariff_design}, Dole et al. affirm that tariffs must be simple, transparent, and predictable for the customers. By following these recommendations, it is possible to design a pricing scheme that combines the benefits of DADP with the predictability of the ToU tariff. This pricing scheme receives the name of Fixed Shape Pricing (FSP). FSP tariffs can provide more stimulus than the ToU tariff. However, the FSP tariff has the same predictability of the ToU tariff. Although the FSP tariff will not be as simple as the ToU, it will be simpler for the customers than DADP tariffs.</p>
+<p>Dole et al. affirm that tariffs must be simple, transparent, and predictable for the customers <a class="reference internal" href="references.html#dole2004" id="id8"><span>[Dole2004]</span></a>. By following these recommendations, it is possible to design a pricing scheme that combines the benefits of DADP with the predictability of the ToU tariff. This pricing scheme receives the name of Fixed Shape Pricing (FSP). FSP tariffs can provide more stimulus than the ToU tariff. However, the FSP tariff has the same predictability of the ToU tariff. Although the FSP tariff will not be as simple as the ToU, it will be simpler for the customers than DADP tariffs.</p>
 <p>The FSP tariff fixes one price for each hour over all the days of the year. FSP tariff does not reflect the real costs of producing electricity in the IMG, which is a drawback. However, in the long run, the FSP tariff might offer better results than the ToU pricing. Additionally, it might be easier to accept by the IMG customers than the DADP tariff.</p>
 <p>To build the FSP tariff the methodology assigns one variable for each hour of the day. All these variables are one-dimensional. By using these variables the methodology builds a vector of 24 positions, and repeat it till reaching the optimization horizon. The resulting vector is the price of the tariff. Equation <a class="reference internal" href="#equation-equ-fsp">(10)</a> shows the payments of the <span class="math notranslate nohighlight">\(n\)</span> customer when the planner choose to use the FSP tariff as DSM strategy.</p>
 <div class="math notranslate nohighlight" id="equation-equ-fsp">
@@ -148,73 +300,74 @@
 </div>
 
 
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">DSM integration into the sizing</a><ul>
-<li><a class="reference internal" href="#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
-<li><a class="reference internal" href="#time-of-use-tariff">Time of use tariff:</a></li>
-<li><a class="reference internal" href="#critical-peak-pricing">Critical peak pricing:</a></li>
-<li><a class="reference internal" href="#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
-<li><a class="reference internal" href="#incentive-based-pricing">Incentive-based pricing:</a></li>
-<li><a class="reference internal" href="#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
-<li><a class="reference internal" href="#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multiyear.html" class="btn btn-neutral float-right" title="Multiyear analysis" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="methodology.html" class="btn btn-neutral" title="Methodology formulation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="methodology.html"
-                        title="previous chapter">Methodology formulation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="multiyear.html"
-                        title="next chapter">Multiyear analysis</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/dsm.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Juan Carlos Oviedo Cepeda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Stanford-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="multiyear.html" title="Multiyear analysis"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="methodology.html" title="Methodology formulation"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>
