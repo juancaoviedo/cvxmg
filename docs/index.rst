@@ -13,6 +13,20 @@ This characteristic allows CVXMG to provide the optimal tariffs for the energy s
 CVXMG uses CVXPY at its core. CVXPY is a Python-embedded modeling language for convex optimization problems. CVXPY allows CVXMG to build and solve deterministic and stochastic convex formulations to perform the analysis of the IMGs. 
 Due to the speed of solution of convex formulations, CVXMG can perform a multiyear analysis in seconds! Moreover, CVXMG can execute multiyear stochastic analysis in a regular machine.  
 
+Installing CVXMG
+---------------------
+
+CVXMG can be easily installed using `PyPi <https://pypi.org/project/cvxmg/>`_ or downloading the `GitHub <https://github.com/juancaoviedo/cvxmg>`_ repository. 
+To install CVXMG just execute the following in your line of commands:
+
+::
+
+   pip install cvxmg
+
+
+Using CVXMG
+--------------
+
 CVXMG uses two simple dictionaries "prob_info" and "sources_info" to create different architectures of IMGs. These two dictionaries are passed as attributes for the constructor classes. 
 CVXMG offers three different constructor classes: One for deterministic analysis, one for multiyear analysis, and one for multiyear stochastic analysis. 
 Each one of the constructors uses the information of "prob_info" to know the architecture of the IMG and the data of "sources_info" to know the characteristics of the energy sources.
@@ -21,6 +35,7 @@ The use of objects for the energy sources allows CVXMG to build the optimization
 
 Once the user defines "prob_info" and "sources_info" needs to execute a constructor. For more info on how to set "prob_info" and "sources_info", please refer to the example section. 
 If the user wants to compute the sizing of an IMG using a deterministic analysis of one year, the following command must be executed:  
+
 :: 
 
    import cvxmg as cm
@@ -28,11 +43,13 @@ If the user wants to compute the sizing of an IMG using a deterministic analysis
     
 The above line of commands will create the structure of the IMG in the object MicroGrid. Additionally, it will create all the optimization formulation following the rules of the Disciplined Convex Programming of CVXPY. 
 However, at this moment, CVXMG did not solve the formulation yet. To solve the formulation, the user needs to execute the solve method: 
+
 ::
 
    MicroGrid.solveMG()
 
 The above commands will solve the formulation and will store the results in the MicroGrid object. To extract the results, the user must execute: 
+
 ::
 
    summary, dispatch_results = MicroGrid.resultsMG()
@@ -52,12 +69,13 @@ Finally, if the user wants to create some predetermined plots of the results can
    configini
    constructores
    example
-   modules
    methodology
    dsm
    multiyear
    stochastic
    sources
+   modules
+   references
 
 
 

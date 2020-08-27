@@ -18,7 +18,7 @@ A methodology with the above characteristics does not exist in the reviewed lite
 Proposed solution
 ---------------------
 
-The proposed solution implements a multiyear-stochastic analysis using Disciplined Convex Stochastic Programming (DCSP). DCSP builds on principles from stochastic optimization and convex analysis, representing a considerable advantage to build the desired methodology \cite{Ali2015}. Equation :eq:`equ:dcsp_formulation` presents the general formulation of a convex stochastic problem:   
+The proposed solution implements a multiyear-stochastic analysis using Disciplined Convex Stochastic Programming (DCSP). DCSP builds on principles from stochastic optimization and convex analysis, representing a considerable advantage to build the desired methodology [Ali2015]_. Equation :eq:`equ:dcsp_formulation` presents the general formulation of a convex stochastic problem:   
 
 .. math::
     \begin{equation}
@@ -28,12 +28,12 @@ The proposed solution implements a multiyear-stochastic analysis using Disciplin
     \end{equation}
     :label: equ:dcsp_formulation
 
-where :math:`b_i:\mathbf{R}^n \times \mathbf{R}^q \to \mathbf{R}`, :math:`i=1, \ldots ,B` are convex functions in :math:`x` for each value of the random variable :math:`\xi \in \mathbf{R}^q`, and :math:`c_i:\mathbf{R}^n \to \mathbf{R}`, :math:`i=1 ,\ldots ,C` are (deterministic) affine functions; since expectations preserve convexity, the objective and inequality constraint functions in :eq:`equ:dcsp_formulation` are (also) convex in :math:`x`, making :eq:`equ:dcsp_formulation` a convex optimization problem \cite{Ali2015}, \cite[Chapter~7]{Liberti2008}. 
+where :math:`b_i:\mathbf{R}^n \times \mathbf{R}^q \to \mathbf{R}`, :math:`i=1, \ldots ,B` are convex functions in :math:`x` for each value of the random variable :math:`\xi \in \mathbf{R}^q`, and :math:`c_i:\mathbf{R}^n \to \mathbf{R}`, :math:`i=1 ,\ldots ,C` are (deterministic) affine functions; since expectations preserve convexity, the objective and inequality constraint functions in :eq:`equ:dcsp_formulation` are (also) convex in :math:`x`, making :eq:`equ:dcsp_formulation` a convex optimization problem [Ali2015]_, [Liberti2008]_. 
 
 Main assumptions
 --------------------
 
-The formulation of the methodology assumes that the planner can have at least one year of historical data of weather variables and electrical demand. The formulation use this historical data to build the multiyear, and multiyear-stochastic analysis of the methodology by using a scenario construction technique. Section \ref{subsec:math_formulation} presents the information about the scenario building technique.
+The formulation of the methodology assumes that the planner can have at least one year of historical data of weather variables and electrical demand. The formulation use this historical data to build the multiyear, and multiyear-stochastic analysis of the methodology by using a scenario construction technique. 
 
 The methodology assumes that there is no presence of smart or controllable loads in the IMGs. Considering this, it is not possible to apply advanced DSM strategies for IMGs. Due to this limitation, the present study proposes to use price-based DSM strategies and one DSM strategy based on Direct Load Curtailment. Both kinds of DSM strategies offer less technical difficulty as their more sophisticated counterparts. 
 
@@ -112,7 +112,7 @@ The formulation naturally includes the balance Equation:
     \end{equation}
     :label: equ:energy_balance_f2_f1
 
-where $EE_t$ and $LE_t$ are the excess and lack of energy. According to \cite{Chauhan2014,Diaf2008}, the loss of power supply probability (LPSP) is: 
+where $EE_t$ and $LE_t$ are the excess and lack of energy. According to [Chauhan2014]_, [Diaf2008]_, the loss of power supply probability (LPSP) is: 
 
 .. math::
     \begin{equation}

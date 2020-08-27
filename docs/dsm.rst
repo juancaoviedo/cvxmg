@@ -1,11 +1,11 @@
 DSM integration into the sizing
 ==================================
 
-The methodology integrates ToU, CPP, DADP, IBP, Fixed Shape Pricing (FSP) and DLCt as DSM strategies into the sizing of the IMG. The baseline case for comparisons does not use a DSM strategy, it only uses a flat tariff. The description of the baseline case and each of the DSM strategies proceeds in the following subsections \cite{Celik2017}.  
+The methodology integrates ToU, CPP, DADP, IBP, Fixed Shape Pricing (FSP) and DLCt as DSM strategies into the sizing of the IMG. The baseline case for comparisons does not use a DSM strategy, it only uses a flat tariff. The description of the baseline case and each of the DSM strategies proceeds in the following subsections [Celik2017]_.
 
 Flat tariff (Baseline case):
 --------------------------------
-In general terms, the value of a flat tariff is the sum of all the costs of producing the energy divided by the total amount of energy produced \cite{Inversin2000}. Equation :eq:`equ:8` describes the yearly payments using a regular flat tariff. 
+In general terms, the value of a flat tariff is the sum of all the costs of producing the energy divided by the total amount of energy produced [Inversin2000]_. Equation :eq:`equ:8` describes the yearly payments using a regular flat tariff. 
 
 .. math::
     \begin{equation}
@@ -26,7 +26,7 @@ However, this traditional approach does not set an optimal tariff to recover inv
 Time of use tariff:
 ---------------------------
 
-ToU tariffs vary daily or seasonally on a fixed schedule, using two or more constant prices \cite{Baatz2017}. One of the main benefits of this type of fare is its stability over long periods, which gives the customer a better ability to adapt to it \cite{Glick2014, Kostkova2013}. To create a ToU tariff, the planner must define the number of :math:`Z` blocks, and the starting and ending hours of each :math:`z` block \cite{Glick2014}. The optimization problem considers the prices :math:`\pi_z`  of the :math:`Z` number of blocks as decision variables. Figure \ref{fig:tou} shows the main components of a ToU tariff, and equation :eq:`equ:tou` presents the yearly payments using :math:`Z` different block hours of prices. 
+ToU tariffs vary daily or seasonally on a fixed schedule, using two or more constant prices [Baatz2017]_. One of the main benefits of this type of fare is its stability over long periods, which gives the customer a better ability to adapt to it [Glick2014, Kostkova2013]_. To create a ToU tariff, the planner must define the number of :math:`Z` blocks, and the starting and ending hours of each :math:`z` block [Glick2014]_. The optimization problem considers the prices :math:`\pi_z`  of the :math:`Z` number of blocks as decision variables. The following figure shows the main components of a ToU tariff, and equation :eq:`equ:tou` presents the yearly payments using :math:`Z` different block hours of prices. 
  
 .. image:: images/ToU.png
    :width: 600
@@ -43,7 +43,7 @@ ToU tariffs vary daily or seasonally on a fixed schedule, using two or more cons
 Critical peak pricing:    
 ----------------------------
 
-CPP tariff can be 3 to 5 times higher than the usual tariff but is allowed only a few days per year \cite{Kostkova2013}. In Equation :eq:`equ:11`, :math:`\pi_{base}` is a scalar variable, that is chosen to be equal to the flat tariff :math:`\pi^{flat}`. :math:`\pi_{peak}` is a decision variable of dimension :math:`T`. Equation :eq:`equ:11` defines the day-ahead forecasted payments using a CPP tariff, and Equation :eq:`equ:11a` defines the day-ahead hourly critical peak price.  
+CPP tariff can be 3 to 5 times higher than the usual tariff but is allowed only a few days per year [Kostkova2013]_. In Equation :eq:`equ:11`, :math:`\pi_{base}` is a scalar variable, that is chosen to be equal to the flat tariff :math:`\pi^{flat}`. :math:`\pi_{peak}` is a decision variable of dimension :math:`T`. Equation :eq:`equ:11` defines the day-ahead forecasted payments using a CPP tariff, and Equation :eq:`equ:11a` defines the day-ahead hourly critical peak price.  
 
 .. math::
     \begin{equation}
@@ -67,7 +67,7 @@ A critical forecasted event as high demand or low generation capacity triggers t
 
 Day ahead dynamic pricing:
 -------------------------------
-DADP refers to a tariff that is announced one day in advance to customers and has hourly variations. This scheme offers less uncertainty to customers than *hour-ahead pricing* or *real-time pricing,* thus allowing them to plan their activities \cite{Joe-Wong2012, Borenstein2002}. Equation :eq:`equ:13` introduces the payments under DADP tariff, using :math:`\pi_{t}` as a decision variable vector of dimension :math:`T`.
+DADP refers to a tariff that is announced one day in advance to customers and has hourly variations. This scheme offers less uncertainty to customers than *hour-ahead pricing* or *real-time pricing,* thus allowing them to plan their activities [Wong2012]_, [Borenstein2002]_. Equation :eq:`equ:13` introduces the payments under DADP tariff, using :math:`\pi_{t}` as a decision variable vector of dimension :math:`T`.
 
 .. math::
     \begin{equation}
@@ -93,7 +93,7 @@ The IBP tariff provides discounts on the tariff to the customers to increase the
 
 Fixed Shape Pricing:
 ------------------------
-As mentioned in section \ref{sec:tariff_design}, Dole et al. affirm that tariffs must be simple, transparent, and predictable for the customers. By following these recommendations, it is possible to design a pricing scheme that combines the benefits of DADP with the predictability of the ToU tariff. This pricing scheme receives the name of Fixed Shape Pricing (FSP). FSP tariffs can provide more stimulus than the ToU tariff. However, the FSP tariff has the same predictability of the ToU tariff. Although the FSP tariff will not be as simple as the ToU, it will be simpler for the customers than DADP tariffs. 
+Dole et al. affirm that tariffs must be simple, transparent, and predictable for the customers [Dole2004]_. By following these recommendations, it is possible to design a pricing scheme that combines the benefits of DADP with the predictability of the ToU tariff. This pricing scheme receives the name of Fixed Shape Pricing (FSP). FSP tariffs can provide more stimulus than the ToU tariff. However, the FSP tariff has the same predictability of the ToU tariff. Although the FSP tariff will not be as simple as the ToU, it will be simpler for the customers than DADP tariffs. 
 
 The FSP tariff fixes one price for each hour over all the days of the year. FSP tariff does not reflect the real costs of producing electricity in the IMG, which is a drawback. However, in the long run, the FSP tariff might offer better results than the ToU pricing. Additionally, it might be easier to accept by the IMG customers than the DADP tariff.
 

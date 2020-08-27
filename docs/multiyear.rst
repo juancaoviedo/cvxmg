@@ -1,6 +1,6 @@
 Multiyear analysis
 ====================================
-Most of the methodologies found in literature to compute the sizing of IMGs consider one single year for the analysis (refer to Tables \ref{tab:sizing_ems_multi} and \ref{tab:sizing_ems_single}). However, by considering this, these methodologies are implicitly assuming that the capital, operational, and maintenance expenditures will remain constant during the lifetime of the projects (20 to 25 years). These kinds of methodologies only consider the interest rate to compute future values of capital, operational, and maintenance. Nevertheless, this is not a straightforward justifiable assumption, especially considering that renewable energy sources' costs are decreasing fast in the last years. Moreover, new policies taxing carbon emissions can significantly benefit renewable energy projects in the future. To have a better understanding of the variations in prices in the future, refer to Figure \ref{fig:cost_projections}.
+Most of the methodologies found in literature to compute the sizing of IMGs consider one single year for the analysis. However, by considering this, these methodologies are implicitly assuming that the capital, operational, and maintenance expenditures will remain constant during the lifetime of the projects (20 to 25 years). These kinds of methodologies only consider the interest rate to compute future values of capital, operational, and maintenance. Nevertheless, this is not a straightforward justifiable assumption, especially considering that renewable energy sources' costs are decreasing fast in the last years. Moreover, new policies taxing carbon emissions can significantly benefit renewable energy projects in the future. To have a better understanding of the variations in prices in the future, the following figure is introduced.
 
 .. image:: images/prices_bess.png
    :width: 370
@@ -16,19 +16,19 @@ Most of the methodologies found in literature to compute the sizing of IMGs cons
    :width: 370
 
 .. hint::
-   + BESS capital expenditures \cite{atb_data}, 
-   + PV capital expenditures \cite{atb_data}, 
-   + Wind capital expenditures \cite{atb_data}, 
+   + BESS capital expenditures [atb_data]_, 
+   + PV capital expenditures [atb_data]_, 
+   + Wind capital expenditures [atb_data]_, 
    + Diesel generator capital expenditures. 
-   + Diesel price \cite{energy_outlook}, 
-   + Carbon Tax price \cite{tax_data}. 
+   + Diesel price [energy_outlook]_, 
+   + Carbon Tax price [tax_data]_. 
 
 
 These figures shows the trends in capital expenditures for different energy sources for the following years. By using a multiyear analysis, it is possible to capture those trends in the prices. However, a methodology that uses one single year approach can not incorporate these trends. This assumption does not seem appropriate for future replacements of the energy sources. 
 
-Reference \cite{Pecenak2019} classifies multiyear methodologies in two main categories: the forward-looking model and the adaptive model. On one side, the forward-looking model deals with an optimization formulation that has as a horizon the lifetime of the IMG project (20 to 25 years). This approach has the advantage of being able to integrate future information. However, the enormous size of the optimization formulation can make the problem difficult to solve. Additionally, the formulation will require binary variables to integrate the technologies' replacement, which adds even more complexity to the problem. On the other side, the adaptive model uses a rolling horizon of smaller windows of time (usually one year). This approach does not require binary variables, which represents an advantage. The model easily integrates growth of demand, price forecasts, and energy resources. Additionally, this approach does not require to modify the optimization formulation. Instead, it solves a single year optimization until it reaches the project's lifetime. 
+Reference [Pecenak2019]_ classifies multiyear methodologies in two main categories: the forward-looking model and the adaptive model. On one side, the forward-looking model deals with an optimization formulation that has as a horizon the lifetime of the IMG project (20 to 25 years). This approach has the advantage of being able to integrate future information. However, the enormous size of the optimization formulation can make the problem difficult to solve. Additionally, the formulation will require binary variables to integrate the technologies' replacement, which adds even more complexity to the problem. On the other side, the adaptive model uses a rolling horizon of smaller windows of time (usually one year). This approach does not require binary variables, which represents an advantage. The model easily integrates growth of demand, price forecasts, and energy resources. Additionally, this approach does not require to modify the optimization formulation. Instead, it solves a single year optimization until it reaches the project's lifetime. 
 
-CVXMG chooses to work with the adaptive method. However, despite its advantages, the implementation of the model requires careful attention to previous years' input parameters. The investment decisions of previous years should be known for the model in each window of time. Algorithm \ref{algorithm_multiyear} shows a simplified step by step guide for the multiyear analysis. The following lines provide a brief description of each line of the algorithm. 
+CVXMG chooses to work with the adaptive method. However, despite its advantages, the implementation of the model requires careful attention to previous years' input parameters. The investment decisions of previous years should be known for the model in each window of time. The following algorithm shows a simplified step by step guide for the multiyear analysis. The following lines provide a brief description of each line of the algorithm. 
 
 ::
 
@@ -89,7 +89,7 @@ This part of the algorithm actualizes the cost parameters of the solver. These p
 yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):
 -----------------------------------------------------------------------------
 
-The function :math:`yearly\_solver` contains the formulation described at the beginning of this section (Equations \ref{equ:capex}--\ref{equ:dlcres2}). This function solves the DCSP optimization formulation for over one year. This function returns the capacities of the energy sources to install in that year, the dispatch of the energy sources and the energy tariffs for the customers. Additionally, this function returns the payments of each one of the stakeholders of the project. 
+The function :math:`yearly\_solver` contains the formulation described at the beginning of this section (Equations :eq:`equ:capex` to :eq:`equ:dlcres2`). This function solves the DCSP optimization formulation for over one year. This function returns the capacities of the energy sources to install in that year, the dispatch of the energy sources and the energy tariffs for the customers. Additionally, this function returns the payments of each one of the stakeholders of the project. 
 
 summary[year] = resul:
 -------------------------
