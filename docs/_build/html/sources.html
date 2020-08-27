@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Energy sources models &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Stochastic multiyear analysis" href="stochastic.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="stochastic.html" title="Stochastic multiyear analysis"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="energy-sources-models">
+<h1>Energy sources models<a class="headerlink" href="#energy-sources-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="photovoltaic-system">
+<h2>Photovoltaic system<a class="headerlink" href="#photovoltaic-system" title="Permalink to this headline">¶</a></h2>
+<p>References cite{Li2017, Zhang2016, lasnier1990} describe the output power <span class="math notranslate nohighlight">\(E_{PV,t}\)</span> of a <span class="math notranslate nohighlight">\(N_{PV}\)</span> number of photovoltaic panels as:</p>
+<div class="math notranslate nohighlight" id="equation-equ-23">
+<span class="eqno">(1)<a class="headerlink" href="#equation-equ-23" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    E_{PV,t} = N_{PV}\rho_{PV}P_{STC}\frac{G_{A,t}}{G_{STC}}(1+C_T(T_{C,t}-T_{STC}))
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_{PV}\)</span>, <span class="math notranslate nohighlight">\(P_{STC}\)</span>, <span class="math notranslate nohighlight">\(G_{A,t}\)</span>, <span class="math notranslate nohighlight">\(G_{STC}\)</span>, and <span class="math notranslate nohighlight">\(C_T\)</span> are the derating factor (unitless), output power  of the PV module (<span class="math notranslate nohighlight">\(kW\)</span>), GHI (<span class="math notranslate nohighlight">\(kW/m^2\)</span>), GHI at standard conditions (<span class="math notranslate nohighlight">\(kW/m^2\)</span>), and temperature coefficient of the PV module (<span class="math notranslate nohighlight">\(\%/^{\circ}C\)</span>), respectively. <span class="math notranslate nohighlight">\(T_{C,t}\)</span>  is the working temperature of the PV cell at hour <span class="math notranslate nohighlight">\(t\)</span> (<span class="math notranslate nohighlight">\(^{\circ}C\)</span>), and <span class="math notranslate nohighlight">\(T_{STC}\)</span> is the temperature at standard conditions (<span class="math notranslate nohighlight">\(^{\circ}C\)</span>). Reference cite{Skoplaki2009} describes <span class="math notranslate nohighlight">\(T_{C,t}\)</span> as a function of the ambient temperature and incident solar radiation over the PV module.</p>
+<div class="math notranslate nohighlight" id="equation-equ-23a">
+<span class="eqno">(2)<a class="headerlink" href="#equation-equ-23a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    T_{C,t} = T_{A,t} + \frac{G_{A,t}}{G_{NOCT}}(T_{NOCT}-T_{a,t,NOCT})
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(G_{NOCT}\)</span>, <span class="math notranslate nohighlight">\(T_{NOCT}\)</span> and <span class="math notranslate nohighlight">\(T_{a,t,NOCT}\)</span> are the solar radiation (<span class="math notranslate nohighlight">\(kW/m^2\)</span>), working temperature (<span class="math notranslate nohighlight">\(^{\circ}C\)</span>) and ambient temperature (<span class="math notranslate nohighlight">\(^{\circ}C\)</span>) at Nominal Operational Cell Temperature (NOCT) conditions cite{A.Duffie2013, librosolar}.</p>
+</div>
+<div class="section" id="battery-energy-storage-system">
+<h2>Battery energy storage system<a class="headerlink" href="#battery-energy-storage-system" title="Permalink to this headline">¶</a></h2>
+<p>A battery is an element strongly coupled in time cite{Xiaoping2010}. The lack or excess of energy in one hour can be demanded or stored in the battery. To guarantee that the battery is not charged and discharged simultaneously, the BESS model can integrate binary variables. However, as discussed before, the proposed methodology tries to avoid using binary variables. The methodology proposes to model the BESS as an accumulator to avoid using binary variables. The battery is a deposit to store something temporarily. The deposit can <em>charge</em> if there is still space available, and <em>discharge</em> when required.  Operations Research modeled this problem long before, and it is well known as the inventory problem cite{Silver2008}.</p>
+<p>The model of the BESS does not use separate optimization variables for charging and discharging of the BESS. Instead uses one single variable for the dispatch that controls the residual energy of the battery cite{Zhang2018ab}. Equation <a class="reference internal" href="#equation-equ-residual-energy">(3)</a> presents a simple way of defining the residual energy in a BESS.</p>
+<div class="math notranslate nohighlight" id="equation-equ-residual-energy">
+<span class="eqno">(3)<a class="headerlink" href="#equation-equ-residual-energy" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    RE_{B,t} = SOC_{t}C_{B}
+\end{equation}\]</div>
+<p>If the following state of the residual energy is superior to the previous, the battery was charged <span class="math notranslate nohighlight">\(E_{B,t}\)</span> units during time <span class="math notranslate nohighlight">\(t\)</span>. If the following state of the residual energy is inferior to the previous, the battery was discharged <span class="math notranslate nohighlight">\(E_{B,t}\)</span> units during time <span class="math notranslate nohighlight">\(t\)</span>. Equations <a class="reference internal" href="#equation-equ-charge">(4)</a> and <a class="reference internal" href="#equation-equ-discharge">(5)</a> show this.</p>
+<div class="math notranslate nohighlight" id="equation-equ-charge">
+<span class="eqno">(4)<a class="headerlink" href="#equation-equ-charge" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    RE_{B,t+1} = RE_{B,t} + E_{B,t}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-discharge">
+<span class="eqno">(5)<a class="headerlink" href="#equation-equ-discharge" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    RE_{B,t+1} = RE_{B,t} - E_{B,t}
+\end{equation}\]</div>
+<p>Equation <a class="reference internal" href="#equation-equ-24">(6)</a> describes the initial residual energy of the BESS. The simulations assume that the battery starts half charged (50% of its nominal capacity). Additionally, the simulation assumes that the minimum level of discharge of the battery is 50% and that the maximum level of charge is 100% of its nominal capacity. Equation <a class="reference internal" href="#equation-equ-25">(7)</a> describes those limits. Moreover, the simulations consider the maximum rate of charge and discharge of the battery. The simulation assumes that the maximum charge and discharge rate in each time slot is 30% of its nominal capacity. For all the simulations, the slot of time is one hour. Equation <a class="reference internal" href="#equation-equ-27">(8)</a> and <a class="reference internal" href="#equation-equ-28">(9)</a> describes the limits of charge and discharge of the battery for each time slot, respectively.</p>
+<div class="math notranslate nohighlight" id="equation-equ-24">
+<span class="eqno">(6)<a class="headerlink" href="#equation-equ-24" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    E_{B,0} = 0.5C_B
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-25">
+<span class="eqno">(7)<a class="headerlink" href="#equation-equ-25" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    0.5C_B \leq RE_{B,t}  \leq C_B
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-27">
+<span class="eqno">(8)<a class="headerlink" href="#equation-equ-27" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    E_{B,t+1} \geq E_{B,t} -0.3C_B
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-28">
+<span class="eqno">(9)<a class="headerlink" href="#equation-equ-28" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    E_{B,t+1} \leq E_{B,t} +0.3C_B
+\end{equation}\]</div>
+</div>
+<div class="section" id="diesel-generator">
+<h2>Diesel generator<a class="headerlink" href="#diesel-generator" title="Permalink to this headline">¶</a></h2>
+<p>The fuel consumption of a diesel generator is a function of its capacity and output power. This function uses linear or quadratic formulations cite{13,14}. Reference cite{Scioletti2017} makes a quadratic fit to estimate <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, and <span class="math notranslate nohighlight">\(\gamma\)</span> parameters as a function of the capacity of the generator using manufacturer-provided fuel consumption data. Bukar et al. use a linear approximation to describe the diesel consumption of a Diesel Generator cite{Bukar2019}. Equation <a class="reference internal" href="#equation-equ-diesel-generator-operational-costs">(10)</a> describes the function that cite{Bukar2019} use.</p>
+<div class="math notranslate nohighlight" id="equation-equ-diesel-generator-operational-costs">
+<span class="eqno">(10)<a class="headerlink" href="#equation-equ-diesel-generator-operational-costs" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    F_{DG,t}=0.246E_{DG,t}+0.08415C_{DG}
+\end{equation}\]</div>
+<p>where, <span class="math notranslate nohighlight">\(E_{DG,t}\)</span>, <span class="math notranslate nohighlight">\(F_{DG,t}\)</span>, and <span class="math notranslate nohighlight">\(C_{DG}\)</span> denote the generated power (kW), the fuel consumption (L/hour), and the installed capacity (kW) of the diesel generator.</p>
+<p>subsection{Wind generator}</p>
+<p>The output power of a wind turbine is a function of the wind speed and its rated capacity. Equation <a class="reference internal" href="#equation-equ-wind-turbine">(11)</a> presents a well-accepted model to compute the output power of a wind turbine cite{Ramli2018, Kaabeche2017}. The proposed methodology uses this model.</p>
+<div class="math notranslate nohighlight" id="equation-equ-wind-turbine">
+<span class="eqno">(11)<a class="headerlink" href="#equation-equ-wind-turbine" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{equation}
+    E_{WT}=
+    \begin{cases}
+    0, &amp; V_{A,t}&lt;V_{cut-in},V_{A,t}&gt;V_{cut-out} \\
+    V_{A,t}^3\left(\frac{E_{WT,R}}{V^3_{Rated}-V^3_{cut-in}}\right)-E_{WT,R}\left(\frac{V^3_{cut-in}}{V^3_{Rated}-V^3_{cut-in}}\right), &amp; V_{cut-in} \leq V_{A,t} &lt; V_{Rated} \\
+    E_{WT,R}, &amp; V_{Rated} \leq V_{A,t} &lt; V_{cut-out}
+    \end{cases}
+\end{equation}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V_{A,t}\)</span> is the wind speed (m/s), <span class="math notranslate nohighlight">\(E_{WT,R}\)</span> is the rated power (kW), <span class="math notranslate nohighlight">\(V_{cut-in}\)</span>, <span class="math notranslate nohighlight">\(V_{Rated}\)</span>, <span class="math notranslate nohighlight">\(V_{cut-out}\)</span> represent the cut-in, nominal and cut-out speed of the wind turbine (m/s), respectively.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Energy sources models</a><ul>
+<li><a class="reference internal" href="#photovoltaic-system">Photovoltaic system</a></li>
+<li><a class="reference internal" href="#battery-energy-storage-system">Battery energy storage system</a></li>
+<li><a class="reference internal" href="#diesel-generator">Diesel generator</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="stochastic.html"
+                        title="previous chapter">Stochastic multiyear analysis</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sources.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="stochastic.html" title="Stochastic multiyear analysis"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

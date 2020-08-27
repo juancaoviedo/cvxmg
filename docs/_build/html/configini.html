@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Setting the informationf of the IMG &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Types of constructors for the IMG" href="constructores.html" />
+    <link rel="prev" title="Welcome to CVXMG 1.0" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="constructores.html" title="Types of constructors for the IMG"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to CVXMG 1.0"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="setting-the-informationf-of-the-img">
+<h1>Setting the informationf of the IMG<a class="headerlink" href="#setting-the-informationf-of-the-img" title="Permalink to this headline">¶</a></h1>
+<p>A crucial part of the process using CVXMG is defining the information of the project. To do so, CVXMG needs to dictionaries, “prob_info” and “sources_info”.
+In the following lines present a brief description of how to create the dictionaries “prob_info” and “sources_info”.</p>
+<div class="section" id="setting-prob-info">
+<h2>Setting “prob_info”<a class="headerlink" href="#setting-prob-info" title="Permalink to this headline">¶</a></h2>
+<p>CVXMG provides two .csv files to make easier setting the data of “prob_info”.</p>
+<p>The file named config.csv contains the information about the architecture of the IMG. The file named resourcedata.csv cointains the information of the primary energy resources.
+CVXMG provides one function to read the data of config.csv and three different functions to read the reorcedata.csv file.
+The function to read config.csv is “variables”. The three functions to import the resource data are: resources_norm, resources_all and resources_noise. These functions are crucial for the multyyear analysis and the stochastic analysis.
+For more information about these functions, please refer to the docs of the functions.</p>
+<p>The user must do the following to import the information of prob_info dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span>  <span class="nn">pandas</span>                  <span class="k">as</span>      <span class="nn">pd</span>              <span class="c1"># Library for date frames handling</span>
+<span class="kn">import</span>  <span class="nn">cvxmg</span>                   <span class="k">as</span>      <span class="nn">cm</span>              <span class="c1"># Import cvxmg</span>
+
+<span class="c1">#region to read the parameters to intialize the code</span>
+<span class="n">prob_info</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">variables_csv</span>   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;config.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_blank_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;project_life_time&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;interest_rate&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;scenarios&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;years&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;scala&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;prxo&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;percentage_yearly_growth&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;percentage_variation&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;dlcpercenthour&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;dlcpercenttotal&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;sen_ince&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;sen_ghi&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;elasticity&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;curtailment&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;capex_private&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;capex_gov&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;capex_community&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;capex_ong&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;opex_private&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;opex_gov&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;opex_community&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;opex_ong&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;rate_return_private&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;max_value_tariff&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;drpercentage&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;diesel_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;pv_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;battery_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;wind_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;hydro_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;hydrogen_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;gas_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;biomass_system&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;flat&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;tou&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;tou_sun&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;tou_three&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;cpp&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;dadp&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;shape_tar&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;ince&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;dilc&#39;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;residential&#39;</span><span class="p">],</span><span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;commercial&#39;</span><span class="p">],</span><span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;industrial&#39;</span><span class="p">],</span><span class="n">prob_info</span><span class="p">[</span><span class="s1">&#39;community&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">variables</span><span class="p">(</span><span class="n">variables_csv</span><span class="p">)</span>
+<span class="c1">#endregion</span>
+
+<span class="c1">#region to read the weather data, the load and resource availability for the community</span>
+<span class="n">data_csv</span>        <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;resourcedata.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_blank_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;ghi&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;irrdiffuse&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;wind&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;hydro&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;load_residential&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;load_commercial&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;load_industrial&quot;</span><span class="p">],</span> <span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;load_community&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">resources_norm</span><span class="p">(</span><span class="n">data_csv</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;years&quot;</span><span class="p">],</span> <span class="n">scenarios</span><span class="o">=</span><span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;scenarios&quot;</span><span class="p">],</span> <span class="n">percentage_yearly_growth</span><span class="o">=</span><span class="n">prob_info</span><span class="p">[</span><span class="s2">&quot;percentage_yearly_growth&quot;</span><span class="p">])</span>
+<span class="c1">#endregion</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-sources-info">
+<h2>Setting “sources_info”<a class="headerlink" href="#setting-sources-info" title="Permalink to this headline">¶</a></h2>
+<p>The information of “sources_info” specify the characteristics of the energy sources. Each energy source expect different parameters.
+“sources_info” is a nested dictionary. To create “sources_info”, the user first must initialize the dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sources_info</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>If the user wants to create the information of a Battery Energy Storage System must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sources_info</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1"># Battery Energy Storage System info</span>
+<span class="s2">&quot;bess_1&quot;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;life_time&quot;</span>             <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;investment_cost&quot;</span>       <span class="p">:</span> <span class="mi">420</span><span class="p">,</span>                                              <span class="c1"># USD</span>
+    <span class="s2">&quot;fuel_function&quot;</span>         <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                                                <span class="c1"># Fuel function</span>
+    <span class="s2">&quot;fuel_cost&quot;</span>             <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                                                <span class="c1"># USD</span>
+    <span class="s2">&quot;maintenance_cost&quot;</span>      <span class="p">:</span> <span class="mi">6</span><span class="p">,</span>                                                <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;min_out_power&quot;</span>         <span class="p">:</span> <span class="mi">50</span><span class="p">,</span>                                               <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;max_out_power&quot;</span>         <span class="p">:</span> <span class="mi">100</span><span class="p">,</span>                                              <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_up&quot;</span>               <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>                                                <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_down&quot;</span>             <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>                                                <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;initial_charge&quot;</span>        <span class="p">:</span> <span class="mi">50</span><span class="p">,</span>                                               <span class="c1"># Percentage of the capacity</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the user wants to create the information of a Diesel Generator must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sources_info</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1"># Diesel generator info</span>
+<span class="s2">&quot;diesel_gen_1&quot;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;life_time&quot;</span>         <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;investment_cost&quot;</span>   <span class="p">:</span> <span class="mi">550</span><span class="p">,</span>                                                  <span class="c1"># USD</span>
+    <span class="s2">&quot;fuel_function&quot;</span>     <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.246</span><span class="p">,</span> <span class="mf">0.08415</span><span class="p">]),</span>                           <span class="c1"># Fuel function</span>
+    <span class="c1"># &quot;fuel_function&quot;     : np.array([0.000203636364, 0.224872727, 4.22727273]),  # Fuel function</span>
+    <span class="s2">&quot;fuel_cost&quot;</span>         <span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>                                                  <span class="c1"># USD</span>
+    <span class="s2">&quot;maintenance_cost&quot;</span>  <span class="p">:</span> <span class="mi">6</span><span class="p">,</span>                                                    <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;min_out_power&quot;</span>     <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                                                    <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;max_out_power&quot;</span>     <span class="p">:</span> <span class="mi">100</span><span class="p">,</span>                                                  <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_up&quot;</span>           <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>                                                    <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_down&quot;</span>         <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>                                                    <span class="c1"># Percentage of the capacity</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the user wants to create the information of a Photovoltaic System must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sources_info</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1"># Photovoltaic system info</span>
+<span class="s2">&quot;pv_gen_1&quot;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;life_time&quot;</span>         <span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;investment_cost&quot;</span>   <span class="p">:</span> <span class="mi">1300</span><span class="p">,</span>                                                  <span class="c1"># USD</span>
+    <span class="s2">&quot;maintenance_cost&quot;</span>  <span class="p">:</span> <span class="mi">6</span><span class="p">,</span>                                                     <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_up&quot;</span>           <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>                                                     <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_down&quot;</span>         <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;derat&quot;</span>             <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>        <span class="c1"># Derating factor</span>
+    <span class="s2">&quot;pstc&quot;</span>              <span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>      <span class="c1"># Nominal capacity of the ov module                                                     # Percentage of the capacity</span>
+    <span class="s2">&quot;Ct&quot;</span>                <span class="p">:</span> <span class="o">-</span><span class="mf">0.0039</span><span class="p">,</span>  <span class="c1"># Termic coefficient of the pv module</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the user wants to create the information of the wind generation System must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sources_info</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1"># Wind generator info</span>
+<span class="s2">&quot;wind_gen_1&quot;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;life_time&quot;</span>         <span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="s2">&quot;investment_cost&quot;</span>   <span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>                                                  <span class="c1"># USD</span>
+    <span class="s2">&quot;maintenance_cost&quot;</span>  <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>                                                     <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_up&quot;</span>           <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>                                                     <span class="c1"># Percentage of the capacity</span>
+    <span class="s2">&quot;rate_down&quot;</span>         <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;rated_speed&quot;</span>       <span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+    <span class="s2">&quot;speed_cut_in&quot;</span>      <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;speed_cut_out&quot;</span>     <span class="p">:</span> <span class="mf">12.5</span><span class="p">,</span>
+    <span class="s2">&quot;nominal_capacity&quot;</span>  <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is crucial to specify the information of the lack of energy and the excess of energy in “sources_info”. The user can use this information to control the desired level of reliability of the microgrid and to associate a cost to these values.
+To create this information the user must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sources_info</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1"># Lack of energy info</span>
+<span class="s2">&quot;lack_ene&quot;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;cost_function&quot;</span>    <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                                                     <span class="c1"># Cost function</span>
+    <span class="s2">&quot;reliability&quot;</span>      <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>                                                     <span class="c1"># Percentage of reliability                                                   # Percentage of the capacity</span>
+<span class="p">},</span>
+
+<span class="c1"># Excess of energy info</span>
+<span class="s2">&quot;excess_ene&quot;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;cost_function&quot;</span>    <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                                                     <span class="c1"># Cost function</span>
+    <span class="s2">&quot;reliability&quot;</span>      <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>                                                     <span class="c1"># Percentage of reliability</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Setting the informationf of the IMG</a><ul>
+<li><a class="reference internal" href="#setting-prob-info">Setting “prob_info”</a></li>
+<li><a class="reference internal" href="#setting-sources-info">Setting “sources_info”</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to CVXMG 1.0</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="constructores.html"
+                        title="next chapter">Types of constructors for the IMG</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/configini.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="constructores.html" title="Types of constructors for the IMG"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to CVXMG 1.0"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>DSM integration into the sizing &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Multiyear analysis" href="multiyear.html" />
+    <link rel="prev" title="Methodology formulation" href="methodology.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="multiyear.html" title="Multiyear analysis"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="methodology.html" title="Methodology formulation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dsm-integration-into-the-sizing">
+<h1>DSM integration into the sizing<a class="headerlink" href="#dsm-integration-into-the-sizing" title="Permalink to this headline">¶</a></h1>
+<p>The methodology integrates ToU, CPP, DADP, IBP, Fixed Shape Pricing (FSP) and DLCt as DSM strategies into the sizing of the IMG. The baseline case for comparisons does not use a DSM strategy, it only uses a flat tariff. The description of the baseline case and each of the DSM strategies proceeds in the following subsections cite{Celik2017}.</p>
+<div class="section" id="flat-tariff-baseline-case">
+<h2>Flat tariff (Baseline case):<a class="headerlink" href="#flat-tariff-baseline-case" title="Permalink to this headline">¶</a></h2>
+<p>In general terms, the value of a flat tariff is the sum of all the costs of producing the energy divided by the total amount of energy produced cite{Inversin2000}. Equation <a class="reference internal" href="#equation-equ-8">(1)</a> describes the yearly payments using a regular flat tariff.</p>
+<div class="math notranslate nohighlight" id="equation-equ-8">
+<span class="eqno">(1)<a class="headerlink" href="#equation-equ-8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Gamma_{n}^{flat}=\frac{\zeta_{y}+\vartheta_{y}+\mu_{y}+\phi_{y}}{\sum_{t=1}^T D_{t}^{dr}}(1+R)\sum_{t=1}^T D_{n,t}^{dr}
+    % \Theta^{flat}=\frac{\zeta+\sum_{t=1}^T\vartheta_{t}+\sum_{t=1}^T\mu_{t}+\sum_{t=1}^T\phi_{y}}{\sum_{t=1}^T D_{t}^{dr}}(1+R)\sum_{t=1}^TD_{t}^{dr}
+\end{equation}\]</div>
+<p>However, this traditional approach does not set an optimal tariff to recover investments while minimizing energy costs.  Here we propose to introduce a decision variable <span class="math notranslate nohighlight">\(\pi^{flat}\)</span> into the formulation to find the optimum price for the tariff.</p>
+<div class="math notranslate nohighlight" id="equation-equ-flat">
+<span class="eqno">(2)<a class="headerlink" href="#equation-equ-flat" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Gamma_{n}^{flat}=\pi^{flat}\sum_{t=1}^T D_{n,t}^{dr}
+\end{equation}\]</div>
+</div>
+<div class="section" id="time-of-use-tariff">
+<h2>Time of use tariff:<a class="headerlink" href="#time-of-use-tariff" title="Permalink to this headline">¶</a></h2>
+<p>ToU tariffs vary daily or seasonally on a fixed schedule, using two or more constant prices cite{Baatz2017}. One of the main benefits of this type of fare is its stability over long periods, which gives the customer a better ability to adapt to it cite{Glick2014, Kostkova2013}. To create a ToU tariff, the planner must define the number of <span class="math notranslate nohighlight">\(Z\)</span> blocks, and the starting and ending hours of each <span class="math notranslate nohighlight">\(z\)</span> block cite{Glick2014}. The optimization problem considers the prices <span class="math notranslate nohighlight">\(\pi_z\)</span>  of the <span class="math notranslate nohighlight">\(Z\)</span> number of blocks as decision variables. Figure ref{fig:tou} shows the main components of a ToU tariff, and equation <a class="reference internal" href="#equation-equ-tou">(3)</a> presents the yearly payments using <span class="math notranslate nohighlight">\(Z\)</span> different block hours of prices.</p>
+<a class="reference internal image-reference" href="_images/ToU.png"><img alt="_images/ToU.png" src="_images/ToU.png" style="width: 600px;" /></a>
+<div class="math notranslate nohighlight" id="equation-equ-tou">
+<span class="eqno">(3)<a class="headerlink" href="#equation-equ-tou" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    % \Theta^{ToU}=\sum_{t=1}^T\sum_{z=1}^{Z}\pi_z D_{t}^{dr}
+    \Gamma_{n}^{ToU}=\sum_{t=1}^T\sum_{z=1}^{Z}\pi_z D_{z,n,t}^{dr}
+\end{equation}\]</div>
+</div>
+<div class="section" id="critical-peak-pricing">
+<h2>Critical peak pricing:<a class="headerlink" href="#critical-peak-pricing" title="Permalink to this headline">¶</a></h2>
+<p>CPP tariff can be 3 to 5 times higher than the usual tariff but is allowed only a few days per year cite{Kostkova2013}. In Equation <a class="reference internal" href="#equation-equ-11">(4)</a>, <span class="math notranslate nohighlight">\(\pi_{base}\)</span> is a scalar variable, that is chosen to be equal to the flat tariff <span class="math notranslate nohighlight">\(\pi^{flat}\)</span>. <span class="math notranslate nohighlight">\(\pi_{peak}\)</span> is a decision variable of dimension <span class="math notranslate nohighlight">\(T\)</span>. Equation <a class="reference internal" href="#equation-equ-11">(4)</a> defines the day-ahead forecasted payments using a CPP tariff, and Equation <a class="reference internal" href="#equation-equ-11a">(5)</a> defines the day-ahead hourly critical peak price.</p>
+<div class="math notranslate nohighlight" id="equation-equ-11">
+<span class="eqno">(4)<a class="headerlink" href="#equation-equ-11" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Gamma_{n}^{CPP}=\sum_{t=1}^{T}(\pi^{base}+\pi_{t}^{peak})D_{n,t}^{dr}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-11a">
+<span class="eqno">(5)<a class="headerlink" href="#equation-equ-11a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \pi_{t}^{CPP}=\pi^{base}+\pi_{t}^{peak}
+\end{equation}\]</div>
+<p>A critical forecasted event as high demand or low generation capacity triggers the critical peak price in a CPP tariff.  In this regard, the CPP tariff must include a predictor of the critical event and a decision mechanism to set the value of the critical price. The formulation uses historical data, which implies that the formulation has full knowledge over the optimization horizon (T:=:8760:hours). The perfect knowledge allows the formulation to state constraint <a class="reference internal" href="#equation-equ-12">(6)</a>, limiting the apparition of the critical price only to a few hours in a year. Equation <a class="reference internal" href="#equation-equ-12">(6)</a> uses variable <span class="math notranslate nohighlight">\(\varphi_{peak}\)</span>, to control the number of hours with critical price allowed and <span class="math notranslate nohighlight">\(\delta_{peak}\)</span> to define how many times the base price <span class="math notranslate nohighlight">\(\pi_{base}\)</span> is scaled up. The planner defines <span class="math notranslate nohighlight">\(\varphi_{peak}\)</span> and <span class="math notranslate nohighlight">\(\delta_{peak}\)</span>. <span class="math notranslate nohighlight">\(\pi_{base}\)</span>, <span class="math notranslate nohighlight">\(\pi_{peak}\)</span>, <span class="math notranslate nohighlight">\(\tau_{base}\)</span> and <span class="math notranslate nohighlight">\(\tau_{peak}\)</span> are decision variables that the optimization formulation needs to compute.</p>
+<div class="math notranslate nohighlight" id="equation-equ-12">
+<span class="eqno">(6)<a class="headerlink" href="#equation-equ-12" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \sum_{t=1}^T\pi_{peak,t}\leq \varphi_{peak}T\delta_{peak}\pi_{base}
+\end{equation}\]</div>
+</div>
+<div class="section" id="day-ahead-dynamic-pricing">
+<h2>Day ahead dynamic pricing:<a class="headerlink" href="#day-ahead-dynamic-pricing" title="Permalink to this headline">¶</a></h2>
+<p>DADP refers to a tariff that is announced one day in advance to customers and has hourly variations. This scheme offers less uncertainty to customers than <em>hour-ahead pricing</em> or <em>real-time pricing,</em> thus allowing them to plan their activities cite{Joe-Wong2012, Borenstein2002}. Equation <a class="reference internal" href="#equation-equ-13">(7)</a> introduces the payments under DADP tariff, using <span class="math notranslate nohighlight">\(\pi_{t}\)</span> as a decision variable vector of dimension <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-equ-13">
+<span class="eqno">(7)<a class="headerlink" href="#equation-equ-13" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Gamma_{n}^{DADP}=\sum_{t=1}^T\pi_{t}D_{n,t}^{dr}
+\end{equation}\]</div>
+</div>
+<div class="section" id="incentive-based-pricing">
+<h2>Incentive-based pricing:<a class="headerlink" href="#incentive-based-pricing" title="Permalink to this headline">¶</a></h2>
+<p>The IBP tariff provides discounts on the tariff to the customers to increase the electric energy consumption or an extra fare to penalize it. The planner can decide the IBP base price to be equal to the flat tariff <span class="math notranslate nohighlight">\(\pi^{flat}\)</span> to guarantee a constant value each day. Variable <span class="math notranslate nohighlight">\(\pi_{inc,t}\)</span> computes the hourly incentives and can take positive or negative values. Equation <a class="reference internal" href="#equation-equ-6inc">(8)</a> defines the payments using the IBP tariff.</p>
+<div class="math notranslate nohighlight" id="equation-equ-6inc">
+<span class="eqno">(8)<a class="headerlink" href="#equation-equ-6inc" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Gamma_{n}^{IBP}=\sum_{t=1}^{T} D_{n,t}^{dr}(\pi^{base}+\pi_{t}^{inc})
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-6inca">
+<span class="eqno">(9)<a class="headerlink" href="#equation-equ-6inca" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \pi_{t}^{IBP}=\pi^{base}+\pi_{t}^{inc}
+\end{equation}\]</div>
+</div>
+<div class="section" id="fixed-shape-pricing">
+<h2>Fixed Shape Pricing:<a class="headerlink" href="#fixed-shape-pricing" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned in section ref{sec:tariff_design}, Dole et al. affirm that tariffs must be simple, transparent, and predictable for the customers. By following these recommendations, it is possible to design a pricing scheme that combines the benefits of DADP with the predictability of the ToU tariff. This pricing scheme receives the name of Fixed Shape Pricing (FSP). FSP tariffs can provide more stimulus than the ToU tariff. However, the FSP tariff has the same predictability of the ToU tariff. Although the FSP tariff will not be as simple as the ToU, it will be simpler for the customers than DADP tariffs.</p>
+<p>The FSP tariff fixes one price for each hour over all the days of the year. FSP tariff does not reflect the real costs of producing electricity in the IMG, which is a drawback. However, in the long run, the FSP tariff might offer better results than the ToU pricing. Additionally, it might be easier to accept by the IMG customers than the DADP tariff.</p>
+<p>To build the FSP tariff the methodology assigns one variable for each hour of the day. All these variables are one-dimensional. By using these variables the methodology builds a vector of 24 positions, and repeat it till reaching the optimization horizon. The resulting vector is the price of the tariff. Equation <a class="reference internal" href="#equation-equ-fsp">(10)</a> shows the payments of the <span class="math notranslate nohighlight">\(n\)</span> customer when the planner choose to use the FSP tariff as DSM strategy.</p>
+<div class="math notranslate nohighlight" id="equation-equ-fsp">
+<span class="eqno">(10)<a class="headerlink" href="#equation-equ-fsp" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Gamma_{n}^{FSP}=\sum_{t=1}^{T}\sum_{h=1}^{24}\pi_{h}^{FSP}D_{n,t}^{dr}
+\end{equation}\]</div>
+<p>All the tariffs must have restrictions to avoid null or excessive pricing. Governments, policymakers, or IMG owners can guarantee fair fares to the customers with the following constraint:</p>
+<div class="math notranslate nohighlight" id="equation-equ-14">
+<span class="eqno">(11)<a class="headerlink" href="#equation-equ-14" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \pi^{min} \leq \pi_{x} \leq \pi^{max}
+\end{equation}\]</div>
+</div>
+<div class="section" id="direct-load-curtailment-strategy">
+<h2>Direct Load Curtailment Strategy:<a class="headerlink" href="#direct-load-curtailment-strategy" title="Permalink to this headline">¶</a></h2>
+<p>The DLCt strategy curtails a portion <span class="math notranslate nohighlight">\(\epsilon_{t}\)</span> out of the demand if required. The planner of the IMG decides the percentage of max curtailed hourly demand <span class="math notranslate nohighlight">\(\theta\)</span>, and the percentage of the total energy curtailed in the optimization period <span class="math notranslate nohighlight">\(\kappa\)</span>. The final demand and payments are defined as follows:</p>
+<div class="math notranslate nohighlight" id="equation-equ-dlcdem">
+<span class="eqno">(12)<a class="headerlink" href="#equation-equ-dlcdem" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    D_{t}^{dr}=D_{t}^{flat}-\epsilon_{t}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-dlcoay">
+<span class="eqno">(13)<a class="headerlink" href="#equation-equ-dlcoay" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Gamma_{n}^{DLCt}=\sum_{t=1}^{T} D_{n,t}^{dr}\pi^{flat}
+\end{equation}\]</div>
+<p>The general restrictions for the DLCt strategy are defined as follows:</p>
+<div class="math notranslate nohighlight" id="equation-equ-dlcres1">
+<span class="eqno">(14)<a class="headerlink" href="#equation-equ-dlcres1" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \epsilon_{t} \leq \theta D_{t}^{dr}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-dlcres2">
+<span class="eqno">(15)<a class="headerlink" href="#equation-equ-dlcres2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \sum_{t=1}^{T} \epsilon_{t} \leq \kappa \sum_{t=1}^{T} D_{t}^{dr}
+\end{equation}\]</div>
+<p>It is important to notice that Equation <a class="reference internal" href="methodology.html#equation-equ-6a">(9)</a> establish a constraint to guarantee that the sum of the demand with flat tariff (base case) is equal to the sum of the demand after the application of any of the DSM strategies. However, the DLCt strategy need to violate this constraint, otherwise the only way to guarantee that the base case demand is equal to the demand with DSM is by making the variable <span class="math notranslate nohighlight">\(\epsilon_{t}\)</span> equal to zero. In order to avoid making <span class="math notranslate nohighlight">\(\epsilon_{t}\)</span> equal to zero the methodology removes constraint <a class="reference internal" href="methodology.html#equation-equ-6a">(9)</a> for the DLCt DSM strategy.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">DSM integration into the sizing</a><ul>
+<li><a class="reference internal" href="#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
+<li><a class="reference internal" href="#time-of-use-tariff">Time of use tariff:</a></li>
+<li><a class="reference internal" href="#critical-peak-pricing">Critical peak pricing:</a></li>
+<li><a class="reference internal" href="#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
+<li><a class="reference internal" href="#incentive-based-pricing">Incentive-based pricing:</a></li>
+<li><a class="reference internal" href="#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
+<li><a class="reference internal" href="#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="methodology.html"
+                        title="previous chapter">Methodology formulation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="multiyear.html"
+                        title="next chapter">Multiyear analysis</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/dsm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="multiyear.html" title="Multiyear analysis"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="methodology.html" title="Methodology formulation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

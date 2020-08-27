@@ -1,0 +1,1087 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>cvxmg modules &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Methodology formulation" href="methodology.html" />
+    <link rel="prev" title="cvxmg" href="modules.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="methodology.html" title="Methodology formulation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="cvxmg"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">cvxmg</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-cvxmg">
+<span id="cvxmg-modules"></span><h1>cvxmg modules<a class="headerlink" href="#module-cvxmg" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="cvxmg.ComputeDSMS">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">ComputeDSMS</code><span class="sig-paren">(</span><em class="sig-param">loadfile</em>, <em class="sig-param">elasticity</em>, <em class="sig-param">initial_price</em>, <em class="sig-param">max_value_tariff</em>, <em class="sig-param">years</em>, <em class="sig-param">dlcpercenthour</em>, <em class="sig-param">dlcpercenttotal</em>, <em class="sig-param">flat</em>, <em class="sig-param">tou</em>, <em class="sig-param">tou_sun</em>, <em class="sig-param">tou_three</em>, <em class="sig-param">cpp</em>, <em class="sig-param">dadp</em>, <em class="sig-param">shape_tar</em>, <em class="sig-param">ince</em>, <em class="sig-param">dilc</em>, <em class="sig-param">drpercentage</em>, <em class="sig-param">simulation_year=0</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.ComputeDSMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class computes the response of the customers to the incentive of the DSMS. Additionally, this class provides the customer payments, the demand after the application of the DSMS, and the tariff for the optimization horizon.
+This class takes the following parameters as inputs:</p>
+<div class="line-block">
+<div class="line"><strong>loadfile:</strong> (numpy.ndarray)</div>
+<div class="line">File vector that contains the electrical demand. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>elasticity:</strong> (int, float)</div>
+<div class="line">Value of elasticity of the customers.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>initial_price:</strong> (int, float)</div>
+<div class="line">Initial price of the electric energy. Value of the flat tariff. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int)</div>
+<div class="line">Number of years for the optimization horizon. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>dlcpercenthour:</strong> (int, float)</div>
+<div class="line">Percentage of load curtailment each hour for the Direct Load Curtailment DSMS. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>dlcpercenttotal:</strong> (int, float)</div>
+<div class="line">Percentage of load curtailment for the day for the Direct Load Curtailment DSMS. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>flat:</strong> (True or False)</div>
+<div class="line">Assign True to select flat tariff, otherwise assign False. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>tou:</strong> (True or False)</div>
+<div class="line">Assign True to select Time of Use tariff, otherwise assign False. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>tou_sun:</strong> (True or False)</div>
+<div class="line">Assign True to select Time of Use tariff for sun and off sun hours, otherwise assign False. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>tou_three:</strong> (True or False)</div>
+<div class="line">Assign True to select Time of Use tariff of three levels, otherwise assign False. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>cpp:</strong> (True or False)</div>
+<div class="line">Assign True to select Critical Peak Pricing tariff, otherwise assign False. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>dadp:</strong> (True or False)</div>
+<div class="line">Assign True to select Day Ahead Dynamic Pricing tariff, otherwise assign False. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>shape:</strong> (True or False)</div>
+<div class="line">Assign True to select Shape tariff, otherwise assign False. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>ince:</strong> (True or False)</div>
+<div class="line">Assign True to select Incentive-Based Pricing tariff, otherwise assign False. Incentive-based DSMS assumes a flat tariff for the base. Additionally to the base tariff (flat) the incentives are computed. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>dilc:</strong> (True or False)</div>
+<div class="line">Assign True to select the Direct Load Curtailment DSMS, otherwise assign False. Direct Load Curtailment DSMS assumes a flat tariff. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>drpercentage:</strong> (int or float)</div>
+<div class="line">Define the percentage of the demand that is sensible to the variations in price. This value must be a percentage (25%, 35%, etc.).</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>simulation_year:</strong> (int)        </div>
+<div class="line">Year of simulation. By default this parameter is zero. It is only used when a multiyear analysis is applied. </div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.DeterministicDSMS">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">DeterministicDSMS</code><span class="sig-paren">(</span><em class="sig-param">prob_info</em>, <em class="sig-param">sources_info</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.DeterministicDSMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Deterministic constructor to ensamble the microgrid using Demand Side Management Strategies. The deterministic constructor build the optimization formulation for the microgrid using the information of the problem and the information of the energy sources. The information of the problem is stored in prob_info, the information of the energy sources is stored in sources_info.</p>
+<p><strong>prob_info:</strong> (dictionary) 
+Contains the information related to the configuration of the optimization formulation. To make easier setting the parameters, a function named variables is created to import the values of problem info from a <a href="#id1"><span class="problematic" id="id2">*</span></a>.csv file. Additionally, prob_info should include the weather conditions of the geographical region where the IMG is going to be installed. To make easier the process of importing these data, resources_norm, resources_all and resources_noise functions were created.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For more information about how to create the variable prob_info please refer to Setting prob_info section. 
+For more information about the different options of how to generate the scenarios for the multiyear analysis, please refer to resources_norm, resources_all and resources_noise.</p>
+</div>
+<p><strong>sources_info:</strong> (dictionary) 
+Contains the information related to the configuration of the energy sources.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Please refer to <strong>Setting sources_info</strong> section.</p>
+</div>
+<dl class="method">
+<dt id="cvxmg.DeterministicDSMS.plotMG">
+<code class="sig-name descname">plotMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.DeterministicDSMS.plotMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method created to make some default plots of the results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.DeterministicDSMS.resultsMG">
+<code class="sig-name descname">resultsMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.DeterministicDSMS.resultsMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method created to obtain the results of the optimization. It returns a tuple. summary, and dispatch_results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.DeterministicDSMS.solveMG">
+<code class="sig-name descname">solveMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.DeterministicDSMS.solveMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method created to solve the optimization formulation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.EGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">EGenerator</code><span class="sig-paren">(</span><em class="sig-param">investment_cost=0</em>, <em class="sig-param">fuel_function=0</em>, <em class="sig-param">fuel_cost=0</em>, <em class="sig-param">maintenance_cost=5</em>, <em class="sig-param">min_out_power=0</em>, <em class="sig-param">max_out_power=100</em>, <em class="sig-param">rate_up=1</em>, <em class="sig-param">rate_down=1</em>, <em class="sig-param">years=1</em>, <em class="sig-param">yearly_total_capacity=0</em>, <em class="sig-param">tax_tonne_price=0</em>, <em class="sig-param">life_time=3</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.EGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General class for generators (Diesel, Gas, Biomass, etc.). This class will create an object that represents an electric energy generator. 
+This class requires the following attributes:</p>
+<div class="line-block">
+<div class="line"><strong>investment_cost:</strong> (int, float)</div>
+<div class="line">Initial investment cost paid for installing a kW of the selected technology. </div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the investment costs will be assumed to be zero.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>fuel_function:</strong> (numpy.ndarray of dimension less than three)</div>
+<div class="line">The fuel function can take a cuadratic or linear input arguments. The dimension of the numpy array will determine the fuel function. </div>
+<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the operational costs. The datails of this approximation can be found in <a class="reference internal" href="#ov2020" id="id3"><span>[ov2020]</span></a>: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the output power of the generator. </div>
+<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the operational costs. However, to better aproximate the fuel consumption, the second term is multiplied by the installed capacity. The datails of this approximation can be found in <a class="reference internal" href="#bu2019" id="id4"><span>[bu2019]</span></a>: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+bC\)</span>, where Q is the output power of the generator and C is the installed capacity. </div>
+<div class="line">if the input has a numpy array of dimension one ([a]), a linear function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the output power of the generator. </div>
+</div>
+<p>If any value is passed the class will take the default value = 0, which means that the operational costs will be assumed to be zero.</p>
+<div class="line-block">
+<div class="line"><strong>fuel_cost:</strong> (int, float)</div>
+<div class="line">This attribute takes the fuel cost expresed in measure unity by money unity (L/USD, g/CAD, etc.). It is worth it to mention that the fuel cost units must be consistent with the fuel function units. </div>
+<div class="line">fuel_function units multiplied by fuel_cost units = money units (USD, CAD, etc.)</div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the operational costs will be zero even if a fuel function cost was passed. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>maintenance_cost:</strong> (int, float, numpy.ndarray of dimension less than three)</div>
+<div class="line">If an int or float value is passed, the maintenance cost of the generator will be expressed as the yearly cost. The input value is considered as a percentage of the installation costs. </div>
+<div class="line">if the value is 6, then a 6% of the installation costs are taken as the yearly maintenance costs of the generator. If a numpy array is passed then a function will be built using the same principle of the fuel function.</div>
+<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the output power of the generator. </div>
+<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+b\)</span>, where Q is the output power of the generator. </div>
+<div class="line">if the input has a numpy array of dimension one ([a]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the output power of the generator. </div>
+</div>
+<p>If any value is passed the class will take the default value = 5, which means that the maintenance costs will be assumed to be 5% of the investment costs.</p>
+<div class="line-block">
+<div class="line"><strong>min_out_power:</strong> (int, float)</div>
+<div class="line">Minimum output power of the generator. If the generator has a lower generation limit, this value should be specified here. The input value must be a percentage [0,100]. </div>
+<div class="line">If 30 is passed, it is assumed that the generator can dispatch values only above the 30% of its nominal capacity.  </div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the the generator can dispatch any value above zero. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>max_out_power:</strong> (int, float)</div>
+<div class="line">Maximum output power of the generator. If the generator has a superior generation limit, this value should be specified here. The input value must be a percentage [0,100]. </div>
+<div class="line">If 80 is passed, it is assumed that the generator can dispatch values only below the 80% of its nominal capacity.  </div>
+<div class="line">If any value is passed the class will take the default value = 100, which means that the the generator can dispatch any value below the 100% of its nominal capacity. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>rate_up:</strong> (int, float)</div>
+<div class="line">Maximum rate to increase the output power in one time step. If the generator has a limit in the variation of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the generator will consider that is able to increase the output power from zero to the installed capacity in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>rate_down:</strong> (int, float)</div>
+<div class="line">Maximum rate to decrease the output power in one time step. If the generator has a limit in the variations of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the generator will consider that is able to decrease the output power from the installed capacity to zero in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int)</div>
+<div class="line">Number of years of optimization. </div>
+<div class="line">If any value is passed the class will take the default value = 1.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>yearly_total_capacity:</strong> (int, float)</div>
+<div class="line">Installed capacity in the previous year. This attribute only works for multiyear analysis. The default value is zero. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>tax_tonne_price:</strong> (int, float)</div>
+<div class="line">Price paid for each tonne of CO2 produced for the generator. The consumed liters of diesel are multiplied by 2.65 (Diesel type B5) to obtain the kilograms of CO2.</div>
+</div>
+<dl class="method">
+<dt id="cvxmg.EGenerator.formulate">
+<code class="sig-name descname">formulate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.EGenerator.formulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.EStorage">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">EStorage</code><span class="sig-paren">(</span><em class="sig-param">investment_cost=0</em>, <em class="sig-param">fuel_function=0</em>, <em class="sig-param">fuel_cost=0</em>, <em class="sig-param">maintenance_cost=5</em>, <em class="sig-param">min_out_power=0</em>, <em class="sig-param">max_out_power=100</em>, <em class="sig-param">rate_up=1</em>, <em class="sig-param">rate_down=1</em>, <em class="sig-param">initial_charge=50</em>, <em class="sig-param">years=1</em>, <em class="sig-param">yearly_total_capacity=0</em>, <em class="sig-param">tax_tonne_price=0</em>, <em class="sig-param">life_time=4</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.EStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General class for storage (Batteries, CAES, HydroPump, Flywheel, Hydrogen, etc.). This class will create an object that represents a electric energy storage system. The datails of this model can be found in <a class="reference internal" href="#ov2020" id="id5"><span>[ov2020]</span></a>. This class requires the following attributes:</p>
+<div class="line-block">
+<div class="line"><strong>investment_cost:</strong> (int, float)</div>
+<div class="line">Initial investment cost paid for installing a kW of the selected technology. </div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the investment costs will be assumed to be zero.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>fuel_function:</strong> (numpy array of dimension less than three)</div>
+<div class="line">The fuel function can take a cuadratic or linear input arguments. The dimension of the numpy array will determine the fuel function. </div>
+<div class="line">if the input have a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the power that flows (in/out) in the storage system.</div>
+<div class="line">if the input have a numpy array of dimension two ([a, b]), a linear function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+b\)</span>, where Q is the power that flows (in/out) in the storage system.</div>
+<div class="line">if the input have a numpy array of dimension one ([a]), a linear function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the power that flows (in/out) in the storage system.</div>
+</div>
+<p>If any value is passed the class will take the default value = 0, which means that the operational costs will be assumed to be zero.</p>
+<div class="line-block">
+<div class="line"><strong>fuel_cost:</strong> (int, float)</div>
+<div class="line">This attribute takes the fuel cost expresed in measure unity by money unity (L/USD, g/CAD, etc.). It is worth it to mention that the fuel cost units must be consistent with the fuel function units. </div>
+<div class="line">fuel_function units multiplied by fuel_cost units = money units (USD, CAD, etc.)</div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the operational costs will be zero even if a fuel function cost was passed. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>maintenance_cost:</strong> (int, float, numpy.ndarray of dimension less than three)</div>
+<div class="line">If a int or float value is passed, the maintenance cost will be expressed as the yearly cost. The input value is considered as a percentage of the installation costs. </div>
+<div class="line">if the value is 15, then a 15% of the installation costs are taken as the yearly maintenance costs of the storage system. If a numpy array is passed, a function will be built using the same principle of the fuel function.</div>
+<div class="line">if the input have a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the power that flows (in/out) in the storage system. </div>
+<div class="line">if the input have a numpy array of dimension two ([a, b]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+b\)</span>, where Q is the power that flows (in/out) in the storage system.</div>
+<div class="line">if the input have a numpy array of dimension one ([a]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the power that flows (in/out) in the storage system.</div>
+</div>
+<p>If any value is passed the class will take the default value = 5, which means that the maintenance costs will be assumed to be 5% of the investment costs.</p>
+<div class="line-block">
+<div class="line"><strong>min_out_power:</strong> (int, float)</div>
+<div class="line">Minimum output power of the storage system. If the storage system has a lower generation limit, this value should be specified here. The input value must be a percentage [0,100]. </div>
+<div class="line">If 30 is passed, it is assumed that the storage system can dispatch values only above the 30% of its nominal capacity.  </div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the the storage system can dispatch any value above zero. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>max_out_power:</strong> (int, float)</div>
+<div class="line">Maximum output power of the storage system. If the storage system has a superior generation limit, this value should be specified here. The input value must be a percentage [0,100]. </div>
+<div class="line">If 80 is passed, it is assumed that the storage system can dispatch values only below the 80% of its nominal capacity.  </div>
+<div class="line">If any value is passed the class will take the default value = 100, which means that the the storage system can dispatch any value below the 100% of its nominal capacity. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>rate_up:</strong> (int, float)</div>
+<div class="line">Maximum rate to increase the output power in one time step. If the storage system has a limit in the variation of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the storage system will consider that is able to increase the output power from zero to the installed capacity in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>rate_down:</strong> (int, float)</div>
+<div class="line">Maximum rate to decrease the output power in one time step. If the storage system has a limit in the variations of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the storage system will consider that is able to decrease the output power from the installed capacity to zero in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>initial_charge:</strong> (int, float)</div>
+<div class="line">Initial value of charge at the beggining of the optimization horizon. This value is considered as a percentage of the installed capacity. It is wort it to mention that the passed value must be inside of the limits of the lower and upper limit of charge of the storage system.</div>
+<div class="line">If any value is passed the class will take the default value = 50, which means that the initial charge of the storage is considered to be 50% of its nominal capacity.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int)</div>
+<div class="line">Number of years of optimization. </div>
+<div class="line">If any value is passed the class will take the default value = 1.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>yearly_total_capacity:</strong> (int, float)</div>
+<div class="line">Installed capacity in the previous year. This attribute only works for multiyear analysis. The default value is zero. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>tax_tonne_price:</strong> (int, float)</div>
+<div class="line">Price paid for each tonne of CO2 produced for the storage. </div>
+</div>
+<dl class="method">
+<dt id="cvxmg.EStorage.formulate">
+<code class="sig-name descname">formulate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.EStorage.formulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.Excessenergy">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">Excessenergy</code><span class="sig-paren">(</span><em class="sig-param">cost_function=0</em>, <em class="sig-param">reliability=5</em>, <em class="sig-param">years=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.Excessenergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General class for excess of Energy. The details of this model can be found in <a class="reference internal" href="#ov2020" id="id6"><span>[ov2020]</span></a>. This Class requires the following attributes:</p>
+<div class="line-block">
+<div class="line"><strong>cost_function:</strong> (numpy.ndarray of dimension less than three)</div>
+<div class="line">The cost function can take a cuadratic or linear input arguments. The dimension of the numpy array will determine the cost function. </div>
+<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the excess of energy. </div>
+<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+b\)</span>, where Q is the excess of energy </div>
+<div class="line">if the input has a numpy array of dimension one ([a]), a linear function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the excess of energy. </div>
+</div>
+<p>If any value is passed the class will take the default value = 0, which means that the operational costs will be assumed to be zero.</p>
+<div class="line-block">
+<div class="line"><strong>reliability:</strong> (int, float)</div>
+<div class="line">Desired value of reliability for the excess of energy. This value is expressed as a percentage. A value of 5 means that is allowed a excess of energy of 5% to supply the demand.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int)</div>
+<div class="line">Number of years of optimization. </div>
+<div class="line">If any value is passed the class will take the default value = 1.</div>
+</div>
+<dl class="method">
+<dt id="cvxmg.Excessenergy.formulate">
+<code class="sig-name descname">formulate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.Excessenergy.formulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.Lackenergy">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">Lackenergy</code><span class="sig-paren">(</span><em class="sig-param">cost_function=0</em>, <em class="sig-param">reliability=5</em>, <em class="sig-param">years=1</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.Lackenergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General class for Lack of Energy. The details of the model can be found in <a class="reference internal" href="#ov2020" id="id7"><span>[ov2020]</span></a>. This class requires the following attributes:</p>
+<div class="line-block">
+<div class="line"><strong>cost_function:</strong> (numpy.ndarray of dimension less than three)</div>
+<div class="line">The cost function can take a cuadratic or linear input arguments. The dimension of the numpy array will determine the cost function. </div>
+<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the lack of energy. </div>
+<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+b\)</span>, where Q is the lack of energy </div>
+<div class="line">if the input has a numpy array of dimension one ([a]), a linear function will be used for the operational costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the lack of energy. </div>
+</div>
+<p>If any value is passed the class will take the default value = 0, which means that the operational costs will be assumed to be zero.</p>
+<div class="line-block">
+<div class="line"><strong>reliability:</strong> (int, float)</div>
+<div class="line">Desired value of reliability for the lack of energy. This value is expressed as a percentage. A value of 5 means that is allowed a lack of energy of 5% to supply the demand.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int)</div>
+<div class="line">Number of years of optimization. </div>
+<div class="line">If any value is passed the class will take the default value = 1.</div>
+</div>
+<dl class="citation">
+<dt class="label" id="ov2020"><span class="brackets">ov2020</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>,<a href="#id6">3</a>,<a href="#id7">4</a>,<a href="#id15">5</a>)</span></dt>
+<dd><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="3">
+<li><p>Oviedo Cepeda et al. (in press), “Design of an Incentive-based Demand Side Management Strategy for Stand-Alone Microgrids Planning,” Int. J. Sustain. Energy Plan. Manag., vol. 28, pp. 1–21, 2020.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+<dt class="label" id="bu2019"><span class="brackets">bu2019</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id16">2</a>,<a href="#id19">3</a>)</span></dt>
+<dd><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="12">
+<li><p>Bukar, C. W. Tan, and K. Y. Lau, “Optimal sizing of an autonomous photovoltaic/wind/battery/diesel generator microgrid using grasshopper optimization algorithm,” Sol. Energy, vol. 188, no. March, pp. 685–696, 2019.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+</dl>
+<dl class="method">
+<dt id="cvxmg.Lackenergy.formulate">
+<code class="sig-name descname">formulate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.Lackenergy.formulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.LookTable">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">LookTable</code><a class="headerlink" href="#cvxmg.LookTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>LookTable class creates an iterable object that contains the capex values of the energy sources until the year 2050. All source data for the CAPEX prices can be found in <a class="reference external" href="https://atb.nrel.gov/electricity/2019/data.html">https://atb.nrel.gov/electricity/2019/data.html</a> and the source data for the diesel price can be foun in <a class="reference external" href="https://www.eia.gov/outlooks/aeo/tables_ref.php">https://www.eia.gov/outlooks/aeo/tables_ref.php</a></p>
+<dl class="method">
+<dt id="cvxmg.LookTable.plotBESS">
+<code class="sig-name descname">plotBESS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.LookTable.plotBESS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the BESS CAPEX prices until the year 2050. All source data can be found in <a class="reference external" href="https://atb.nrel.gov/electricity/2019/data.html">https://atb.nrel.gov/electricity/2019/data.html</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.LookTable.plotCPI">
+<code class="sig-name descname">plotCPI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.LookTable.plotCPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the Consumer Index Prices until the year 2050. Due to the lack of data, it is assumed a stable price for the following years.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.LookTable.plotCTAX">
+<code class="sig-name descname">plotCTAX</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.LookTable.plotCTAX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the TAX prices until the year 2050. All source data can be found in the Greenhouse Gas Pollution Pricing Act of the Canadian Government <a class="reference external" href="https://www.canlii.org/en/ca/laws/stat/sc-2018-c-12-s-186/139160/sc-2018-c-12-s-186.html">https://www.canlii.org/en/ca/laws/stat/sc-2018-c-12-s-186/139160/sc-2018-c-12-s-186.html</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.LookTable.plotDIESEL">
+<code class="sig-name descname">plotDIESEL</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.LookTable.plotDIESEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the DIESEL prices until the year 2050. All source data can be found in <a class="reference external" href="https://www.eia.gov/outlooks/aeo/tables_ref.php">https://www.eia.gov/outlooks/aeo/tables_ref.php</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.LookTable.plotGENSET">
+<code class="sig-name descname">plotGENSET</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.LookTable.plotGENSET" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the diesel GENSET CAPEX prices until the year 2050. Due to the lack of data, it is assumed a linear reduction in the prices.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.LookTable.plotPV">
+<code class="sig-name descname">plotPV</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.LookTable.plotPV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the PV CAPEX prices until the year 2050. All source data can be found in <a class="reference external" href="https://atb.nrel.gov/electricity/2019/data.html">https://atb.nrel.gov/electricity/2019/data.html</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.LookTable.plotWIND">
+<code class="sig-name descname">plotWIND</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.LookTable.plotWIND" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to plot the WIND CAPEX prices until the year 2050. All source data can be found in <a class="reference external" href="https://atb.nrel.gov/electricity/2019/data.html">https://atb.nrel.gov/electricity/2019/data.html</a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.MultiyearDSMS">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">MultiyearDSMS</code><span class="sig-paren">(</span><em class="sig-param">prob_info_input</em>, <em class="sig-param">sources_info</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.MultiyearDSMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><a href="#id8"><span class="problematic" id="id9">|</span></a>Multiyear constructor to ensamble the microgrid using Demand Side Management Strategies. The multiyear constructor implements the adaptative method described in <a class="reference internal" href="#pece2019" id="id10"><span>[pece2019]</span></a>. However, the multiyear analysis here does not consider three day each month as the authors propose in the article. The multy-year analysis here considers the full year analysis (8760 hours).
+<a href="#id11"><span class="problematic" id="id12">|</span></a>The multiyear constructor requires the following parameters:</p>
+<div class="line-block">
+<div class="line"><strong>prob_info:</strong> (dictionary) </div>
+<div class="line">Contains the information related to the configuration of the optimization formulation. To make easier setting the parameters, a function named variables is created to import the values of problem info from a <a href="#id13"><span class="problematic" id="id14">*</span></a>.csv file. </div>
+<div class="line">Additionally, prob_info should include the weather conditions of the geographical region where the IMG is going to be installed. To make easier the process of importing these data, resources_norm, resources_all and resources_noise functions were created.</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For more information about how to create the variable prob_info please refer to <strong>Setting prob_info</strong> section. 
+For more information about the different options of how to generate the scenarios for the multiyear analysis, please refer to resources_norm, resources_all and resources_noise.</p>
+</div>
+<div class="line-block">
+<div class="line"><strong>sources_info:</strong> (dictionary)</div>
+<div class="line">Contains the information related to the configuration of the energy sources. </div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Please refer to <strong>Setting sources_info</strong> section.</p>
+</div>
+<dl class="citation">
+<dt class="label" id="pece2019"><span class="brackets"><a class="fn-backref" href="#id10">pece2019</a></span></dt>
+<dd><ol class="upperalpha simple" start="26">
+<li><ol class="upperalpha simple" start="11">
+<li><p>Pecenak, M. Stadler, and K. Fahy, “Efficient multi-year economic energy planning in microgrids,” Appl. Energy, vol. 255, no. August, p. 113771, 2019.</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+</dl>
+<dl class="method">
+<dt id="cvxmg.MultiyearDSMS.financialMG">
+<code class="sig-name descname">financialMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.MultiyearDSMS.financialMG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.MultiyearDSMS.plotMG">
+<code class="sig-name descname">plotMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.MultiyearDSMS.plotMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>MultiyearDSMS.plotMG():  
+Method created to make some default plots of the results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.MultiyearDSMS.resultsMG">
+<code class="sig-name descname">resultsMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.MultiyearDSMS.resultsMG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.PVGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">PVGenerator</code><span class="sig-paren">(</span><em class="sig-param">investment_cost=0</em>, <em class="sig-param">maintenance_cost=5</em>, <em class="sig-param">rate_up=1</em>, <em class="sig-param">rate_down=1</em>, <em class="sig-param">ghi=0</em>, <em class="sig-param">temperature=0</em>, <em class="sig-param">derat=1</em>, <em class="sig-param">pstc=0.3</em>, <em class="sig-param">Ct=-0.0039</em>, <em class="sig-param">years=1</em>, <em class="sig-param">sen_ghi=1</em>, <em class="sig-param">simulation_year=0</em>, <em class="sig-param">yearly_total_capacity=0</em>, <em class="sig-param">life_time=25</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.PVGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General class for the photovoltaic generator. The model of the pv generator can be found in <a class="reference internal" href="#ov2020" id="id15"><span>[ov2020]</span></a> and <a class="reference internal" href="#bu2019" id="id16"><span>[bu2019]</span></a>.
+This class requires the following attributes:</p>
+<div class="line-block">
+<div class="line"><strong>investment_cost:</strong> (int, float)</div>
+<div class="line">Initial investment cost paid for installing a kW of the selected technology. </div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the investment costs will be assumed to be zero.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>maintenance_cost:</strong> (int, float, numpy.ndarray of dimension less than three)</div>
+<div class="line">If an int or float value is passed, the maintenance cost of the partially dispatchable generator will be expressed as the yearly cost. The input value is considered as a percentage of the installation costs. </div>
+<div class="line">if the value is 6, then a 6% of the installation costs are taken as the yearly maintenance costs of the partially dispatchable generator. If a numpy array is passed then a function will be built using the same principle of the fuel function.</div>
+<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the output power of the partially dispatchable generator. </div>
+<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+b\)</span>, where Q is the output power of the partially dispatchable generator. </div>
+<div class="line">if the input has a numpy array of dimension one ([a]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the output power of the partially dispatchable generator. </div>
+</div>
+<p>If any value is passed the class will take the default value = 5, which means that the maintenance costs will be assumed to be 5% of the investment costs.</p>
+<div class="line-block">
+<div class="line"><strong>rate_up:</strong> (int, float)</div>
+<div class="line">Maximum rate to increase the output power in one time step. If the partially dispatchable generator has a limit in the variation of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the partially dispatchable generator will consider that is able to increase the output power from zero to the installed capacity in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>rate_down:</strong> (int, float)</div>
+<div class="line">Maximum rate to decrease the output power in one time step. If the partially dispatchable generator has a limit in the variations of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the partially dispatchable generator will consider that is able to decrease the output power from the installed capacity to zero in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>ghi:</strong> (numpy.ndarray)</div>
+<div class="line">A numpy array with the Global Horizontal Radiation. This array should be passed for at least one year, with hourly time intervals. The default value is zero. However, if this value is not passed the pv generator will not work.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>temperature:</strong> (numpy.ndarray)</div>
+<div class="line">A numpy array with the Temperature values. This array should be passed for at least one year, with hourly time intervals. The default value is zero. However, if this value is not passed the pv generator will not work.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>derat:</strong> (int, float)</div>
+<div class="line">Derating factor. By default is one. Any value different from one will scale the pv generation. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>pstc:</strong> (int, float)</div>
+<div class="line">Output power of the selected pv module. This value should be passed in kW. By default this value is 0.3 kW.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Ct:</strong> (int, float)</div>
+<div class="line">Termic coeficient of the selected pv module. By default this value is -0.0039.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int)</div>
+<div class="line">Number of years of optimization. </div>
+<div class="line">If any value is passed the class will take the default value = 1.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>sen_ghi:</strong> (int, float)</div>
+<div class="line">Value to perform sensitivity analysis over the global horizontal radiation. This value scale all the array of global horizontal radiation. The default value is = 1.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>simulation_year:</strong> (int)        </div>
+<div class="line">Year of simulation. By default this parameter is zero. It is only used when a multiyear analysis is applied. </div>
+</div>
+<dl class="method">
+<dt id="cvxmg.PVGenerator.formulate">
+<code class="sig-name descname">formulate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.PVGenerator.formulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.StochasticDSMS">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">StochasticDSMS</code><span class="sig-paren">(</span><em class="sig-param">prob_info_input</em>, <em class="sig-param">sources_info</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.StochasticDSMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<div class="line-block">
+<div class="line">Stochastic multiyear constructor to ensamble the microgrid using Demand Side Management Strategies. This constructor perform an sochastic analysis</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>prob_info:</strong> (dictionary) </div>
+<div class="line">Contains the information related to the configuration of the optimization formulation. To make easier setting the parameters, a function named variables is created to import the values of problem info from a <a href="#id17"><span class="problematic" id="id18">*</span></a>.csv file. </div>
+<div class="line">Additionally, prob_info should include the weather conditions of the geographical region where the IMG is going to be installed. To make easier the process of importing these data, resources_norm, resources_all and resources_noise functions were created.</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For more information about how to create the variable prob_info please refer to <strong>Setting prob_info</strong> section. 
+For more information about the different options of how to generate the scenarios for the multiyear analysis, please refer to resources_norm, resources_all and resources_noise.</p>
+</div>
+<div class="line-block">
+<div class="line"><strong>sources_info:</strong> (dictionary) </div>
+<div class="line">Contains the information related to the configuration of the energy sources. </div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Please refer to <strong>Setting sources_info</strong> section.</p>
+</div>
+<dl class="method">
+<dt id="cvxmg.StochasticDSMS.resultsMG">
+<code class="sig-name descname">resultsMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.StochasticDSMS.resultsMG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.WINDGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">WINDGenerator</code><span class="sig-paren">(</span><em class="sig-param">investment_cost=0</em>, <em class="sig-param">maintenance_cost=5</em>, <em class="sig-param">rate_up=1</em>, <em class="sig-param">rate_down=1</em>, <em class="sig-param">wind=0</em>, <em class="sig-param">years=1</em>, <em class="sig-param">rated_speed=13</em>, <em class="sig-param">speed_cut_in=3</em>, <em class="sig-param">speed_cut_out=12.5</em>, <em class="sig-param">nominal_capacity=1</em>, <em class="sig-param">simulation_year=0</em>, <em class="sig-param">yearly_total_capacity=0</em>, <em class="sig-param">life_time=15</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.WINDGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General class for Partially Dispatchable Renewable Wind generator. The model of the wind generator can be found in <a class="reference internal" href="#bu2019" id="id19"><span>[bu2019]</span></a>. This class requires the following attributes:</p>
+<div class="line-block">
+<div class="line"><strong>investment_cost:</strong> (int, float)</div>
+<div class="line">Initial investment cost paid for installing a kW of the selected technology. </div>
+<div class="line">If any value is passed the class will take the default value = 0, which means that the investment costs will be assumed to be zero.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>maintenance_cost:</strong> (int, float, numpy.ndarray of dimension less than three)</div>
+<div class="line">If an int or float value is passed, the maintenance cost of the partially dispatchable generator will be expressed as the yearly cost. The input value is considered as a percentage of the installation costs. </div>
+<div class="line">if the value is 6, then a 6% of the installation costs are taken as the yearly maintenance costs of the partially dispatchable generator. If a numpy array is passed then a function will be built using the same principle of the fuel function.</div>
+<div class="line">if the input has a numpy array of dimension three ([a, b, c]), a cuadratic function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ^2+bQ+c\)</span>, where Q is the output power of the partially dispatchable generator. </div>
+<div class="line">if the input has a numpy array of dimension two ([a, b]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ+b\)</span>, where Q is the output power of the partially dispatchable generator. </div>
+<div class="line">if the input has a numpy array of dimension one ([a]), a linear function will be used for the maintenance costs: </div>
+<div class="line"><span class="math notranslate nohighlight">\(aQ\)</span>, where Q is the output power of the partially dispatchable generator. </div>
+</div>
+<p>If any value is passed the class will take the default value = 5, which means that the maintenance costs will be assumed to be 5% of the investment costs.</p>
+<div class="line-block">
+<div class="line"><strong>rate_up:</strong> (int, float)</div>
+<div class="line">Maximum rate to increase the output power in one time step. If the partially dispatchable generator has a limit in the variation of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the partially dispatchable generator will consider that is able to increase the output power from zero to the installed capacity in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>rate_down:</strong> (int, float)</div>
+<div class="line">Maximum rate to decrease the output power in one time step. If the partially dispatchable generator has a limit in the variations of output power this value should be specified here. The input value is considered as a percentage of the installed capacity. </div>
+<div class="line">If any value is passed the class will take the default value = 1, which means that the partially dispatchable generator will consider that is able to decrease the output power from the installed capacity to zero in one time step. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>wind:</strong> (numpy.ndarray)</div>
+<div class="line">A numpy array with the wind speeds. This array should be passed for at least one year, with hourly time intervals. The default value is zero. However, if this value is not passed the wind generator will not work.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int)</div>
+<div class="line">Number of years of optimization. </div>
+<div class="line">If any value is passed the class will take the default value = 1.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>rated_speed:</strong> (int, float)</div>
+<div class="line">Rated speed of the wind turbine. The default value is 13 m/s.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>speed_cut_in:</strong> (int, float)</div>
+<div class="line">Speed at which the wind turbine start to generate. The default value is 3 m/s.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>speed_cut_out:</strong> (int, float)</div>
+<div class="line">Speed at which the wind turbine stop to generate. The default value is 12.5 m/s.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>nominal_capacity:</strong> (int, float)</div>
+<div class="line">Nominal capacity of the wind turbine. The default value is 1 kW.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>simulation_year:</strong> (int)        </div>
+<div class="line">Year of simulation. By default this parameter is zero. It is only used when a multiyear analysis is applied. </div>
+</div>
+<dl class="method">
+<dt id="cvxmg.WINDGenerator.formulate">
+<code class="sig-name descname">formulate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.WINDGenerator.formulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cvxmg.YearlySolverDSMS">
+<em class="property">class </em><code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">YearlySolverDSMS</code><span class="sig-paren">(</span><em class="sig-param">prob_info</em>, <em class="sig-param">sources_info</em>, <em class="sig-param">simulation_year</em>, <em class="sig-param">summary</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.YearlySolverDSMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<div class="line-block">
+<div class="line">Solver created for the multiyear analysis. This solver computes the results of one year of operation of the microgrid. The yearly solver requires the following parameters:</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>prob_info:</strong> (dictionary) </div>
+<div class="line">Contains the information related to the configuration of the optimization formulation. To make easier setting the parameters, a function named variables is created to import the values of problem info from a <a href="#id20"><span class="problematic" id="id21">*</span></a>.csv file. </div>
+<div class="line">Additionally, prob_info should include the weather conditions of the geographical region where the IMG is going to be installed. To make easier the process of importing these data, resources_norm, resources_all and resources_noise functions were created.</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For more information about how to create the variable prob_info please refer to <strong>Setting prob_info</strong> section. 
+For more information about the different options of how to generate the scenarios for the multiyear analysis, please refer to resources_norm, resources_all and resources_noise.</p>
+</div>
+<div class="line-block">
+<div class="line"><strong>sources_info:</strong> (dictionary) </div>
+<div class="line">Contains the information related to the configuration of the energy sources. </div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Please refer to <strong>Setting sources_info</strong> section.</p>
+</div>
+<div class="line-block">
+<div class="line"><strong>simulation_year:</strong> (int)</div>
+<div class="line">Refers to the year to simulate. This parameter is controlled by the MultiyearDSMS constructor. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>summary:</strong> (dictionary) </div>
+<div class="line">Refers to a dictionary that contains the results of simulating the microgrid in the years before to the simulation year. This parameter is controlled by the MultiyearDSMS constructor. </div>
+</div>
+<dl class="method">
+<dt id="cvxmg.YearlySolverDSMS.resultsMG">
+<code class="sig-name descname">resultsMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.YearlySolverDSMS.resultsMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>YearlySolverDSMS.resultsMG():  
+Method created to obtain the results of the optimization. It returns a tuple. summary, and dispatch_results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cvxmg.YearlySolverDSMS.solveMG">
+<code class="sig-name descname">solveMG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.YearlySolverDSMS.solveMG" title="Permalink to this definition">¶</a></dt>
+<dd><p>YearlySolverDSMS.solveMG():  
+Method created to solve the optimization formulation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.data_years_beta">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">data_years_beta</code><span class="sig-paren">(</span><em class="sig-param">data_in</em>, <em class="sig-param">years</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.data_years_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, using hourly normal distribution aproximated from the input data. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> (pandas dataframe) </div>
+<div class="line">A pandas series of data indexed with an hourly time stamp over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (pandas dataframe) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<p>This function returns a numpy array of dimension (1,8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.data_years_norm">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">data_years_norm</code><span class="sig-paren">(</span><em class="sig-param">data_in</em>, <em class="sig-param">years</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.data_years_norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, using hourly normal distribution aproximated from the input data. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> (pandas dataframe) </div>
+<div class="line">A pandas series of data indexed with an hourly time stamp over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<p>This function returns a numpy array of dimension (1,8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.data_years_weibull">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">data_years_weibull</code><span class="sig-paren">(</span><em class="sig-param">data_in</em>, <em class="sig-param">years=1</em>, <em class="sig-param">fit_type='weekly'</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.data_years_weibull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, using a hourly weibull distribution aproximated from the input data. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> (pandas dataframe)</div>
+<div class="line">A pandas series of data indexed with an hourly time stamp over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<p>This function returns a numpy array of dimension (1,8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.fitweibull">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">fitweibull</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.fitweibull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to fit a weibull distribution.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.resources_all">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">resources_all</code><span class="sig-paren">(</span><em class="sig-param">data_input</em>, <em class="sig-param">years=1</em>, <em class="sig-param">scenarios=1</em>, <em class="sig-param">percentage_yearly_growth=0</em>, <em class="sig-param">fit_type='weekly'</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.resources_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, using normal, beta and weibull distributions. The normal distribution is used for the temperature, hydro, and the different types of load. The beta distribution is used for the GHI and the diffuse irradaition. The weibull distribution is used ofr the wind. The input parameters are:</p>
+<div class="line-block">
+<div class="line"><strong>data_input:</strong> (numpy ndarray) </div>
+<div class="line">A numpy array of data with hourly intervals over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>scenarios:</strong> (int) </div>
+<div class="line">Number of scenarios to generate the data (stochastic analysis)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_yearly_growth:</strong> (int, float) </div>
+<div class="line">Percentage of desired yearly growth of the output data (geometric growth)</div>
+</div>
+<p>This function returns a numpy array of dimension (escenarios, 8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.resources_noise">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">resources_noise</code><span class="sig-paren">(</span><em class="sig-param">data_input</em>, <em class="sig-param">years=1</em>, <em class="sig-param">scenarios=1</em>, <em class="sig-param">percentage_variation=10</em>, <em class="sig-param">percentage_yearly_growth=0</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.resources_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, adding gaussian noise. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> (numpy ndarray) </div>
+<div class="line">A numpy array of data with hourly intervals over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>scenarios:</strong> (int) </div>
+<div class="line">Number of scenarios to generate the data (stochastic analysis)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_variation:</strong> (int, float)</div>
+<div class="line">Variation of the gaussian noise. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_yearly_growth:</strong> (int, float) </div>
+<div class="line">Percentage of desired yearly growth of the output data (geometric growth)</div>
+</div>
+<p>This function returns a numpy array of dimension (escenarios, 8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.resources_norm">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">resources_norm</code><span class="sig-paren">(</span><em class="sig-param">data_input</em>, <em class="sig-param">years=1</em>, <em class="sig-param">scenarios=1</em>, <em class="sig-param">percentage_yearly_growth=0</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.resources_norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, using only normal distributions. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_input:</strong> (numpy ndarray) </div>
+<div class="line">A numpy array of data with hourly intervals over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>scenarios:</strong> (int) </div>
+<div class="line">Number of scenarios to generate the data (stochastic analysis)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_yearly_growth:</strong> (int, float) </div>
+<div class="line">Percentage of desired yearly growth of the output data (geometric growth)</div>
+</div>
+<p>This function returns a numpy array of dimension (escenarios, 8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.variables">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">variables</code><span class="sig-paren">(</span><em class="sig-param">variables_csv</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to import some variables for the dictionary ‘prob_info’ from an csv file. This function is used only for the provided example. 
+The input parameters are:</p>
+<div class="line-block">
+<div class="line"><strong>variables(variables_csv):</strong> (csv file)</div>
+<div class="line">variables_csv is a csv file that contains the following information: </div>
+</div>
+<div class="line-block">
+<div class="line">project_life_time;20          # Set the life time of the project in years</div>
+<div class="line">interest_rate;4               # Set the interest rate   </div>
+<div class="line">esce;3                        # Set the number of scenarios (only for the stochastic analysis)                                                                                                          </div>
+<div class="line">years;3                       # Set the number of years (only for the multiyear analysis)                                                              </div>
+<div class="line">scala;1                       # Set the scala to adjust the peak load                                                                                                                                  </div>
+<div class="line">prxo;0.17                     # Set the price of the flat tariff (initial price)                                                                                                                            </div>
+<div class="line">percentage_yearly_growth;5    # Set the percentage of the yearly growth of the electric demand                                                                            </div>
+<div class="line">percentage_variation;50       # Set the percentage variation (only for generating data with noise)                                                                     </div>
+<div class="line">dlcpercenthour;30             # Set the percentage of allowed load curtailment in the DLC strategy                                                           </div>
+<div class="line">dlcpercenttotal;15            # Set the percentage of allowed load curtailment in the DLC strategy                                                           </div>
+<div class="line">sen_ince;0.1                  # Set the variable for sensitivity analysis of the values of the incentives                                                   </div>
+<div class="line">sen_ghi;1                     # Set the variable for sensitivity analysis of the values of the global horizontal radiation                               </div>
+<div class="line">elasticity;0.3                # Set the value of the elasticity of the customers                                                                              </div>
+<div class="line">curtailment;1                 # Set the value of allowed curtailment after the introduction of the DSM                                                       </div>
+<div class="line">capex_private;0.2             # Set the capex paid by the private investors                                                                                      </div>
+<div class="line">capex_gov;0.8                 # Set the capex paid by the govrnment                                                                                          </div>
+<div class="line">capex_community;0             # Set the capex paid by the community                                                                                              </div>
+<div class="line">capex_ong;0                   # Set the capex paid by the ONGs                                                                                             </div>
+<div class="line">opex_private;1                # Set the opex paid by the private investors                                                                                    </div>
+<div class="line">opex_gov;0                    # Set the opex paid by the govrnment                                                                                        </div>
+<div class="line">opex_community;0              # Set the opex paid by the community                                                                                              </div>
+<div class="line">opex_ong;0                    # Set the opex paid by the ONGs                                                                                             </div>
+<div class="line">rate_return_private;1.15      # Set the rate of return for private investors                                                                                            </div>
+<div class="line">max_value_tariff;0.34         # Set the maximum value of the tariff                                           </div>
+<div class="line">drpercentage;30               # Set the percentage of the demand that responds to the price incentive                                         </div>
+<div class="line">diesel_system;True            # Include a diesel generator system                                                             </div>
+<div class="line">pv_system;True                # Include a photovoltaic system                                                    </div>
+<div class="line">battery_system;True           # Include a battery energy storage system                                               </div>
+<div class="line">wind_system;True              # Include a wind generator system                                                    </div>
+<div class="line">hydro_system;False            # Set False, energy source not implemented yet                                         </div>
+<div class="line">hydrogen_system;False         # Set False, energy source not implemented yet                                            </div>
+<div class="line">gas_system;False              # Set False, energy source not implemented yet                                       </div>
+<div class="line">biomass_system;False          # Set False, energy source not implemented yet                                           </div>
+<div class="line">flat;False                    # Set True to select flat tariff, otherwise set False                          </div>
+<div class="line">tou;False                     # Set True to select ToU tariff, otherwise set False                          </div>
+<div class="line">tou_sun;False                 # Set True to select ToU_SUN tariff, otherwise set False                          </div>
+<div class="line">tou_three;False               # Set True to select ToU_Three tariff, otherwise set False                          </div>
+<div class="line">cpp;True                      # Set True to select CPP tariff, otherwise set False                         </div>
+<div class="line">dadp;False                    # Set True to select DADP tariff, otherwise set False                          </div>
+<div class="line">shape;False                   # Set True to select Shape tariff, otherwise set False                          </div>
+<div class="line">ince;False                    # Set True to select incentive-based DSMS, otherwise set False                 </div>
+<div class="line">dilc;False                    # Set True to select direct load curtailment DSMS, otherwise set False         </div>
+<div class="line">residential;False             # Set True to select this type of load, otherwise set False                           </div>
+<div class="line">commercial;False              # Set True to select this type of load, otherwise set False                          </div>
+<div class="line">industrial;False              # Set True to select this type of load, otherwise set False                          </div>
+<div class="line">community;True                # Set True to select this type of load, otherwise set False                        </div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.yearly_data_generator_beta">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">yearly_data_generator_beta</code><span class="sig-paren">(</span><em class="sig-param">data_in</em>, <em class="sig-param">years=1</em>, <em class="sig-param">scenarios=1</em>, <em class="sig-param">percentage_yearly_growth=0</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.yearly_data_generator_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, using a Beta distribution. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> (pandas dataframe)</div>
+<div class="line">A numpy array of data with hourly intervals over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>scenarios:</strong> (int)</div>
+<div class="line">Number of scenarios to generate the data (stochastic analysis)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_variation:</strong> (int, float) </div>
+<div class="line">Percentage of the noise </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_yearly_growth:</strong> (int, float)</div>
+<div class="line">Percentage of desired yearly growth of the output data (geometric growth)</div>
+</div>
+<p>This function returns a numpy array of dimension (escenarios, 8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.yearly_data_generator_noise">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">yearly_data_generator_noise</code><span class="sig-paren">(</span><em class="sig-param">data_in</em>, <em class="sig-param">years=1</em>, <em class="sig-param">scenarios=1</em>, <em class="sig-param">percentage_variation=10</em>, <em class="sig-param">percentage_yearly_growth=0</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.yearly_data_generator_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, adding gaussian noise. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> (numpy ndarray) </div>
+<div class="line">A numpy array of data with hourly intervals over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>scenarios:</strong> (int) </div>
+<div class="line">Number of scenarios to generate the data (stochastic analysis)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_variation:</strong> (int, float)</div>
+<div class="line">Variation of the gaussian noise. </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_yearly_growth:</strong> (int, float) </div>
+<div class="line">Percentage of desired yearly growth of the output data (geometric growth)</div>
+</div>
+<p>This function returns a numpy array of dimension (escenarios, 8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.yearly_data_generator_norm">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">yearly_data_generator_norm</code><span class="sig-paren">(</span><em class="sig-param">data_in</em>, <em class="sig-param">years=1</em>, <em class="sig-param">scenarios=1</em>, <em class="sig-param">percentage_yearly_growth=0</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.yearly_data_generator_norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, adding gaussian noise to the input data. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> </div>
+<div class="line">A numpy array of data with hourly intervals over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>scenarios:</strong> </div>
+<div class="line">Number of scenarios to generate the data (stochastic analysis)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_variation:</strong></div>
+<div class="line">Percentage of the noise </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_yearly_growth:</strong> </div>
+<div class="line">Percentage of desired yearly growth of the output data (geometric growth). This function returns a numpy array of dimension (escenarios, 8760*years), with the synthetic generated data.  </div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="cvxmg.yearly_data_generator_weibull">
+<code class="sig-prename descclassname">cvxmg.</code><code class="sig-name descname">yearly_data_generator_weibull</code><span class="sig-paren">(</span><em class="sig-param">data_in</em>, <em class="sig-param">years=1</em>, <em class="sig-param">scenarios=1</em>, <em class="sig-param">percentage_yearly_growth=0</em>, <em class="sig-param">fit_type='weekly'</em><span class="sig-paren">)</span><a class="headerlink" href="#cvxmg.yearly_data_generator_weibull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function designed to create synthetic data, using a Weibull distribution. Input parameters:</p>
+<div class="line-block">
+<div class="line"><strong>data_in:</strong> (numpy ndarray) </div>
+<div class="line">A numpy array of data with hourly intervals over a period of one year.  </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>years:</strong> (int) </div>
+<div class="line">Number of years to generate the data </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>scenarios:</strong> (int) </div>
+<div class="line">Number of scenarios to generate the data (stochastic analysis)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_variation:</strong> (int, float) </div>
+<div class="line">Percentage of the noise </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>percentage_yearly_growth:</strong> (int, float) </div>
+<div class="line">Percentage of desired yearly growth of the output data (geometric growth)</div>
+</div>
+<p>This function returns a numpy array of dimension (escenarios, 8760*years), with the synthetic generated data.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="previous chapter">cvxmg</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="methodology.html"
+                        title="next chapter">Methodology formulation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cvxmg.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="methodology.html" title="Methodology formulation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="cvxmg"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cvxmg</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

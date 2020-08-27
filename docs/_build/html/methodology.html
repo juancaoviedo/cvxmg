@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Methodology formulation &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DSM integration into the sizing" href="dsm.html" />
+    <link rel="prev" title="cvxmg modules" href="cvxmg.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dsm.html" title="DSM integration into the sizing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cvxmg.html" title="cvxmg modules"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="methodology-formulation">
+<h1>Methodology formulation<a class="headerlink" href="#methodology-formulation" title="Permalink to this headline">¶</a></h1>
+<p>The problem that aims to solve CVXMG is to study the effects of Demand Side Management (DSM) strategies over the planning of Islanded/Isolated Microgrids (IMGs). The study should consider the impact of the technical and environmental aspects. The study will address regulatory aspects as well. This requires a methodology capable of:</p>
+<ul class="simple">
+<li><p>Integrate different energy sources for the IMG.</p></li>
+<li><p>Compute the sizing of the energy sources.</p></li>
+<li><p>Compute the energy dispatch of the energy sources.</p></li>
+<li><p>Consider the effects of the DSM over the lifetime of the project.</p></li>
+<li><p>Consider business models to recreate the real-life conditions of the development of IMG projects.</p></li>
+<li><p>Set the tariffs of the energy for the customers.</p></li>
+<li><p>Evaluate the impact of the DSM strategies over the planning of IMGs.</p></li>
+</ul>
+<p>A methodology with the above characteristics does not exist in the reviewed literature. In this regard, CVXMG builds a methodology to solve that.</p>
+<div class="section" id="proposed-solution">
+<h2>Proposed solution<a class="headerlink" href="#proposed-solution" title="Permalink to this headline">¶</a></h2>
+<p>The proposed solution implements a multiyear-stochastic analysis using Disciplined Convex Stochastic Programming (DCSP). DCSP builds on principles from stochastic optimization and convex analysis, representing a considerable advantage to build the desired methodology cite{Ali2015}. Equation <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> presents the general formulation of a convex stochastic problem:</p>
+<div class="math notranslate nohighlight" id="equation-equ-dcsp-formulation">
+<span class="eqno">(1)<a class="headerlink" href="#equation-equ-dcsp-formulation" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{equation}
+    minimize\;E(a_1(x,\xi)) \\
+    subject\;to\;E(b_i(x,\xi)) = 0\;\; i=1, \ldots ,B \\
+    c_i(x,\xi) \geq 0\;\; i=1, \ldots ,C
+\end{equation}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(b_i:\mathbf{R}^n \times \mathbf{R}^q \to \mathbf{R}\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots ,B\)</span> are convex functions in <span class="math notranslate nohighlight">\(x\)</span> for each value of the random variable <span class="math notranslate nohighlight">\(\xi \in \mathbf{R}^q\)</span>, and <span class="math notranslate nohighlight">\(c_i:\mathbf{R}^n \to \mathbf{R}\)</span>, <span class="math notranslate nohighlight">\(i=1 ,\ldots ,C\)</span> are (deterministic) affine functions; since expectations preserve convexity, the objective and inequality constraint functions in <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> are (also) convex in <span class="math notranslate nohighlight">\(x\)</span>, making <a class="reference internal" href="#equation-equ-dcsp-formulation">(1)</a> a convex optimization problem cite{Ali2015}, cite[Chapter~7]{Liberti2008}.</p>
+</div>
+<div class="section" id="main-assumptions">
+<h2>Main assumptions<a class="headerlink" href="#main-assumptions" title="Permalink to this headline">¶</a></h2>
+<p>The formulation of the methodology assumes that the planner can have at least one year of historical data of weather variables and electrical demand. The formulation use this historical data to build the multiyear, and multiyear-stochastic analysis of the methodology by using a scenario construction technique. Section ref{subsec:math_formulation} presents the information about the scenario building technique.</p>
+<p>The methodology assumes that there is no presence of smart or controllable loads in the IMGs. Considering this, it is not possible to apply advanced DSM strategies for IMGs. Due to this limitation, the present study proposes to use price-based DSM strategies and one DSM strategy based on Direct Load Curtailment. Both kinds of DSM strategies offer less technical difficulty as their more sophisticated counterparts.</p>
+<p>The formulation also assumes that the planner can know the price elasticity of the demand of the customers. By using the price elasticity of the customers’ demand, it is possible to compute how they will react to different stimuli. Additionally, the price elasticity of the demand intrinsically implies that without any external stimulus, the customers do not have any incentive to modify their consumption patterns. This assumption means that customers will not alter their consumption patterns if the IMG uses a flat tariff.</p>
+</div>
+<div class="section" id="mathematical-formulation">
+<h2>Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h2>
+<p>The formulation of the problem aims to minimize the total costs of the IMG project. The total costs of the project are Capital Expenditures (<span class="math notranslate nohighlight">\(\zeta\)</span>), Operational Expenditures (<span class="math notranslate nohighlight">\(\vartheta\)</span>), Maintenance Expenditures (<span class="math notranslate nohighlight">\(\mu\)</span>) and Carbon Taxes Expenditures (<span class="math notranslate nohighlight">\(\phi\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-equ-capex">
+<span class="eqno">(2)<a class="headerlink" href="#equation-equ-capex" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \zeta=\sum_{u=1}^U{C_{u}I_{u}}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-opex">
+<span class="eqno">(3)<a class="headerlink" href="#equation-equ-opex" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \vartheta =\sum_{t=1}^T\sum_{u=1}^U{\lambda_{u,t}E_{u,t}}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-maintenance">
+<span class="eqno">(4)<a class="headerlink" href="#equation-equ-maintenance" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \mu =\sum_{t=1}^T\sum_{u=1}^U{\Lambda_{u,t}E_{u,t}}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-taxes">
+<span class="eqno">(5)<a class="headerlink" href="#equation-equ-taxes" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \Phi =\sum_{t=1}^T\sum_{u=1}^U{B_u F_{u,t}}
+\end{equation}\]</div>
+<p>and <span class="math notranslate nohighlight">\(C_{u}\)</span>, <span class="math notranslate nohighlight">\(I_{u}\)</span>, <span class="math notranslate nohighlight">\(\lambda_{u,t}\)</span>, <span class="math notranslate nohighlight">\(\Lambda_{u,t}\)</span>, <span class="math notranslate nohighlight">\(E_{u,t}\)</span>, <span class="math notranslate nohighlight">\(B_u\)</span> and <span class="math notranslate nohighlight">\(F_{u,t}\)</span> represent the installed capacity, unitary investment cost, unitary dispatch costs, unitary maintenance costs, dispatched energy, carbon dioxide production by liter, and fuel consumption of the <span class="math notranslate nohighlight">\(u\)</span> energy source at time <span class="math notranslate nohighlight">\(t\)</span>, respectively. <span class="math notranslate nohighlight">\(T\)</span> represents the horizon of the optimization.</p>
+<p>The mathematical formulation allows the planner to build all kinds of business models by considering that a <span class="math notranslate nohighlight">\(i \in I\)</span> number of different investors (<span class="math notranslate nohighlight">\(\varphi\)</span>) can fund the IMG project. These <span class="math notranslate nohighlight">\(i \in I\)</span> investors can contribute to pay capital (<span class="math notranslate nohighlight">\(\varphi_{i,\zeta}\)</span>), operational (<span class="math notranslate nohighlight">\(\varphi_{i,\vartheta}\)</span>) or maintenance (<span class="math notranslate nohighlight">\(\varphi_{i,\mu}\)</span>) expenditures. The objective function captures the different sources of money to fund the project:</p>
+<div class="math notranslate nohighlight" id="equation-equ-objective-1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-equ-objective-1" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+        X_{1} = argmin_{C_{u},E_{u,t}} \; \sum_{i=1}^I{\varphi_{i,\zeta}\zeta+\varphi_{i,\vartheta}\vartheta+\varphi_{i,\mu}\mu+\varphi_{i,\phi}\phi}
+\end{equation}\]</div>
+<p>The formulation considers the energy prices as the only revenue stream for the investors that aim to recover their investment and have profits. If the business model has private investors ($varphi^{priv}$) the formulation allows to guarantee an expected Rate of Return ($R$) using the following constraint:</p>
+<div class="math notranslate nohighlight" id="equation-equ-return-of-investment">
+<span class="eqno">(7)<a class="headerlink" href="#equation-equ-return-of-investment" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    (1+R)\sum_{y=1}^{Y}{(\varphi^{priv,\zeta}\zeta_{y}+\varphi^{priv,\vartheta}\vartheta_{y}+\varphi^{priv,\mu}\mu_{y} + \varphi^{priv,\phi}\phi_{y})} \geq \sum_{t=1}^{YT}{\pi_{x,t}D_{t}^{dr}}
+\end{equation}\]</div>
+<p>where $pi_{n,t}$ is the price of the energy at time $t$ using the $n$ DSM strategy, and $D_{t}^{dr}$ is the electrical demand after the $x$ DSM strategy is applied. However, it is crucial to highlight that the horizon of this constraint is the life time of the project. The life time of the project is measured in years ($Y$) for the sum in the left, and in hours for the sum in the right ($Y$ multiplied by $T$).</p>
+<p>Equation <a class="reference internal" href="#equation-equ-elasticity">(8)</a> uses the demand with flat tariff ($D_{t}^{flat}$) as the base demand, the flat tariff ($pi^{flat}$) as the base price, the $x$ price ($pi_{x,t}$) as the DSM tariff, and the price-elasticity ($e_{t}$) of the customers to compute the response of the demand $D_{t}^{dr}$.</p>
+<div class="math notranslate nohighlight" id="equation-equ-elasticity">
+<span class="eqno">(8)<a class="headerlink" href="#equation-equ-elasticity" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    e_{t}=\frac{\pi^{flat}(D_{t}^{dr}-D_{t}^{flat})}{D_{t}^{flat}(\pi_{x,t} - \pi^{flat})}
+\end{equation}\]</div>
+<p>The formulation allows defining the changes in the total electrical demand after the introduction of the DSM using factor $Psi^{c}$ in Equation <a class="reference internal" href="#equation-equ-6a">(9)</a>. Factor $Psi^{c}$ is an input parameter that the planner choose according to the conditions of the IMG project. Values $Psi^{c} leq 1$ decreases the total energy consumption, while values $Psi^{c} geq 1$ increases the total energy consumption over the optimization horizon. A value  $Psi^{c}=1$ indicates that the total energy consumption over the optimization horizon remains constant after the introduction of DSM.</p>
+<div class="math notranslate nohighlight" id="equation-equ-6a">
+<span class="eqno">(9)<a class="headerlink" href="#equation-equ-6a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \sum_{t=1}^TD_{t}^{dr} - \Psi^{c}\sum_{t=1}^TD_{t}^{flat} = 0
+\end{equation}\]</div>
+<p>The formulation naturally includes the balance Equation:</p>
+<div class="math notranslate nohighlight" id="equation-equ-energy-balance-f2-f1">
+<span class="eqno">(10)<a class="headerlink" href="#equation-equ-energy-balance-f2-f1" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \sum_{t=1}^{T}\sum_{u=1}^{U} E_{u,t} - EE_t + LE_t - D_{t}^{dr}=0
+\end{equation}\]</div>
+<p>where $EE_t$ and $LE_t$ are the excess and lack of energy. According to cite{Chauhan2014,Diaf2008}, the loss of power supply probability (LPSP) is:</p>
+<div class="math notranslate nohighlight" id="equation-equ-19">
+<span class="eqno">(11)<a class="headerlink" href="#equation-equ-19" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    LPSP=\frac{\sum_{t=1}^{T}LE_t}{\sum_{t=1}^{T} D_{t}^{dr}}
+\end{equation}\]</div>
+<p>Similarly, Equation <a class="reference internal" href="#equation-equ-20">(12)</a> defines the excess of power supply probability (EPSP) as:</p>
+<div class="math notranslate nohighlight" id="equation-equ-20">
+<span class="eqno">(12)<a class="headerlink" href="#equation-equ-20" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    EPSP=\frac{\sum_{t=1}^{T}EE_t}{\sum_{t=1}^{T} D_{t}^{dr}}
+\end{equation}\]</div>
+<p>By using Equations <a class="reference internal" href="#equation-equ-19">(11)</a> and <a class="reference internal" href="#equation-equ-20">(12)</a> it is possible to create two constraints to control LPSP <a class="reference internal" href="#equation-equ-lack-energy">(13)</a> and EPSP <a class="reference internal" href="#equation-equ-excess-energy">(14)</a> over the optimization horizon:</p>
+<div class="math notranslate nohighlight" id="equation-equ-lack-energy">
+<span class="eqno">(13)<a class="headerlink" href="#equation-equ-lack-energy" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \sum_{t=1}^{T}LE_t\leq LPSP\sum_{t=1}^{T} D_{t}^{dr}
+\end{equation}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-excess-energy">
+<span class="eqno">(14)<a class="headerlink" href="#equation-equ-excess-energy" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+    \sum_{t=1}^{T}EE_t\leq EPSP\sum_{t=1}^{T} D_{t}^{dr}
+\end{equation}\]</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Methodology formulation</a><ul>
+<li><a class="reference internal" href="#proposed-solution">Proposed solution</a></li>
+<li><a class="reference internal" href="#main-assumptions">Main assumptions</a></li>
+<li><a class="reference internal" href="#mathematical-formulation">Mathematical formulation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cvxmg.html"
+                        title="previous chapter">cvxmg modules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dsm.html"
+                        title="next chapter">DSM integration into the sizing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/methodology.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dsm.html" title="DSM integration into the sizing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cvxmg.html" title="cvxmg modules"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

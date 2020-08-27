@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to CVXMG 1.0 &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setting the informationf of the IMG" href="configini.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="configini.html" title="Setting the informationf of the IMG"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-cvxmg-1-0">
+<h1>Welcome to CVXMG 1.0<a class="headerlink" href="#welcome-to-cvxmg-1-0" title="Permalink to this headline">¶</a></h1>
+<p>CVXMG is a python based package that allows the users to compute the sizing of Isolated/Islanded MicroGrids (IMGs). Additionally to the sizing of the IMGs, CVXMG returns the optimal dispatch of the energy sources and the optimal tariffs for the energy.
+CVXMG allows implementing Demand Side Management (DSM) in the sizing of the IMGs. Four different DSM strategies based on dynamic pricing of the energy can be easily choose for the user. Time of Use, Critical Peak Pricing, Day-Ahead Dynamic Pricing, and a DSM based on economic incentives.
+This characteristic allows CVXMG to provide the optimal tariffs for the energy sold to the customers in the IMG. Additionally, CVXMG can use a DSM based on curtailment of the electric loads. The implementation of DSM in the sizing of IMGs makes CVXMG a worth looking tool for different analyses for IMG planners and policymakers.</p>
+<p>CVXMG uses CVXPY at its core. CVXPY is a Python-embedded modeling language for convex optimization problems. CVXPY allows CVXMG to build and solve deterministic and stochastic convex formulations to perform the analysis of the IMGs.
+Due to the speed of solution of convex formulations, CVXMG can perform a multiyear analysis in seconds! Moreover, CVXMG can execute multiyear stochastic analysis in a regular machine.</p>
+<p>CVXMG uses two simple dictionaries “prob_info” and “sources_info” to create different architectures of IMGs. These two dictionaries are passed as attributes for the constructor classes.
+CVXMG offers three different constructor classes: One for deterministic analysis, one for multiyear analysis, and one for multiyear stochastic analysis.
+Each one of the constructors uses the information of “prob_info” to know the architecture of the IMG and the data of “sources_info” to know the characteristics of the energy sources.
+CVXMG creates the energy sources of the IMG as objects using the Objected Oriented Programming capabilities offered by Phyton.
+The use of objects for the energy sources allows CVXMG to build the optimization formulation of the problem using a Plug and Play approach.</p>
+<p>Once the user defines “prob_info” and “sources_info” needs to execute a constructor. For more info on how to set “prob_info” and “sources_info”, please refer to the example section.
+If the user wants to compute the sizing of an IMG using a deterministic analysis of one year, the following command must be executed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cvxmg</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="n">MicroGrid</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">DeterministicDSMS</span><span class="p">(</span><span class="n">prob_info</span><span class="p">,</span> <span class="n">sources_info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above line of commands will create the structure of the IMG in the object MicroGrid. Additionally, it will create all the optimization formulation following the rules of the Disciplined Convex Programming of CVXPY.
+However, at this moment, CVXMG did not solve the formulation yet. To solve the formulation, the user needs to execute the solve method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MicroGrid</span><span class="o">.</span><span class="n">solveMG</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The above commands will solve the formulation and will store the results in the MicroGrid object. To extract the results, the user must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span><span class="p">,</span> <span class="n">dispatch_results</span> <span class="o">=</span> <span class="n">MicroGrid</span><span class="o">.</span><span class="n">resultsMG</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The above line of commands will create a pandas structure in the variable summary with the essential variables of the sizing results. Additionally, the method will create another pandas structure to store the dispatch results of energy sources.</p>
+<p>Finally, if the user wants to create some predetermined plots of the results can call the method plotMG:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MicroGrid</span><span class="o">.</span><span class="n">plotMG</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="configini.html">Setting the informationf of the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-prob-info">Setting “prob_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configini.html#setting-sources-info">Setting “sources_info”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constructores.html">Types of constructors for the IMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#deterministicdsms">DeterministicDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#multiyeardsms">MultiyearDSMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constructores.html#stochasticdsms">StochasticDSMS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example of how to use CVXMG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#first-step-create-the-information-of-prob-info-and-sources-info">First step: Create the information of “prob_info” and “sources_info”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#second-step-set-the-constructor">Second step: Set the constructor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">cvxmg</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cvxmg.html">cvxmg modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">Methodology formulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#proposed-solution">Proposed solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#main-assumptions">Main assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html#mathematical-formulation">Mathematical formulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dsm.html">DSM integration into the sizing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#flat-tariff-baseline-case">Flat tariff (Baseline case):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#time-of-use-tariff">Time of use tariff:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#critical-peak-pricing">Critical peak pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#day-ahead-dynamic-pricing">Day ahead dynamic pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#incentive-based-pricing">Incentive-based pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#fixed-shape-pricing">Fixed Shape Pricing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsm.html#direct-load-curtailment-strategy">Direct Load Curtailment Strategy:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiyear.html">Multiyear analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#set-problem-information">Set problem information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#read-results-of-previous-years">Read results of previous years:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#actualize-solver-parameters">Actualize solver parameters:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiyear.html#summary-year-resul">summary[year] = resul:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stochastic.html">Stochastic multiyear analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Energy sources models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#photovoltaic-system">Photovoltaic system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#battery-energy-storage-system">Battery energy storage system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#diesel-generator">Diesel generator</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="configini.html"
+                        title="next chapter">Setting the informationf of the IMG</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="configini.html" title="Setting the informationf of the IMG"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

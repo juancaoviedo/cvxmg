@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multiyear analysis &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Stochastic multiyear analysis" href="stochastic.html" />
+    <link rel="prev" title="DSM integration into the sizing" href="dsm.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="stochastic.html" title="Stochastic multiyear analysis"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dsm.html" title="DSM integration into the sizing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="multiyear-analysis">
+<h1>Multiyear analysis<a class="headerlink" href="#multiyear-analysis" title="Permalink to this headline">¶</a></h1>
+<p>Most of the methodologies found in literature to compute the sizing of IMGs consider one single year for the analysis (refer to Tables ref{tab:sizing_ems_multi} and ref{tab:sizing_ems_single}). However, by considering this, these methodologies are implicitly assuming that the capital, operational, and maintenance expenditures will remain constant during the lifetime of the projects (20 to 25 years). These kinds of methodologies only consider the interest rate to compute future values of capital, operational, and maintenance. Nevertheless, this is not a straightforward justifiable assumption, especially considering that renewable energy sources’ costs are decreasing fast in the last years. Moreover, new policies taxing carbon emissions can significantly benefit renewable energy projects in the future. To have a better understanding of the variations in prices in the future, refer to Figure ref{fig:cost_projections}.</p>
+<a class="reference internal image-reference" href="_images/prices_bess.png"><img alt="_images/prices_bess.png" src="_images/prices_bess.png" style="width: 370px;" /></a>
+<a class="reference internal image-reference" href="_images/prices_pv.png"><img alt="_images/prices_pv.png" src="_images/prices_pv.png" style="width: 370px;" /></a>
+<a class="reference internal image-reference" href="_images/prices_wind.png"><img alt="_images/prices_wind.png" src="_images/prices_wind.png" style="width: 370px;" /></a>
+<a class="reference internal image-reference" href="_images/prices_genset.png"><img alt="_images/prices_genset.png" src="_images/prices_genset.png" style="width: 370px;" /></a>
+<a class="reference internal image-reference" href="_images/prices_diesel.png"><img alt="_images/prices_diesel.png" src="_images/prices_diesel.png" style="width: 370px;" /></a>
+<a class="reference internal image-reference" href="_images/prices_ctax.png"><img alt="_images/prices_ctax.png" src="_images/prices_ctax.png" style="width: 370px;" /></a>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<ul class="simple">
+<li><p>BESS capital expenditures cite{atb_data},</p></li>
+<li><p>PV capital expenditures cite{atb_data},</p></li>
+<li><p>Wind capital expenditures cite{atb_data},</p></li>
+<li><p>Diesel generator capital expenditures.</p></li>
+<li><p>Diesel price cite{energy_outlook},</p></li>
+<li><p>Carbon Tax price cite{tax_data}.</p></li>
+</ul>
+</div>
+<p>These figures shows the trends in capital expenditures for different energy sources for the following years. By using a multiyear analysis, it is possible to capture those trends in the prices. However, a methodology that uses one single year approach can not incorporate these trends. This assumption does not seem appropriate for future replacements of the energy sources.</p>
+<p>Reference cite{Pecenak2019} classifies multiyear methodologies in two main categories: the forward-looking model and the adaptive model. On one side, the forward-looking model deals with an optimization formulation that has as a horizon the lifetime of the IMG project (20 to 25 years). This approach has the advantage of being able to integrate future information. However, the enormous size of the optimization formulation can make the problem difficult to solve. Additionally, the formulation will require binary variables to integrate the technologies’ replacement, which adds even more complexity to the problem. On the other side, the adaptive model uses a rolling horizon of smaller windows of time (usually one year). This approach does not require binary variables, which represents an advantage. The model easily integrates growth of demand, price forecasts, and energy resources. Additionally, this approach does not require to modify the optimization formulation. Instead, it solves a single year optimization until it reaches the project’s lifetime.</p>
+<p>CVXMG chooses to work with the adaptive method. However, despite its advantages, the implementation of the model requires careful attention to previous years’ input parameters. The investment decisions of previous years should be known for the model in each window of time. Algorithm ref{algorithm_multiyear} shows a simplified step by step guide for the multiyear analysis. The following lines provide a brief description of each line of the algorithm.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MultiyearDSMS</span>
+
+<span class="n">Inputs</span><span class="p">:</span> <span class="n">Weather</span><span class="p">,</span> <span class="n">forecasted</span> <span class="n">acquisition</span> <span class="n">prices</span> <span class="n">of</span> <span class="n">energy</span> <span class="n">sources</span><span class="p">,</span> <span class="n">forecasted</span> <span class="n">fuel</span> <span class="n">prices</span> <span class="n">over</span> <span class="n">the</span> <span class="n">lifetime</span> <span class="n">of</span> <span class="n">the</span> <span class="n">IMG</span> <span class="n">project</span><span class="o">.</span>
+<span class="n">Outputs</span><span class="p">:</span> <span class="n">Tariffs</span> <span class="n">of</span> <span class="n">energy</span><span class="p">,</span> <span class="n">yearly</span> <span class="n">acquisition</span><span class="p">,</span> <span class="n">yearly</span> <span class="n">dispatch</span> <span class="n">of</span> <span class="n">energy</span> <span class="n">sources</span> <span class="n">over</span> <span class="n">the</span> <span class="n">life</span> <span class="n">time</span> <span class="n">of</span> <span class="n">the</span> <span class="n">IMG</span> <span class="n">project</span><span class="o">.</span>
+
+<span class="n">prob_info</span> <span class="o">=</span> <span class="n">Set</span> <span class="n">problem</span> <span class="n">information</span>
+<span class="n">historic_data</span> <span class="o">=</span> <span class="n">Save</span> <span class="n">historic</span> <span class="n">weather</span><span class="p">,</span> <span class="n">save</span> <span class="n">demand</span> <span class="n">data</span>
+<span class="n">synthetic_data</span> <span class="o">=</span> <span class="n">create_synthetic_data</span><span class="p">(</span><span class="n">historic_data</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">year</span> <span class="o">=</span> <span class="mi">0</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lifetime</span><span class="p">):</span>
+    <span class="n">prev_data</span> <span class="o">=</span> <span class="n">Read</span> <span class="n">results</span> <span class="n">of</span> <span class="n">previous</span> <span class="n">years</span>
+    <span class="n">act_param</span> <span class="o">=</span> <span class="n">Actualize</span> <span class="n">solver</span> <span class="n">parameters</span>
+    <span class="n">resul</span> <span class="o">=</span> <span class="n">yearly_solver</span><span class="p">(</span><span class="n">prob_info</span><span class="p">,</span> <span class="n">synthetic_data</span><span class="p">[</span><span class="n">year</span><span class="p">],</span> <span class="n">prev_data</span><span class="p">,</span> <span class="n">act_param</span><span class="p">)</span>
+    <span class="n">summary</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">resul</span>
+</pre></div>
+</div>
+<div class="section" id="set-problem-information">
+<h2>Set problem information<a class="headerlink" href="#set-problem-information" title="Permalink to this headline">¶</a></h2>
+<p>This line saves the configuration of the analysis in the variable prob_info. This variable contains a list of the energy sources that the optimization includes, the technical and economic characteristics of those energy sources, the lifetime of the project, and interest rate. This variable contains all the information about the multiyear analysis.</p>
+</div>
+<div class="section" id="save-historic-weather-and-demand-data">
+<h2>Save historic weather and demand data:<a class="headerlink" href="#save-historic-weather-and-demand-data" title="Permalink to this headline">¶</a></h2>
+<p>This line reads the historic weather and electrical demand data. Afterwards the data is stored in the variable historic_data.</p>
+</div>
+<div class="section" id="create-synthetic-data-historic-data">
+<h2>create_synthetic_data(historic_data):<a class="headerlink" href="#create-synthetic-data-historic-data" title="Permalink to this headline">¶</a></h2>
+<p>This line creates the synthetic data for the multiyear optimization formulation. A single year approach can use the historical data (of one year). However, to build the multiyear optimization formulation, synthetic data is required for the project’s lifetime. The function create_synthetic_data takes as inputs the historical data of weather and electrical demand profiles (one year) and returns as output the synthetic data over the lifetime of the project (20 or 25 years). The function follows a four-step process to create synthetic data for the optimization formulation:</p>
+<ol class="arabic simple">
+<li><p>Divide the historical data by months.</p></li>
+<li><p>Take the data of each month and group it by hours.</p></li>
+<li><p>Fit each hour group to the probability distributions recommended by the literature to each kind of data (Weibull for wind, Beta for Global Horizontal Radiation, log-normal for the demand, amongst others).</p></li>
+<li><p>Build the synthetic new profiles by random sampling the fitted probability distributions at each hour and month.</p></li>
+</ol>
+<p>The above-described process is similar to a Gaussian process without a covariance matrix. Two main reasons force to adopt the above-described process and not the well know Gaussian process. The first reason is that the Gaussian process can model only processes that follow a Gaussian distribution. This limitation forces the study to assume that the wind and Global Horizontal Radiation (GHI) follow a Gaussian distribution, which is not accurate. The second reason is that fitting and sampling a Gaussian process consume more computational power and requires more time to build synthetic data than the above-described process. Equation <a class="reference internal" href="#equation-equ-generate-distributions">(1)</a> describes the sampling process to create the synthetic data.</p>
+<div class="math notranslate nohighlight" id="equation-equ-generate-distributions">
+<span class="eqno">(1)<a class="headerlink" href="#equation-equ-generate-distributions" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+   SD_{t}|m,h \sim f(\psi_{m,h})
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(SD_{t}\)</span> represents the Synthetic Data at time <span class="math notranslate nohighlight">\(t\)</span>. This variable represents the electrical demand, wind speed, global horizontal radiation, temperature, and others. <span class="math notranslate nohighlight">\(\psi_{m,h}\)</span> represents the monthly/hourly fitted distributions using the historical data.</p>
+</div>
+<div class="section" id="read-results-of-previous-years">
+<h2>Read results of previous years:<a class="headerlink" href="#read-results-of-previous-years" title="Permalink to this headline">¶</a></h2>
+<p>This line read the results of the previous years and store the values in variable prev_data. This variable contains the capacities of the energy sources acquired in the past. Additionally, this variable contains a detailed register of the costs paid for buying those energy sources in previous years.</p>
+</div>
+<div class="section" id="actualize-solver-parameters">
+<h2>Actualize solver parameters:<a class="headerlink" href="#actualize-solver-parameters" title="Permalink to this headline">¶</a></h2>
+<p>This part of the algorithm actualizes the cost parameters of the solver. These parameters include the acquisition costs of the energy sources and the fuel costs of that year in particular.</p>
+</div>
+<div class="section" id="yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">
+<h2>yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):<a class="headerlink" href="#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param" title="Permalink to this headline">¶</a></h2>
+<p>The function <span class="math notranslate nohighlight">\(yearly\_solver\)</span> contains the formulation described at the beginning of this section (Equations ref{equ:capex}–ref{equ:dlcres2}). This function solves the DCSP optimization formulation for over one year. This function returns the capacities of the energy sources to install in that year, the dispatch of the energy sources and the energy tariffs for the customers. Additionally, this function returns the payments of each one of the stakeholders of the project.</p>
+</div>
+<div class="section" id="summary-year-resul">
+<h2>summary[year] = resul:<a class="headerlink" href="#summary-year-resul" title="Permalink to this headline">¶</a></h2>
+<p>This line save the results of <span class="math notranslate nohighlight">\(yearly\_solver\)</span>. Summary is a list that contains the results of each year.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Multiyear analysis</a><ul>
+<li><a class="reference internal" href="#set-problem-information">Set problem information</a></li>
+<li><a class="reference internal" href="#save-historic-weather-and-demand-data">Save historic weather and demand data:</a></li>
+<li><a class="reference internal" href="#create-synthetic-data-historic-data">create_synthetic_data(historic_data):</a></li>
+<li><a class="reference internal" href="#read-results-of-previous-years">Read results of previous years:</a></li>
+<li><a class="reference internal" href="#actualize-solver-parameters">Actualize solver parameters:</a></li>
+<li><a class="reference internal" href="#yearly-solver-prob-info-synthetic-data-year-prev-data-act-param">yearly_solver(prob_info, synthetic_data[year], prev_data, act_param):</a></li>
+<li><a class="reference internal" href="#summary-year-resul">summary[year] = resul:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dsm.html"
+                        title="previous chapter">DSM integration into the sizing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="stochastic.html"
+                        title="next chapter">Stochastic multiyear analysis</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/multiyear.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="stochastic.html" title="Stochastic multiyear analysis"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dsm.html" title="DSM integration into the sizing"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

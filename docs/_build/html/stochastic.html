@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stochastic multiyear analysis &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Energy sources models" href="sources.html" />
+    <link rel="prev" title="Multiyear analysis" href="multiyear.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sources.html" title="Energy sources models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="multiyear.html" title="Multiyear analysis"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="stochastic-multiyear-analysis">
+<h1>Stochastic multiyear analysis<a class="headerlink" href="#stochastic-multiyear-analysis" title="Permalink to this headline">¶</a></h1>
+<p>The study proposes a stochastic analysis to deal with the uncertainties of electric demand, weather variables, and future prices. The stochastic approach uses a Montecarlo Sampling (MCS) approach (see appendix ref{app:montecarlo}). The MCS approach creates random samples of the probability distribution functions using Equation~(ref{equ:generate_distributions}) to build the scenarios. Algorithm ref{stochastic_multiyear} describes the multiyear stochastic analysis.</p>
+<p>Inputs: Weather, forecasted acquisition prices of energy sources, forecasted fuel prices over the lifetime of the IMG project.
+Outputs: Tariffs of energy for the customers, average yearly acquisition, yearly dispatch of energy sources over the life time of the IMG project.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prob_info</span> <span class="o">=</span> <span class="n">Set</span> <span class="n">problem</span> <span class="n">information</span>
+<span class="n">historic_data</span> <span class="o">=</span> <span class="n">Save</span> <span class="n">historic</span> <span class="n">weather</span> <span class="ow">and</span> <span class="n">demand</span> <span class="n">data</span>
+<span class="n">synthetic_data</span> <span class="o">=</span> <span class="n">create_synthetic_data</span><span class="p">(</span><span class="n">historic_data</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">scenarios</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lifetime</span><span class="p">):</span>
+        <span class="n">prev_data</span> <span class="o">=</span> <span class="n">Read</span> <span class="n">results</span> <span class="n">of</span> <span class="n">previous</span> <span class="n">years</span>
+        <span class="n">act_param</span> <span class="o">=</span> <span class="n">Actualize</span> <span class="n">solver</span> <span class="n">parameters</span>
+        <span class="n">resul</span> <span class="o">=</span> <span class="n">yearly_solver</span><span class="p">(</span><span class="n">prob_info</span><span class="p">,</span> <span class="n">synthetic_data</span><span class="p">[</span><span class="n">year</span><span class="p">],</span> <span class="n">prev_data</span><span class="p">,</span> <span class="n">act_param</span><span class="p">)</span>
+        <span class="n">summary</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">resul</span>
+    <span class="n">total_summary</span><span class="p">[</span><span class="n">scenario</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary</span>
+</pre></div>
+</div>
+<p>The above algorithm uses the multiyear analysis in its core. The only difference with the multiyear analysis is an additional loop. The stochastic multiyear solves one multiyear problem for each scenario that the MCS approach builds. Variable summary stores the results of installing and operating the IMG each year of the simulations. Variable total_summary stores the results of installing and operating each of the scenarios of the stochastic analysis. In the end, the results are the average of all the simulations, as Equation (ref{eq:dcsp_formulation}) describes.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="multiyear.html"
+                        title="previous chapter">Multiyear analysis</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sources.html"
+                        title="next chapter">Energy sources models</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/stochastic.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sources.html" title="Energy sources models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="multiyear.html" title="Multiyear analysis"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>

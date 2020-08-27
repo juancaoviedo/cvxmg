@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Types of constructors for the IMG &#8212; cvxmg 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Example of how to use CVXMG" href="example.html" />
+    <link rel="prev" title="Setting the informationf of the IMG" href="configini.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example.html" title="Example of how to use CVXMG"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="configini.html" title="Setting the informationf of the IMG"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="types-of-constructors-for-the-img">
+<h1>Types of constructors for the IMG<a class="headerlink" href="#types-of-constructors-for-the-img" title="Permalink to this headline">¶</a></h1>
+<p>CVXMG have three different types of constructors that perform different analysis for IMGs. All the constructors hace the following constraints:
+* One constraint to perform the energy balance of the IMG.
+* One constraint to guarantee that the total delivered energy remains cosntant after the aplication of the DSM.
+* One constraint to guarantee that the lack of energy do not exceed the desired reliability.
+* One constraint to guarantee that the excess of energy do not exceed the desired reliability.
+* One constraint to guarantee that the private investors recover their investments and the desired return of investment.</p>
+<p>The only difference between them is the horizon of optimization (one year, multiyear) and the type of analysis (deterministic, stochastic).</p>
+<p>A brief description of each of the constructors proceeds.</p>
+<div class="section" id="deterministicdsms">
+<h2>DeterministicDSMS<a class="headerlink" href="#deterministicdsms" title="Permalink to this headline">¶</a></h2>
+<p>The deterministic constructor performs the sizing of the microgrid considering one year of operation. Additionlly, as the name suggests, the deterministic constructor use a deterministic analysis.</p>
+<p>To use this constructor the user must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span>  <span class="nn">cvxmg</span>  <span class="k">as</span>  <span class="nn">cm</span>
+<span class="n">MicroGrid</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">DeterministicDSMS</span><span class="p">(</span><span class="n">prob_info</span><span class="p">,</span> <span class="n">sources_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiyeardsms">
+<h2>MultiyearDSMS<a class="headerlink" href="#multiyeardsms" title="Permalink to this headline">¶</a></h2>
+<p>The multiyear constructor performs the sizing of the microgrid considering one or several years of operation. The number of years are specified by the user in “prob_info” dictionary. The multiyear constructor use a deterministic analysis.
+The multy year constructor implements the adaptative method described in <a class="reference internal" href="cvxmg.html#pece2019" id="id1"><span>[pece2019]</span></a>.
+However, the multy year analysis here does not consider three day each month as the authors propose in the article.
+The multy-year analysis here considers the full year analysis (8760 hours).</p>
+<p>To use this constructor the user must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span>  <span class="nn">cvxmg</span>  <span class="k">as</span>  <span class="nn">cm</span>
+<span class="n">MicroGrid</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">MultiyearDSMS</span><span class="p">(</span><span class="n">prob_info</span><span class="p">,</span> <span class="n">sources_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stochasticdsms">
+<h2>StochasticDSMS<a class="headerlink" href="#stochasticdsms" title="Permalink to this headline">¶</a></h2>
+<p>The stochastic constructor performs the sizing of the microgrid considering one or several years of operation. However, the stochastic constructor performs a stochastic analysis. By using the functions resources_norm, resources_all and resources_noise CVXMG creates the data to perform the multiyear stochastic analysis.
+This constructor requires that the user specify the number of years for the multiyear analysis and the number of escenarios for the stochastic analysis.</p>
+<p>To use this constructor the user must execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span>  <span class="nn">cvxmg</span>  <span class="k">as</span>  <span class="nn">cm</span>
+<span class="n">MicroGrid</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">StochasticDSMS</span><span class="p">(</span><span class="n">prob_info</span><span class="p">,</span> <span class="n">sources_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Types of constructors for the IMG</a><ul>
+<li><a class="reference internal" href="#deterministicdsms">DeterministicDSMS</a></li>
+<li><a class="reference internal" href="#multiyeardsms">MultiyearDSMS</a></li>
+<li><a class="reference internal" href="#stochasticdsms">StochasticDSMS</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="configini.html"
+                        title="previous chapter">Setting the informationf of the IMG</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="example.html"
+                        title="next chapter">Example of how to use CVXMG</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/constructores.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example.html" title="Example of how to use CVXMG"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="configini.html" title="Setting the informationf of the IMG"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cvxmg 2.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Juan Carlos Oviedo Cepeda.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>
