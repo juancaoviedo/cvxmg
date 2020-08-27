@@ -1,0 +1,10 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+cvxmg/cvxmg.py
+cvxmg.egg-info/PKG-INFO
+cvxmg.egg-info/SOURCES.txt
+cvxmg.egg-info/dependency_links.txt
+cvxmg.egg-info/requires.txt
+cvxmg.egg-info/top_level.txt
