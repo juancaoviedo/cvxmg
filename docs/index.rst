@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to CVXMG 1.0
+Welcome to CVXMG 2.0.0
 =================================
 
 CVXMG is a python based package that allows the users to compute the sizing of Isolated/Islanded MicroGrids (IMGs). Additionally to the sizing of the IMGs, CVXMG returns the optimal dispatch of the energy sources and the optimal tariffs for the energy. 
