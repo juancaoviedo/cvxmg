@@ -51,7 +51,7 @@ Suppose the user wants to compute the sizing of an IMG using a deterministic ana
    import cvxmg as cm
    MicroGrid = cm.DeterministicDSMS(prob_info, sources_info)
     
-The above line of commands will create the structure of the IMG in the object MicroGrid. Additionally, it will guarantee that all the optimization formulation follows the Disciplined Convex Programming of CVXPY. 
+The above line of commands will create the structure of the IMG in the object MicroGrid. Additionally, it will guarantee that all the optimization formulation follows the Disciplined Convex Programming rules already established in CVXPY.
 However, at this moment, CVXMG did not solve the formulation yet. To solve the formulation, the user needs to execute the solve method: 
 
 ::
@@ -73,6 +73,7 @@ Finally, if the user wants to create some predetermined plots of the results can
    MicroGrid.plotMG()
 
 
+The following are the contents of this guide: 
 
 .. toctree::
    :maxdepth: 2
@@ -87,7 +88,6 @@ Finally, if the user wants to create some predetermined plots of the results can
    sources
    modules
    references
-
 
 
 
