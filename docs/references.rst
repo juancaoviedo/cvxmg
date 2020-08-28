@@ -4,7 +4,7 @@ References
 In here the list of references used in this documentation:
 
 .. [pece2019]       Z. K. Pecenak, M. Stadler, and K. Fahy, “Efficient multi-year economic energy planning in microgrids,” Appl. Energy, vol. 255, no. August, p. 113771, 2019.
-.. [ov2020]         J. C. Oviedo Cepeda et al. (in press), “Design of an Incentive-based Demand Side Management Strategy for Stand-Alone Microgrids Planning,” Int. J. Sustain. Energy Plan. Manag., vol. 28, pp. 1–21, 2020.
+.. [ov2020]         Oviedo Cepeda, J.C.; Osma-Pinto, G.; Roche, R.; Duarte, C.; Solano, J.; Hissel, D. Design of a Methodology to Evaluate the Impact of Demand-Side Management in the Planning of Isolated/Islanded Microgrids. Energies 2020, 13, 3459.
 .. [bu2019]         A. L. Bukar, C. W. Tan, and K. Y. Lau, “Optimal sizing of an autonomous photovoltaic/wind/battery/diesel generator microgrid using grasshopper optimization algorithm,” Sol. Energy, vol. 188, no. March, pp. 685–696, 2019.
 .. [Celik2017]      B. Celik, R. Roche, S. Suryanarayanan, D. Bouquain, and A. Miraoui, “Electric energy management in residential areas through coordination of multiple smart homes,” Renew. Sustain. Energy Rev., vol. 80, no. April 2016, pp. 260–275, 2017.
 .. [Inversin2000]   A. R. Inversin, “Mini-grid design manual,” 2000.
