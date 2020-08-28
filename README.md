@@ -31,7 +31,7 @@ And of course cvxpymg itself is open source with a [public repository](https://g
 
 ### Installation
 
-You can use "pip install cvxpymg" from your command window. Or clone the GitHub repository.
+You can use "pip install cvxmg" from your command window. Or clone the GitHub repository.
 
 
 ### Development
