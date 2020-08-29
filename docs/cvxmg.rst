@@ -1,5 +1,5 @@
-cvxmg modules
-===============
+Classes, Objects, and Methods of CVXMG 
+========================================
 
 .. automodule:: cvxmg
    :members:
