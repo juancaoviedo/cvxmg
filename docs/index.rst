@@ -86,8 +86,9 @@ The following are the contents of this guide:
    multiyear
    stochastic
    sources
-   modules
+   cvxmg
    references
+
 
 
 
