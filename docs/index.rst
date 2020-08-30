@@ -48,7 +48,7 @@ Suppose the user wants to compute the sizing of an IMG using a deterministic ana
 
 :: 
 
-   import cvxmg as cm
+   from cvxmg import cvxmg as cm
    MicroGrid = cm.DeterministicDSMS(prob_info, sources_info)
     
 The above line of commands will create the structure of the IMG in the object MicroGrid. Additionally, it will guarantee that all the optimization formulation follows the Disciplined Convex Programming rules already established in CVXPY.
