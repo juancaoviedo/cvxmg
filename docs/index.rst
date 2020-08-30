@@ -34,7 +34,7 @@ To install CVXMG just execute the following in your line of commands:
    pip install cvxmg
 
 .. tip::
-   The installation of cvxpy can raise errors in Windows if the user do not have `Visual Studio build tools<https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16>`_ for Python 3. To solve this issue please refer to the installation official page of `CVXPY <https://www.cvxpy.org/install/>`_, carefully read and follow the `instructions <https://drive.google.com/file/d/0B4GsMXCRaSSIOWpYQkstajlYZ0tPVkNQSElmTWh1dXFaYkJr/view>`_ explained there.    
+   The installation of cvxpy can raise errors in Windows if the user do not have `Visual Studio build tools <https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16>`_ for Python 3. To solve this issue please refer to the installation official page of `CVXPY <https://www.cvxpy.org/install/>`_, carefully read and follow the `instructions <https://drive.google.com/file/d/0B4GsMXCRaSSIOWpYQkstajlYZ0tPVkNQSElmTWh1dXFaYkJr/view>`_ explained there.    
 
 Using CVXMG
 --------------
