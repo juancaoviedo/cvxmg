@@ -19,8 +19,8 @@ For more information about these functions, please refer to the docs of the func
 The user must do the following to import the information of prob_info dictionary:
 ::
 
-    import  pandas                  as      pd              # Library for date frames handling
-    import  cvxmg                   as      cm              # Import cvxmg   
+    import  pandas          as pd              
+    from cvxmg import cvxmg as cm              # Import cvxmg   
                                 
     #region to read the parameters to intialize the code                                    
     prob_info = {}
